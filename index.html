@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tiburon</title>
+    <style>
+
+      .corner-link {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 1000;
+        font-size: 14px;
+      }
+
+      .corner-link a {
+        text-decoration: none;
+        color: #fff;
+        background-color: #A59344;
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-family: Arial, sans-serif;
+        transition: background-color 0.3s ease;
+      }
+
+      .corner-link a:hover {
+        background-color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="corner-link">
+      <a href="https://github.com/sudo-self" target="_blank" rel="noopener noreferrer">
+        sudo-self
+      </a>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+
