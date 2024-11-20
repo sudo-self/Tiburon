@@ -323,12 +323,18 @@ video.loop = true;
 video.muted = true;
 video.autoplay = true;
 
-video.play().catch((error) => {
-  console.error("Video playback error:", error);
+video.addEventListener("loadeddata", () => {
+  console.log("Video loaded");
+  video.play().catch((e) => console.error("Video play error:", e));
+});
+
+video.addEventListener("error", (e) => {
+  console.error("Video error:", e);
 });
 
 const videoTexture = new THREE.VideoTexture(video);
-videoTexture.needsUpdate = true; 
+videoTexture.minFilter = THREE.LinearFilter;
+videoTexture.generateMipmaps = false;
 
 const videoMaterial = new THREE.MeshBasicMaterial({ map: videoTexture });
 const videoScreen = new THREE.Mesh(
@@ -337,6 +343,7 @@ const videoScreen = new THREE.Mesh(
 );
 videoScreen.position.set(0, 1.5, -2.4);
 scene.add(videoScreen);
+
 
 
 const windowMaterial = new THREE.MeshBasicMaterial({ map: windowTexture });
@@ -367,3 +374,5 @@ function animate() {
   requestAnimationFrame(animate);
 }
 animate();
+
+export default ThreeScene;
