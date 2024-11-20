@@ -321,23 +321,31 @@ video.src = "/textures/video.mp4";
 video.crossOrigin = "anonymous";
 video.loop = true;
 video.muted = true;
-video.play();
+video.autoplay = true;
+
+video.play().catch((error) => {
+  console.error("Video playback error:", error);
+});
 
 const videoTexture = new THREE.VideoTexture(video);
+videoTexture.needsUpdate = true; 
+
 const videoMaterial = new THREE.MeshBasicMaterial({ map: videoTexture });
-const videoScreen = new THREE.Mesh(new THREE.PlaneGeometry(2, 1), videoMaterial);
+const videoScreen = new THREE.Mesh(
+  new THREE.PlaneGeometry(2, 1),
+  videoMaterial
+);
 videoScreen.position.set(0, 1.5, -2.4);
 scene.add(videoScreen);
+
 
 const windowMaterial = new THREE.MeshBasicMaterial({ map: windowTexture });
 const windowPlane = new THREE.Mesh(
   new THREE.PlaneGeometry(2, 1.5),
-  windowMaterial,
+  windowMaterial
 );
-
 windowPlane.position.set(-2.4, 1.65, 0);
 windowPlane.rotation.y = Math.PI / 2;
-
 scene.add(windowPlane);
 
 
@@ -349,12 +357,13 @@ window.addEventListener("resize", () => {
   camera.updateProjectionMatrix();
 });
 
-   
-    function animate() {
-      controls.update();
-      renderer.render(scene, camera);
-      requestAnimationFrame(animate);
-    }
-    animate();
 
-export default ThreeScene;
+function animate() {
+  if (video.readyState >= video.HAVE_CURRENT_DATA) {
+    videoTexture.needsUpdate = true;
+  }
+  controls.update();
+  renderer.render(scene, camera);
+  requestAnimationFrame(animate);
+}
+animate();
