@@ -221,10 +221,11 @@ pretzelPositions.forEach((position, index) => {
     const pretzel = gltf.scene;
     pretzel.scale.set(0.05, 0.05, 0.05);
     pretzel.position.set(position.x, position.y, position.z);
-    pretzel.rotation.set(-Math.PI / 4, Math.PI / 4, 0);
+    pretzel.rotation.set(0, 0, 0); 
     scene.add(pretzel);
   });
 });
+
 
 loader.load(
   "/textures/window.glb",
