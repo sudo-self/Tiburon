@@ -8,7 +8,7 @@ const pixelRatio = Math.min(window.devicePixelRatio, 2);
 const width = window.innerWidth;
 const height = window.innerHeight;
 
-const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true }); 
 renderer.setSize(width, height);
 renderer.setPixelRatio(pixelRatio);
 renderer.shadowMap.enabled = true;
@@ -379,10 +379,13 @@ scene.add(windowPlane);
 window.addEventListener("resize", () => {
   const width = window.innerWidth;
   const height = window.innerHeight;
+
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
+
   renderer.setSize(width, height);
 });
+
 
 animate();
 function animate() {
