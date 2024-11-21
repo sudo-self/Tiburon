@@ -5,10 +5,15 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 const width = window.innerWidth;
 const height = window.innerHeight;
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(width, height);
+const renderer = new THREE.WebGLRenderer({
+  antialias: true,
+  powerPreference: "high-performance",
+});
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;
 document.body.appendChild(renderer.domElement);
+
 
 const camera = new THREE.PerspectiveCamera(70, width / height, 0.1, 100);
 camera.position.set(0, 1, 5);
