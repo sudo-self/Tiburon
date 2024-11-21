@@ -148,12 +148,18 @@ const models = [
   },
   
   {
+    url: "/textures/ps5_customized.glb",
+    position: [-1.0, 0.1, -2.0],
+    scale: [0.3, 0.3, 0.3],
+    rotationY: 0,
+  },
+  
+  {
     url: "/textures/nike_shoes.glb",
     position: [-1.9, 0.1, -0.5],
     scale: [0.02, 0.02, 0.02],
     rotationY: Math.PI / 2,
   },
-  
   
   {
     url: "/textures/fire_truck.glb",
