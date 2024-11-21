@@ -2,18 +2,12 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
-const pixelRatio = Math.min(window.devicePixelRatio, 1.5);
-renderer.setPixelRatio(pixelRatio);
-
-
 const width = window.innerWidth;
 const height = window.innerHeight;
 
-const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true }); 
+const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(width, height);
-renderer.setPixelRatio(pixelRatio);
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.body.appendChild(renderer.domElement);
 
 const camera = new THREE.PerspectiveCamera(70, width / height, 0.1, 100);
