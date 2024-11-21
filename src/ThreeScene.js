@@ -353,13 +353,11 @@ window.addEventListener("resize", () => {
   renderer.setSize(width, height);
 });
 
-
-
 animate();
 function animate() {
-    controls.update();
-    renderer.render(scene, camera);
-    requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+  requestAnimationFrame(animate);
 }
 animate();
 
