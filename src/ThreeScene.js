@@ -153,6 +153,7 @@ const models = [
     scale: [0.3, 0.3, 0.3],
     rotationY: 0,
   },
+  
   {
     url: "/textures/dji_mini_2.glb",
     position: [-1.5, 0.5, -2.0],
