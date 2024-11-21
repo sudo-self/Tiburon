@@ -353,14 +353,11 @@ window.addEventListener('resize', () => {
     camera.updateProjectionMatrix();
 });
 
-
+animate();
 function animate() {
-  if (video.readyState >= video.HAVE_CURRENT_DATA) {
-    videoTexture.needsUpdate = true;
-  }
-  controls.update();
-  renderer.render(scene, camera);
-  requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
 }
 animate();
 
