@@ -346,12 +346,13 @@ windowPlane.rotation.y = Math.PI / 2;
 scene.add(windowPlane);
 
 window.addEventListener('resize', () => {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    renderer.setSize(width, height);
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+  renderer.setSize(width, height);
 });
+
 
 animate();
 function animate() {
