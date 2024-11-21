@@ -345,15 +345,14 @@ windowPlane.position.set(-2.4, 1.65, 0);
 windowPlane.rotation.y = Math.PI / 2;
 scene.add(windowPlane);
 
-window.addEventListener("resize", () => {
-  const newWidth = window.innerWidth;
-  const newHeight = window.innerHeight;
-
-  camera.aspect = newWidth / newHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(newWidth, newHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+window.addEventListener('resize', () => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    renderer.setSize(width, height);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
 });
+
 
 function animate() {
   if (video.readyState >= video.HAVE_CURRENT_DATA) {
