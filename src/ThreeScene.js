@@ -130,7 +130,7 @@ loader.load(
   (gltf) => {
     const macbook = gltf.scene;
     macbook.scale.set(0.2, 0.2, 0.2);
-    macbook.position.set(0, 0.6, 0);
+    macbook.position.set(-0.3, 0.6, 0.2);
     scene.add(macbook);
   },
   undefined,
@@ -199,6 +199,14 @@ const models = [
     rotationX: -Math.PI / 8,
     rotationZ: Math.PI / 8,
   },
+  
+  {
+   url: "/textures/bronco.glb",
+    position: [0.5, 0.6, 0.1],
+    scale: [0.01, 0.01, 0.01],
+    rotationX: -Math.PI / 55,
+    rotationZ: Math.PI / 55,
+    },
 
   {
     url: "/textures/free_iphone.glb",
