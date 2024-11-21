@@ -2,13 +2,11 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
-
 const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-const pixelRatio = Math.min(window.devicePixelRatio, 2); 
+const pixelRatio = Math.min(window.devicePixelRatio, 2);
 
 const width = window.innerWidth;
 const height = window.innerHeight;
-
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(width, height);
@@ -17,7 +15,6 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.body.appendChild(renderer.domElement);
 
-
 const camera = new THREE.PerspectiveCamera(70, width / height, 0.1, 100);
 camera.position.set(0, 1, 5);
 
@@ -25,7 +22,6 @@ const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 
 const scene = new THREE.Scene();
-
 
 const textureLoader = new THREE.TextureLoader();
 const floorTexture = textureLoader.load("/textures/floor.jpeg");
@@ -57,7 +53,7 @@ scene.add(pointLight);
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
 scene.add(ambientLight);
 
-const couchMaterial = new THREE.MeshStandardMaterial({ color: 0x4a4a4a  });
+const couchMaterial = new THREE.MeshStandardMaterial({ color: 0x4a4a4a });
 const couchBase = new THREE.Mesh(
   new THREE.BoxGeometry(3, 0.3, 1),
   couchMaterial,
@@ -65,7 +61,7 @@ const couchBase = new THREE.Mesh(
 couchBase.position.set(1.0, 0.2, 2);
 scene.add(couchBase);
 
-const backrestMaterial = new THREE.MeshStandardMaterial({ color: 0x4a4a4a  });
+const backrestMaterial = new THREE.MeshStandardMaterial({ color: 0x4a4a4a });
 const backrest = new THREE.Mesh(
   new THREE.BoxGeometry(3, 0.5, 0.2),
   backrestMaterial,
@@ -76,11 +72,11 @@ scene.add(backrest);
 const armrestGeometry = new THREE.BoxGeometry(0.2, 0.5, 1);
 const armrest1 = new THREE.Mesh(armrestGeometry, couchMaterial);
 const armrest2 = armrest1.clone();
-armrest1.position.set(-.4, 0.45, 2);
+armrest1.position.set(-0.4, 0.45, 2);
 armrest2.position.set(2.5, 0.45, 2);
 scene.add(armrest1, armrest2);
 
-const cushionMaterial = new THREE.MeshStandardMaterial({ color: 0x50C878 });
+const cushionMaterial = new THREE.MeshStandardMaterial({ color: 0x50c878 });
 const cushionGeometry = new THREE.BoxGeometry(1.3, 0.25, 0.9);
 
 const cushion1 = new THREE.Mesh(cushionGeometry, cushionMaterial);
@@ -92,7 +88,7 @@ cushion2.position.set(1.0, 0.4, 2);
 cushion3.position.set(1.8, 0.4, 2);
 scene.add(cushion1, cushion2, cushion3);
 
-const footrestMaterial = new THREE.MeshStandardMaterial({ color:  0x4a4a4a });
+const footrestMaterial = new THREE.MeshStandardMaterial({ color: 0x4a4a4a });
 const footrest = new THREE.Mesh(
   new THREE.BoxGeometry(1, 0.3, 1),
   footrestMaterial,
@@ -108,17 +104,15 @@ const table = new THREE.Mesh(
 table.position.set(0, 0.45, 0);
 scene.add(table);
 
-
 const legGeometry = new THREE.CylinderGeometry(0.05, 0.05, 0.45, 24);
 const legMaterial = new THREE.MeshStandardMaterial({ color: 0x333333 });
-
 
 const legs = [];
 const legPositions = [
   { x: -0.7, z: 0.4 },
   { x: 0.7, z: 0.4 },
   { x: -0.7, z: -0.4 },
-  { x: 0.7, z: -0.4 }
+  { x: 0.7, z: -0.4 },
 ];
 
 for (let i = 0; i < 4; i++) {
@@ -129,8 +123,6 @@ for (let i = 0; i < 4; i++) {
 }
 
 scene.add(...legs);
-
-
 
 const loader = new GLTFLoader();
 loader.load(
@@ -193,15 +185,6 @@ const models = [
     rotationX: -Math.PI / 6,
     rotationZ: Math.PI / 3,
   },
-  
-  {
-    url: "/textures/igame_wifi_router",
-    position: [2.3, 1.2, 2.0],
-    scale: [0.05, 0.05, 0.05],
-    rotationX: -Math.PI / 6,
-    rotationZ: Math.PI / 3,
-  },
-  
 ];
 
 models.forEach(({ url, position, scale, rotationY, rotationX, rotationZ }) => {
@@ -243,7 +226,6 @@ pretzelPositions.forEach((position, index) => {
   });
 });
 
-
 loader.load(
   "/textures/window.glb",
   (gltf) => {
@@ -258,8 +240,11 @@ loader.load(
   },
   undefined,
   (error) => {
-    console.error("An error occurred while loading the window.glb model:", error);
-  }
+    console.error(
+      "An error occurred while loading the window.glb model:",
+      error,
+    );
+  },
 );
 
 function createSteamEffect(position) {
@@ -272,7 +257,6 @@ function createSteamEffect(position) {
     opacity: 0.6,
   });
 
-  
   const positions = [];
   for (let i = 0; i < particleCount; i++) {
     const x = position.x + (Math.random() - 0.5) * 0.5;
@@ -283,12 +267,11 @@ function createSteamEffect(position) {
 
   particlesGeometry.setAttribute(
     "position",
-    new THREE.Float32BufferAttribute(positions, 3)
+    new THREE.Float32BufferAttribute(positions, 3),
   );
 
   const particles = new THREE.Points(particlesGeometry, particlesMaterial);
   scene.add(particles);
-
 
   function animateParticles() {
     const positions = particlesGeometry.attributes.position.array;
@@ -303,26 +286,27 @@ function createSteamEffect(position) {
   animateParticles();
 }
 
-
-    models.forEach(({ url, position, scale, rotationY, rotationX, rotationZ }) => {
-      loader.load(
-        url,
-        (gltf) => {
-          const model = gltf.scene;
-          model.scale.set(...scale);
-          model.position.set(...position);
-          if (rotationY) model.rotation.y = rotationY;
-          if (rotationX) model.rotation.x = rotationX;
-          if (rotationZ) model.rotation.z = rotationZ;
-          scene.add(model);
-        },
-        undefined,
-        (error) => {
-          console.error(`An error occurred while loading the model at ${url}:`, error);
-        }
+models.forEach(({ url, position, scale, rotationY, rotationX, rotationZ }) => {
+  loader.load(
+    url,
+    (gltf) => {
+      const model = gltf.scene;
+      model.scale.set(...scale);
+      model.position.set(...position);
+      if (rotationY) model.rotation.y = rotationY;
+      if (rotationX) model.rotation.x = rotationX;
+      if (rotationZ) model.rotation.z = rotationZ;
+      scene.add(model);
+    },
+    undefined,
+    (error) => {
+      console.error(
+        `An error occurred while loading the model at ${url}:`,
+        error,
       );
-    });
-
+    },
+  );
+});
 
 const video = document.createElement("video");
 video.src = "/textures/video.mp4";
@@ -347,23 +331,19 @@ videoTexture.generateMipmaps = false;
 const videoMaterial = new THREE.MeshBasicMaterial({ map: videoTexture });
 const videoScreen = new THREE.Mesh(
   new THREE.PlaneGeometry(2, 1),
-  videoMaterial
+  videoMaterial,
 );
 videoScreen.position.set(0, 1.5, -2.4);
 scene.add(videoScreen);
 
-
-
 const windowMaterial = new THREE.MeshBasicMaterial({ map: windowTexture });
 const windowPlane = new THREE.Mesh(
   new THREE.PlaneGeometry(2, 1.5),
-  windowMaterial
+  windowMaterial,
 );
 windowPlane.position.set(-2.4, 1.65, 0);
 windowPlane.rotation.y = Math.PI / 2;
 scene.add(windowPlane);
-
-
 
 window.addEventListener("resize", () => {
   const newWidth = window.innerWidth;
@@ -374,7 +354,6 @@ window.addEventListener("resize", () => {
   renderer.setSize(newWidth, newHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
-
 
 function animate() {
   if (video.readyState >= video.HAVE_CURRENT_DATA) {
