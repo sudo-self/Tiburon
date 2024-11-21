@@ -2,17 +2,12 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
-const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-const pixelRatio = Math.min(window.devicePixelRatio, 2);
-
 const width = window.innerWidth;
 const height = window.innerHeight;
 
-const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(width, height);
-renderer.setPixelRatio(pixelRatio);
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.body.appendChild(renderer.domElement);
 
 const camera = new THREE.PerspectiveCamera(70, width / height, 0.1, 100);
@@ -374,12 +369,12 @@ const videoScreen = new THREE.Mesh(
 );
 videoScreen.position.set(0.1, 1.5, -2.4);
 
-const borderMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 }); // Black border
+const borderMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
 const borderThickness = 0.1;
 const borderGeometry = new THREE.PlaneGeometry(2 + borderThickness, 1 + borderThickness);
 const border = new THREE.Mesh(borderGeometry, borderMaterial);
 border.position.copy(videoScreen.position);
-border.position.z -= 0.01; // Slight depth adjustment
+border.position.z -= 0.01;
 
 scene.add(border);
 scene.add(videoScreen);
@@ -396,13 +391,20 @@ scene.add(windowPlane);
 window.addEventListener("resize", () => {
   const width = window.innerWidth;
   const height = window.innerHeight;
+
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
+
   renderer.setSize(width, height);
 });
 
+<<<<<<< HEAD
 const clock = new THREE.Clock();
 
+=======
+
+animate();
+>>>>>>> refs/remotes/origin/main
 function animate() {
   const delta = clock.getDelta();
   controls.update(delta);
