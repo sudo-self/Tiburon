@@ -146,6 +146,15 @@ const models = [
     scale: [1.2, 1.0, 1.0],
     rotationY: 0,
   },
+  
+  {
+    url: "/textures/nike_shoes.glb",
+    position: [-1.9, 0.1, -0.5],
+    scale: [0.02, 0.02, 0.02],
+    rotationY: Math.PI / 2,
+  },
+  
+  
   {
     url: "/textures/fire_truck.glb",
     position: [-2, 0, -2.1],
