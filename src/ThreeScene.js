@@ -150,6 +150,13 @@ const models = [
   },
   
   {
+    url: "/textures/vape.glb",
+    position: [0.3, 0.65, 0.2],
+    scale: [0.2, 0.2, 0.2],
+    rotationY: 1,
+  },
+  
+  {
     url: "/textures/ps5_customized.glb",
     position: [-1.0, 0.1, -2.0],
     scale: [0.3, 0.3, 0.3],
@@ -160,6 +167,13 @@ const models = [
     url: "/textures/kitchen_table.glb",
     position: [0.4, 0.6, -2.4],
     scale: [0.01, 0.01, 0.01],
+    rotationY: 0,
+  },
+  
+  {
+    url: "/textures/playstation_shapes.glb",
+    position: [-0.2, 0.8, -2.4],
+    scale: [0.1, 0.1, 0.1],
     rotationY: 0,
   },
   
