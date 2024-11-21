@@ -231,6 +231,18 @@ const models = [
     rotationZ: Math.PI / 55,
     rotationY: Math.PI / 2,
     },
+  {
+   url: "/textures/coffe_maker.glb",
+    position: [0.7, 0.75, -0.1],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 5,
+    },
+  {
+   url: "/textures/c_cup.glb",
+    position: [0.5, 0.65, -0.1],
+    scale: [0.03, 0.03, 0.03],
+    rotationY: Math.PI / 5,
+    },
 
   {
     url: "/textures/free_iphone.glb",
