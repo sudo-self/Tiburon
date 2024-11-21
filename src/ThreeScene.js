@@ -2,6 +2,9 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
+const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+const pixelRatio = Math.min(window.devicePixelRatio, 2); 
+
 const width = window.innerWidth;
 const height = window.innerHeight;
 
