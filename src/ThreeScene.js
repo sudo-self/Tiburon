@@ -143,6 +143,13 @@ const models = [
   },
   
   {
+    url: "/textures/apple_watch.glb",
+    position: [0.1, 0.65, 0.2],
+    scale: [1.5, 1.0, 1.2],
+    rotationY: 1,
+  },
+  
+  {
     url: "/textures/ps5_customized.glb",
     position: [-1.0, 0.1, -2.0],
     scale: [0.3, 0.3, 0.3],
@@ -204,10 +211,11 @@ const models = [
   
   {
    url: "/textures/bronco.glb",
-    position: [0.6, 0.65, -2.1],
-    scale: [0.01, 0.01, 0.01],
+    position: [0.6, 0.65, -2.2],
+    scale: [0.004, 0.004, 0.004],
     rotationX: -Math.PI /55,
     rotationZ: Math.PI / 55,
+    rotationY: Math.PI / 2,
     },
 
   {
