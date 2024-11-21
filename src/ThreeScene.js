@@ -142,15 +142,22 @@ loader.load(
 const models = [
   {
     url: "/textures/mountain_bike.glb",
-    position: [1.2, 0.6, -1.8],
-    scale: [1.2, 1.0, 1.0],
-    rotationY: 0,
+    position: [1.5, 0.6, -1.2],
+    scale: [1.2, 0.9, 0.9],
+    rotationY: 10,
   },
   
   {
     url: "/textures/ps5_customized.glb",
     position: [-1.0, 0.1, -2.0],
     scale: [0.3, 0.3, 0.3],
+    rotationY: 0,
+  },
+  
+  {
+    url: "/textures/kitchen_table.glb",
+    position: [0.4, 0.6, -2.4],
+    scale: [0.01, 0.01, 0.01],
     rotationY: 0,
   },
   
@@ -202,9 +209,9 @@ const models = [
   
   {
    url: "/textures/bronco.glb",
-    position: [0.5, 0.6, 0.1],
+    position: [0.6, 0.65, -2.1],
     scale: [0.01, 0.01, 0.01],
-    rotationX: -Math.PI / 55,
+    rotationX: -Math.PI /55,
     rotationZ: Math.PI / 55,
     },
 
@@ -346,8 +353,8 @@ video.loop = true;
 video.muted = true;
 video.autoplay = true;
 
-video.addEventListener("loadeddata", () => {
-  console.log("Video loaded");
+video.addEventListener("canplaythrough", () => {
+  console.log("Video ready to play");
   video.play().catch((e) => console.error("Video play error:", e));
 });
 
@@ -357,20 +364,30 @@ video.addEventListener("error", (e) => {
 
 const videoTexture = new THREE.VideoTexture(video);
 videoTexture.minFilter = THREE.LinearFilter;
-videoTexture.generateMipmaps = false;
+videoTexture.magFilter = THREE.LinearFilter;
+videoTexture.format = THREE.RGBFormat;
 
 const videoMaterial = new THREE.MeshBasicMaterial({ map: videoTexture });
 const videoScreen = new THREE.Mesh(
   new THREE.PlaneGeometry(2, 1),
-  videoMaterial,
+  videoMaterial
 );
-videoScreen.position.set(0, 1.5, -2.4);
+videoScreen.position.set(0.1, 1.5, -2.4);
+
+const borderMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 }); // Black border
+const borderThickness = 0.1;
+const borderGeometry = new THREE.PlaneGeometry(2 + borderThickness, 1 + borderThickness);
+const border = new THREE.Mesh(borderGeometry, borderMaterial);
+border.position.copy(videoScreen.position);
+border.position.z -= 0.01; // Slight depth adjustment
+
+scene.add(border);
 scene.add(videoScreen);
 
 const windowMaterial = new THREE.MeshBasicMaterial({ map: windowTexture });
 const windowPlane = new THREE.Mesh(
   new THREE.PlaneGeometry(2, 1.5),
-  windowMaterial,
+  windowMaterial
 );
 windowPlane.position.set(-2.4, 1.65, 0);
 windowPlane.rotation.y = Math.PI / 2;
@@ -384,12 +401,20 @@ window.addEventListener("resize", () => {
   renderer.setSize(width, height);
 });
 
-animate();
+const clock = new THREE.Clock();
+
 function animate() {
-  controls.update();
+  const delta = clock.getDelta();
+  controls.update(delta);
+
+  if (video.readyState >= video.HAVE_CURRENT_DATA) {
+    videoTexture.needsUpdate = true;
+  }
+
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
 }
 animate();
+
 
 export default ThreeScene;
