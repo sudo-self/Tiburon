@@ -391,20 +391,13 @@ scene.add(windowPlane);
 window.addEventListener("resize", () => {
   const width = window.innerWidth;
   const height = window.innerHeight;
-
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
-
   renderer.setSize(width, height);
 });
 
-<<<<<<< HEAD
 const clock = new THREE.Clock();
 
-=======
-
-animate();
->>>>>>> refs/remotes/origin/main
 function animate() {
   const delta = clock.getDelta();
   controls.update(delta);
@@ -417,6 +410,7 @@ function animate() {
   requestAnimationFrame(animate);
 }
 animate();
+
 
 
 export default ThreeScene;
