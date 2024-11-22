@@ -224,6 +224,14 @@ const models = [
   },
   
   {
+    url: "/textures/hoodie.glb",
+    position: [2.3, 0.4, 2.0],
+    scale: [0.8, 0.8, 0.8],
+    rotationX: -Math.PI / 2,
+    rotationZ: Math.PI / 8,
+  },
+  
+  {
    url: "/textures/bronco.glb",
     position: [0.6, 0.65, -2.2],
     scale: [0.004, 0.004, 0.004],
