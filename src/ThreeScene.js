@@ -144,14 +144,15 @@ const models = [
   
   {
     url: "/textures/apple_watch.glb",
-    position: [0.1, 0.65, 0.2],
-    scale: [1.5, 1.0, 1.2],
-    rotationY: 1,
+    position: [0.1, 0.61, 0.2],
+    scale: [0.06, 0.06, 0.06],
+    rotationY: Math.PI / 18,
+    rotationX: -Math.PI /18,
   },
   
   {
     url: "/textures/vape.glb",
-    position: [0.3, 0.65, 0.2],
+    position: [0.3, 0.61, 0.2],
     scale: [0.2, 0.2, 0.2],
     rotationY: 1,
   },
@@ -251,6 +252,13 @@ const models = [
     scale: [0.03, 0.03, 0.03],
     rotationY: Math.PI / 5,
     },
+  {
+      
+      url: "/textures/d_tags.glb",
+      position: [0.6, 0.63, 0.2],
+      scale: [0.0002, 0.0002, 0.0002],
+      rotationY: Math.PI / 5,
+  },
 
   {
     url: "/textures/free_iphone.glb",
