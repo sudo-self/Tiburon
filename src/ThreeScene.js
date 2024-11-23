@@ -193,6 +193,13 @@ const models = [
   },
   
   {
+    url: "/textures/pirate_flag.glb",
+    position: [-1.9, 0.1, -0.8],
+    scale: [0.004, 0.004, 0.004],
+    rotationY: Math.PI / 2,
+  },
+  
+  {
     url: "/textures/fire_truck.glb",
     position: [-2, 0, -2.1],
     scale: [1.0, 1.0, 1.0],
