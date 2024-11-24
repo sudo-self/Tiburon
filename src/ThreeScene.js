@@ -298,6 +298,15 @@ const models = [
     scale: [0.03, 0.03, 0.03],
     rotationY: Math.PI / 5,
   },
+
+    {
+    url: "/textures/game_boy.glb",
+    position: [0.3, 0.64, -0.1],
+    scale: [1.5, 1.5, 1.5],
+    rotationX: -Math.PI / 2,
+    rotationZ: Math.PI / 8,
+  },
+  
   {
     url: "/textures/d_tags.glb",
     position: [0.6, 0.63, 0.2],
