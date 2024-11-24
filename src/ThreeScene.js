@@ -1,3 +1,5 @@
+//Tiburon
+
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
@@ -120,29 +122,24 @@ for (let i = 0; i < 4; i++) {
 
 scene.add(...legs);
 
-
 const photoGeometry = new THREE.PlaneGeometry(1.5, 1);
 const photoMaterial = new THREE.MeshStandardMaterial({
   map: photoTexture,
   side: THREE.DoubleSide,
   roughness: 0.5,
-  metalness: 0.2
+  metalness: 0.2,
 });
 const photo = new THREE.Mesh(photoGeometry, photoMaterial);
 
-
 photo.scale.set(0.5, 0.5, 1);
-
 
 photo.position.set(1.7, 1.6, -2.4);
 photo.rotation.y = Math.PI / 100;
 scene.add(photo);
 
-
 const light = new THREE.PointLight(0xffffff, 1, 10);
 light.position.set(2, 2, 2);
 scene.add(light);
-
 
 const loader = new GLTFLoader();
 loader.load(
@@ -158,9 +155,6 @@ loader.load(
     console.error("An error occurred while loading the MacBook model:", error);
   },
 );
-
-
-
 
 const models = [
   {
@@ -205,7 +199,7 @@ const models = [
     scale: [0.1, 0.1, 0.1],
     rotationY: 0,
   },
-  
+
   {
     url: "/textures/nike_shoes.glb",
     position: [-1.9, 0.1, -0.5],
@@ -284,7 +278,7 @@ const models = [
     rotationZ: Math.PI / 55,
     rotationY: Math.PI / 2,
   },
-  
+
   {
     url: "/textures/chess_coines.glb",
     position: [-0.3, 0.8, -2.0],
@@ -319,23 +313,20 @@ const models = [
     rotationX: -Math.PI / 6,
     rotationZ: Math.PI / 3,
   },
-  
+
   {
-  
     url: "/textures/pirate_poster.glb",
     position: [-1.7, 0.9, -2.5],
     scale: [0.2, 0.2, 0.2],
     rotationY: Math.PI / -2,
-},
-  
+  },
+
   {
-  
     url: "/textures/jj.jpeg",
     position: [-1.4, 0.9, -2.5],
     scale: [0.2, 0.2, 0.2],
     rotationY: Math.PI / -2,
-},
-  
+  },
 ];
 
 let object = {
@@ -345,18 +336,16 @@ let object = {
   rotationY: 0,
 };
 
-let model; 
-
+let model;
 
 function animateObject() {
   const amplitude = 0.4;
   const frequency = 0.5;
 
-
   if (model) {
-    model.position.y = object.position[1] + amplitude * Math.sin(frequency * Date.now() * 0.001);
-    
- 
+    model.position.y =
+      object.position[1] + amplitude * Math.sin(frequency * Date.now() * 0.001);
+
     model.rotation.y += 0.02;
   }
 
@@ -364,7 +353,6 @@ function animateObject() {
 }
 
 animateObject();
-
 
 new GLTFLoader().load(
   object.url,
@@ -377,8 +365,11 @@ new GLTFLoader().load(
   },
   undefined,
   (error) => {
-    console.error(`An error occurred while loading the model at ${object.url}:`, error);
-  }
+    console.error(
+      `An error occurred while loading the model at ${object.url}:`,
+      error,
+    );
+  },
 );
 
 const pretzelPositions = [
@@ -409,10 +400,12 @@ loader.load(
   },
   undefined,
   (error) => {
-    console.error("An error occurred while loading the window.glb model:", error);
-  }
+    console.error(
+      "An error occurred while loading the window.glb model:",
+      error,
+    );
+  },
 );
-
 
 function createSteamEffect(position) {
   const particleCount = 200;
