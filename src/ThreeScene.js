@@ -141,64 +141,64 @@ const models = [
     scale: [1.2, 0.9, 0.9],
     rotationY: 10,
   },
-  
+
   {
     url: "/textures/apple_watch.glb",
     position: [0.1, 0.61, 0.2],
     scale: [0.06, 0.06, 0.06],
     rotationY: Math.PI / 18,
-    rotationX: -Math.PI /18,
+    rotationX: -Math.PI / 18,
   },
-  
+
   {
     url: "/textures/vape.glb",
     position: [0.3, 0.61, 0.2],
     scale: [0.2, 0.2, 0.2],
     rotationY: 1,
   },
-  
+
   {
     url: "/textures/ps5_customized.glb",
     position: [-1.0, 0.1, -2.0],
     scale: [0.3, 0.3, 0.3],
     rotationY: 0,
   },
-  
+
   {
     url: "/textures/kitchen_table.glb",
     position: [0.4, 0.6, -2.4],
     scale: [0.01, 0.01, 0.01],
     rotationY: 0,
   },
-  
+
   {
     url: "/textures/playstation_shapes.glb",
     position: [-0.2, 0.8, -2.4],
     scale: [0.1, 0.1, 0.1],
     rotationY: 0,
   },
-  
+
   {
     url: "/textures/dji_mini_2.glb",
     position: [-1.5, 0.5, -2.0],
     scale: [1.4, 0.8, 1.2],
     rotationY: 0,
   },
-  
+
   {
     url: "/textures/nike_shoes.glb",
     position: [-1.9, 0.1, -0.5],
     scale: [0.02, 0.02, 0.02],
     rotationY: Math.PI / 2,
   },
-  
+
   {
     url: "/textures/pirate_flag.glb",
     position: [-1.9, 0.1, -0.8],
     scale: [0.004, 0.004, 0.004],
     rotationY: Math.PI / 2,
   },
-  
+
   {
     url: "/textures/fire_truck.glb",
     position: [-2, 0, -2.1],
@@ -230,7 +230,7 @@ const models = [
     rotationX: -Math.PI / 8,
     rotationZ: Math.PI / 8,
   },
-  
+
   {
     url: "/textures/hoodie.glb",
     position: [2.3, 0.4, 2.0],
@@ -238,33 +238,32 @@ const models = [
     rotationX: -Math.PI / 2,
     rotationZ: Math.PI / 8,
   },
-  
+
   {
-   url: "/textures/bronco.glb",
+    url: "/textures/bronco.glb",
     position: [0.6, 0.65, -2.2],
     scale: [0.004, 0.004, 0.004],
-    rotationX: -Math.PI /55,
+    rotationX: -Math.PI / 55,
     rotationZ: Math.PI / 55,
     rotationY: Math.PI / 2,
-    },
+  },
   {
-   url: "/textures/coffe_maker.glb",
+    url: "/textures/coffe_maker.glb",
     position: [0.7, 0.75, -0.1],
     scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / 5,
-    },
+  },
   {
-   url: "/textures/c_cup.glb",
+    url: "/textures/c_cup.glb",
     position: [0.5, 0.65, -0.1],
     scale: [0.03, 0.03, 0.03],
     rotationY: Math.PI / 5,
-    },
+  },
   {
-      
-      url: "/textures/d_tags.glb",
-      position: [0.6, 0.63, 0.2],
-      scale: [0.0002, 0.0002, 0.0002],
-      rotationY: Math.PI / 5,
+    url: "/textures/d_tags.glb",
+    position: [0.6, 0.63, 0.2],
+    scale: [0.0002, 0.0002, 0.0002],
+    rotationY: Math.PI / 5,
   },
 
   {
@@ -310,11 +309,10 @@ pretzelPositions.forEach((position, index) => {
     const pretzel = gltf.scene;
     pretzel.scale.set(0.05, 0.05, 0.05);
     pretzel.position.set(position.x, position.y, position.z);
-    pretzel.rotation.set(0, 0, 0); 
+    pretzel.rotation.set(0, 0, 0);
     scene.add(pretzel);
   });
 });
-
 
 loader.load(
   "/textures/window.glb",
@@ -422,13 +420,16 @@ videoTexture.format = THREE.RGBFormat;
 const videoMaterial = new THREE.MeshBasicMaterial({ map: videoTexture });
 const videoScreen = new THREE.Mesh(
   new THREE.PlaneGeometry(2, 1),
-  videoMaterial
+  videoMaterial,
 );
 videoScreen.position.set(0.1, 1.5, -2.4);
 
 const borderMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
 const borderThickness = 0.1;
-const borderGeometry = new THREE.PlaneGeometry(2 + borderThickness, 1 + borderThickness);
+const borderGeometry = new THREE.PlaneGeometry(
+  2 + borderThickness,
+  1 + borderThickness,
+);
 const border = new THREE.Mesh(borderGeometry, borderMaterial);
 border.position.copy(videoScreen.position);
 border.position.z -= 0.01;
@@ -439,7 +440,7 @@ scene.add(videoScreen);
 const windowMaterial = new THREE.MeshBasicMaterial({ map: windowTexture });
 const windowPlane = new THREE.Mesh(
   new THREE.PlaneGeometry(2, 1.5),
-  windowMaterial
+  windowMaterial,
 );
 windowPlane.position.set(-2.4, 1.65, 0);
 windowPlane.rotation.y = Math.PI / 2;
@@ -467,7 +468,5 @@ function animate() {
   requestAnimationFrame(animate);
 }
 animate();
-
-
 
 export default ThreeScene;
