@@ -177,14 +177,7 @@ const models = [
     scale: [0.1, 0.1, 0.1],
     rotationY: 0,
   },
-
-  {
-    url: "/textures/dji_mini_2.glb",
-    position: [-1.5, 0.5, -2.0],
-    scale: [1.4, 0.8, 1.2],
-    rotationY: 0,
-  },
-
+  
   {
     url: "/textures/nike_shoes.glb",
     position: [-1.9, 0.1, -0.5],
@@ -291,27 +284,48 @@ const models = [
   },
 ];
 
-models.forEach(({ url, position, scale, rotationY, rotationX, rotationZ }) => {
-  new GLTFLoader().load(
-    url,
-    (gltf) => {
-      const model = gltf.scene;
-      model.scale.set(...scale);
-      model.position.set(...position);
-      if (rotationY) model.rotation.y = rotationY;
-      if (rotationX) model.rotation.x = rotationX;
-      if (rotationZ) model.rotation.z = rotationZ;
-      scene.add(model);
-    },
-    undefined,
-    (error) => {
-      console.error(
-        `An error occurred while loading the model at ${url}:`,
-        error,
-      );
-    },
-  );
-});
+let object = {
+  url: "/textures/dji_mini_2.glb",
+  position: [-1.5, 0.5, -2.0],
+  scale: [1.4, 0.8, 1.2],
+  rotationY: 0,
+};
+
+let model; 
+
+
+function animateObject() {
+  const amplitude = 0.4;
+  const frequency = 0.5;
+
+
+  if (model) {
+    model.position.y = object.position[1] + amplitude * Math.sin(frequency * Date.now() * 0.001);
+    
+ 
+    model.rotation.y += 0.02;
+  }
+
+  requestAnimationFrame(animateObject);
+}
+
+animateObject();
+
+
+new GLTFLoader().load(
+  object.url,
+  (gltf) => {
+    model = gltf.scene;
+    model.scale.set(...object.scale);
+    model.position.set(...object.position);
+    if (object.rotationY) model.rotation.y = object.rotationY;
+    scene.add(model);
+  },
+  undefined,
+  (error) => {
+    console.error(`An error occurred while loading the model at ${object.url}:`, error);
+  }
+);
 
 const pretzelPositions = [
   { x: -1.8, y: 0.01, z: -2.2 },
@@ -320,12 +334,11 @@ const pretzelPositions = [
   { x: -1.2, y: 0.01, z: -1.2 },
 ];
 
-pretzelPositions.forEach((position, index) => {
+pretzelPositions.forEach((position) => {
   new GLTFLoader().load("/textures/pretzel.glb", (gltf) => {
     const pretzel = gltf.scene;
     pretzel.scale.set(0.05, 0.05, 0.05);
     pretzel.position.set(position.x, position.y, position.z);
-    pretzel.rotation.set(0, 0, 0);
     scene.add(pretzel);
   });
 });
@@ -334,22 +347,18 @@ loader.load(
   "/textures/window.glb",
   (gltf) => {
     const windowModel = gltf.scene;
-
     windowModel.position.set(-2.3, 0.5, 0.03);
     windowModel.scale.set(0.08, 0.06, 0.05);
     windowModel.rotation.set(0, Math.PI / 2, 0);
-
     scene.add(windowModel);
     createSteamEffect(windowModel.position);
   },
   undefined,
   (error) => {
-    console.error(
-      "An error occurred while loading the window.glb model:",
-      error,
-    );
-  },
+    console.error("An error occurred while loading the window.glb model:", error);
+  }
 );
+
 
 function createSteamEffect(position) {
   const particleCount = 200;
