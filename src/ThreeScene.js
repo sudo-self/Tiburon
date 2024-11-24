@@ -250,8 +250,17 @@ const models = [
   },
   {
     url: "/textures/flash_light.glb",
-    position: [-0.1, 0.65, -2.2],
+    position: [0.3, 0.65, -2.0],
     scale: [0.9, 0.9, 0.9],
+    rotationX: -Math.PI / 55,
+    rotationZ: Math.PI / 55,
+    rotationY: Math.PI / 2,
+  },
+  
+  {
+    url: "/textures/chess_coines.glb",
+    position: [-0.3, 0.8, -2.0],
+    scale: [0.03, 0.03, 0.03],
     rotationX: -Math.PI / 55,
     rotationZ: Math.PI / 55,
     rotationY: Math.PI / 2,
