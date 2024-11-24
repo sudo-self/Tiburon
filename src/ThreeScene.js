@@ -248,6 +248,14 @@ const models = [
     rotationY: Math.PI / 2,
   },
   {
+    url: "/textures/flash_light.glb",
+    position: [-0.1, 0.65, -2.2],
+    scale: [0.9, 0.9, 0.9],
+    rotationX: -Math.PI / 55,
+    rotationZ: Math.PI / 55,
+    rotationY: Math.PI / 2,
+  },
+  {
     url: "/textures/coffe_maker.glb",
     position: [0.7, 0.75, -0.1],
     scale: [0.01, 0.01, 0.01],
