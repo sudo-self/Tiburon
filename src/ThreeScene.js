@@ -129,17 +129,44 @@ const photoMaterial = new THREE.MeshStandardMaterial({
   roughness: 0.5,
   metalness: 0.2,
 });
+
 const photo = new THREE.Mesh(photoGeometry, photoMaterial);
-
 photo.scale.set(0.5, 0.5, 1);
-
 photo.position.set(1.7, 1.6, -2.4);
 photo.rotation.y = Math.PI / 100;
 scene.add(photo);
 
-const light = new THREE.PointLight(0xffffff, 1, 10);
-light.position.set(2, 2, 2);
+
+const frameGeometry = new THREE.PlaneGeometry(1.6, 1.1);
+const frameMaterial = new THREE.MeshStandardMaterial({
+  emissive: getRandomNeonColor(),
+  emissiveIntensity: 0.8,
+  roughness: 0.5,
+  metalness: 0.2,
+  side: THREE.DoubleSide,
+});
+
+function getRandomNeonColor() {
+  const colors = [
+    0x39ff14, // neon green
+    0xff073a, // neon red
+    0x0fa9ff, // neon blue
+    0xfa00ff, // neon purple
+    0xfff700, // neon yellow
+  ];
+  return colors[Math.floor(Math.random() * colors.length)];
+}
+
+const light = new THREE.PointLight(getRandomNeonColor(), 1.5, 10);
+light.position.set(1.7, 1.6, -2.8); 
 scene.add(light);
+
+
+function changeLightColor() {
+  light.color.set(getRandomNeonColor());
+}
+
+setInterval(changeLightColor, 2000);
 
 const loader = new GLTFLoader();
 loader.load(
