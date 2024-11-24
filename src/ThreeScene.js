@@ -22,6 +22,7 @@ const textureLoader = new THREE.TextureLoader();
 const floorTexture = textureLoader.load("/textures/floor.jpeg");
 const wallTexture = textureLoader.load("/textures/wall.jpeg");
 const windowTexture = textureLoader.load("/textures/window.png");
+const photoTexture = textureLoader.load("/textures/jj.jpeg");
 
 const floorMaterial = new THREE.MeshStandardMaterial({ map: floorTexture });
 const floor = new THREE.Mesh(new THREE.PlaneGeometry(5, 5), floorMaterial);
@@ -119,6 +120,30 @@ for (let i = 0; i < 4; i++) {
 
 scene.add(...legs);
 
+
+const photoGeometry = new THREE.PlaneGeometry(1.5, 1);
+const photoMaterial = new THREE.MeshStandardMaterial({
+  map: photoTexture,
+  side: THREE.DoubleSide,
+  roughness: 0.5,
+  metalness: 0.2
+});
+const photo = new THREE.Mesh(photoGeometry, photoMaterial);
+
+
+photo.scale.set(0.5, 0.5, 1);
+
+
+photo.position.set(1.7, 1.6, -2.4);
+photo.rotation.y = Math.PI / 100;
+scene.add(photo);
+
+
+const light = new THREE.PointLight(0xffffff, 1, 10);
+light.position.set(2, 2, 2);
+scene.add(light);
+
+
 const loader = new GLTFLoader();
 loader.load(
   "/textures/macbook.glb",
@@ -133,6 +158,9 @@ loader.load(
     console.error("An error occurred while loading the MacBook model:", error);
   },
 );
+
+
+
 
 const models = [
   {
@@ -296,6 +324,14 @@ const models = [
   
     url: "/textures/pirate_poster.glb",
     position: [-1.7, 0.9, -2.5],
+    scale: [0.2, 0.2, 0.2],
+    rotationY: Math.PI / -2,
+},
+  
+  {
+  
+    url: "/textures/jj.jpeg",
+    position: [-1.4, 0.9, -2.5],
     scale: [0.2, 0.2, 0.2],
     rotationY: Math.PI / -2,
 },
@@ -513,3 +549,11 @@ function animate() {
 animate();
 
 export default ThreeScene;
+
+
+
+
+
+
+
+
