@@ -189,7 +189,7 @@ const models = [
     url: "/textures/pirate_flag.glb",
     position: [-1.9, 0.1, -0.8],
     scale: [0.004, 0.004, 0.004],
-    rotationY: Math.PI / 2,
+    rotationY: Math.PI / 4,
   },
 
   {
@@ -282,6 +282,15 @@ const models = [
     rotationX: -Math.PI / 6,
     rotationZ: Math.PI / 3,
   },
+  
+  {
+  
+    url: "/textures/pirate_poster.glb",
+    position: [-1.7, 0.9, -2.5],
+    scale: [0.2, 0.2, 0.2],
+    rotationY: Math.PI / -2,
+},
+  
 ];
 
 let object = {
