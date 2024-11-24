@@ -238,6 +238,14 @@ const models = [
     rotationX: -Math.PI / 2,
     rotationZ: Math.PI / 8,
   },
+  {
+    url: "/textures/office_chair_modern.glb",
+    position: [1.9, 0.8, -0.3],
+    scale: [0.8, 0.8, 0.8],
+    rotationX: -Math.PI / 1,
+    rotationZ: Math.PI / 1,
+    rotationY: Math.PI / 3,
+  },
 
   {
     url: "/textures/bronco.glb",
