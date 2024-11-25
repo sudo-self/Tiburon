@@ -543,7 +543,7 @@ models.forEach(({ url, position, scale, rotationY, rotationX, rotationZ }) => {
 });
 
 const video = document.createElement("video");
-video.src = "/textures/video.mp4";
+video.src = "https://jr-three.vercel.app/textures/video.mp4";
 video.crossOrigin = "anonymous";
 video.loop = true;
 video.muted = true;
