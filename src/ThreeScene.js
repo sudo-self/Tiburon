@@ -312,6 +312,13 @@ const models = [
     rotationZ: Math.PI / 8,
   },
   
+    {
+    url: "/textures/woodtable.glb",
+    position: [1.9, 0.01, -2.2],
+    scale: [0.5, 0.5, 0.5],
+    rotationZ: Math.PI / 80,
+  },
+  
   {
     url: "/textures/bmx.glb",
     position: [1.6, 0.5, -0.7],
