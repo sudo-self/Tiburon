@@ -71,7 +71,7 @@ const armrestGeometry = new THREE.BoxGeometry(0.2, 0.5, 1);
 const armrest1 = new THREE.Mesh(armrestGeometry, couchMaterial);
 const armrest2 = armrest1.clone();
 armrest1.position.set(-0.4, 0.45, 2);
-armrest2.position.set(2.5, 0.45, 2);
+armrest2.position.set(2.4, 0.45, 2);
 scene.add(armrest1, armrest2);
 
 const cushionMaterial = new THREE.MeshStandardMaterial({ color: 0x50c878 });
