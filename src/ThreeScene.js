@@ -85,7 +85,7 @@ cushion2.position.set(1.7, 0.4, 2);
 
 scene.add(cushion1, cushion2);
 
-const footrestMaterial = new THREE.MeshStandardMaterial({ color: 0xFF6600 });
+const footrestMaterial = new THREE.MeshStandardMaterial({ color: 0x00004B });
 const footrest = new THREE.Mesh(
   new THREE.BoxGeometry(1, 0.3, 1),
   footrestMaterial,
