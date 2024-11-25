@@ -548,6 +548,7 @@ video.crossOrigin = "anonymous";
 video.loop = true;
 video.muted = true;
 video.autoplay = true;
+video.playsInline = true; 
 
 video.addEventListener("canplaythrough", () => {
   console.log("Video ready to play");
