@@ -78,13 +78,12 @@ const cushionMaterial = new THREE.MeshStandardMaterial({ color: 0x50c878 });
 const cushionGeometry = new THREE.BoxGeometry(1.3, 0.25, 0.9);
 
 const cushion1 = new THREE.Mesh(cushionGeometry, cushionMaterial);
-const cushion2 = cushion1.clone();
-const cushion3 = cushion1.clone();
+const cushion2 = new THREE.Mesh(cushionGeometry, cushionMaterial);
 
 cushion1.position.set(0.3, 0.4, 2);
-cushion2.position.set(1.0, 0.4, 2);
-cushion3.position.set(1.8, 0.4, 2);
-scene.add(cushion1, cushion2, cushion3);
+cushion2.position.set(1.7, 0.4, 2);
+
+scene.add(cushion1, cushion2);
 
 const footrestMaterial = new THREE.MeshStandardMaterial({ color: 0x4a4a4a });
 const footrest = new THREE.Mesh(
