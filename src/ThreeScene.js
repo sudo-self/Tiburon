@@ -253,6 +253,14 @@ const models = [
     scale: [0.3, 0.3, 0.3],
     rotationY: Math.PI / 2,
   },
+  
+    {
+    url: "/textures/rug.glb",
+    position: [0.1, 0, 1.0],
+    scale: [0.9, 0.9, 0.9],
+    rotationY: Math.PI / 40,
+  },
+  
   {
     url: "/textures/laundry_basket.glb",
     position: [2.0, 0.5, -8.4],
