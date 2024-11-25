@@ -253,6 +253,13 @@ const models = [
     scale: [0.3, 0.3, 0.3],
     rotationY: Math.PI / 2,
   },
+
+    {
+    url: "/textures/red_energy.glb",
+    position: [-2.3, 1.06, -0.3],
+    scale: [1.5, 1.5, 1.5],
+    rotationY: Math.PI / 4,
+  },
   
     {
     url: "/textures/rug.glb",
