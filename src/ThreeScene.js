@@ -199,6 +199,15 @@ const models = [
     rotationX: -Math.PI / 18,
   },
 
+    {
+    url: "/textures/aviators.glb",
+    position: [2.0, 0.6, 2.0],
+    scale: [0.0009, 0.0009, 0.0009],
+    rotationZ: Math.PI / 55,
+    rotationY: Math.PI / -2,
+    rotationX: Math.PI / -55,
+  },
+
   {
     url: "/textures/vape.glb",
     position: [0.3, 0.61, 0.2],
