@@ -394,6 +394,13 @@ const models = [
     scale: [0.2, 0.2, 0.2],
     rotationY: Math.PI / -2,
   },
+  
+    {
+    url: "/textures/frame.glb",
+    position: [1.7, 1.6, -2.55],
+    scale: [5.4, 3.2, 5.4],
+    rotationY: Math.PI / -100,
+  },
 ];
 
 let object = {
