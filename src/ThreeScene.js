@@ -51,7 +51,7 @@ scene.add(pointLight);
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
 scene.add(ambientLight);
 
-const couchMaterial = new THREE.MeshStandardMaterial({ color: 0x00004B });
+const couchMaterial = new THREE.MeshStandardMaterial({ color: 0x696969 });
 const couchBase = new THREE.Mesh(
   new THREE.BoxGeometry(3, 0.3, 1),
   couchMaterial,
@@ -59,7 +59,7 @@ const couchBase = new THREE.Mesh(
 couchBase.position.set(1.0, 0.2, 2);
 scene.add(couchBase);
 
-const backrestMaterial = new THREE.MeshStandardMaterial({ color: 0x00004B });
+const backrestMaterial = new THREE.MeshStandardMaterial({ color: 0x696969 });
 const backrest = new THREE.Mesh(
   new THREE.BoxGeometry(3, 0.5, 0.2),
   backrestMaterial,
@@ -85,7 +85,7 @@ cushion2.position.set(1.7, 0.4, 2);
 
 scene.add(cushion1, cushion2);
 
-const footrestMaterial = new THREE.MeshStandardMaterial({ color: 0x00004B });
+const footrestMaterial = new THREE.MeshStandardMaterial({ color: 0x696969 });
 const footrest = new THREE.Mesh(
   new THREE.BoxGeometry(1, 0.3, 1),
   footrestMaterial,
