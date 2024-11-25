@@ -247,6 +247,14 @@ const models = [
     scale: [1.0, 1.0, 1.0],
     rotationY: Math.PI / 2,
   },
+  
+    {
+    url: "/textures/donnie.glb",
+    position: [-2.4, 0, -1.9],
+    scale: [0.4, 0.4, 0.4],
+    rotationY: Math.PI / 2,
+  },
+  
   {
     url: "/textures/babys_highchair.glb",
     position: [0.1, 0, -1.9],
