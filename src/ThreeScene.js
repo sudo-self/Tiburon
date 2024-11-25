@@ -263,6 +263,13 @@ const models = [
     rotationY: Math.PI / 2,
   },
   
+    {
+    url: "/textures/bookshelf_speaker.glb",
+    position: [-2.4, 1.5, -1.6],
+    scale: [0.4, 0.4, 0.4],
+    rotationY: Math.PI / 2,
+  },
+  
   {
     url: "/textures/babys_highchair.glb",
     position: [0.1, 0, -1.9],
