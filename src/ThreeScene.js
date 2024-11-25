@@ -74,7 +74,7 @@ armrest1.position.set(-0.4, 0.45, 2);
 armrest2.position.set(2.4, 0.45, 2);
 scene.add(armrest1, armrest2);
 
-const cushionMaterial = new THREE.MeshStandardMaterial({ color: 0x50c878 });
+const cushionMaterial = new THREE.MeshStandardMaterial({ color: 0xFF6600 });
 const cushionGeometry = new THREE.BoxGeometry(1.3, 0.25, 0.9);
 
 const cushion1 = new THREE.Mesh(cushionGeometry, cushionMaterial);
