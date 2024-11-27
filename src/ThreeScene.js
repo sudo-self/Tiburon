@@ -243,13 +243,6 @@ const models = [
   },
 
   {
-    url: "/textures/pirate_flag.glb",
-    position: [-1.9, 0.1, -0.8],
-    scale: [0.004, 0.004, 0.004],
-    rotationY: Math.PI / 4,
-  },
-
-  {
     url: "/textures/fire_truck.glb",
     position: [-2, 0, -2.1],
     scale: [1.0, 1.0, 1.0],
@@ -309,6 +302,21 @@ const models = [
     scale: [1.6, 1.6, 1.6],
     rotationY: Math.PI / 1.89,
   },
+  
+  {
+    url: "/textures/foosball.glb",
+    position: [-1.4, 0.1, -0.9],
+    scale: [0.4, 0.4, 0.4],
+    rotationY: Math.PI / 1.95,
+  },
+  
+  {
+    url: "/textures/pirate_flag.glb",
+    position: [-1.9, 0.1, 1.1],
+    scale: [0.004, 0.004, 0.004],
+    rotationY: Math.PI / -1.3,
+  },
+  
   {
     url: "/textures/samsung_tv_remote_control.glb",
     position: [0.5, 0.6, 2],
