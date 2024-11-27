@@ -329,8 +329,15 @@ const models = [
     url: "/textures/woodtable.glb",
     position: [1.9, 0.01, -2.2],
     scale: [0.5, 0.5, 0.5],
-    rotationZ: Math.PI / 80,
+    rotationZ: Math.PI / 84,
   },
+  
+  {
+  url: "/textures/candy_real.glb",
+  position: [0.8, 0.36, -1.1],
+  scale: [0.1, 0.1, 0.1],
+  rotationZ: Math.PI / 80,
+},
   
   {
     url: "/textures/bmx.glb",
