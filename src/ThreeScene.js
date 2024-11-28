@@ -90,7 +90,7 @@ const footrest = new THREE.Mesh(
   new THREE.BoxGeometry(1, 0.3, 1),
   footrestMaterial,
 );
-footrest.position.set(1.9, 0.1, 1.0);
+footrest.position.set(1.9, 0.2, 1.0);
 scene.add(footrest);
 
 const tableMaterial = new THREE.MeshStandardMaterial({ color: 0x696969 });
