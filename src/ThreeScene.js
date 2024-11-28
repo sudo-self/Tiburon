@@ -176,9 +176,8 @@ function changeLightColor() {
 setInterval(changeLightColor, 2000);
 
 
-
-
 let gameBoy = null;
+let iphone = null;
 const mouse = new THREE.Vector2();
 const raycaster = new THREE.Raycaster();
 const loader = new GLTFLoader();
@@ -193,19 +192,16 @@ popupElement.style.display = 'none';
 popupElement.innerHTML = 'Click to play Game Boy!';
 document.body.appendChild(popupElement);
 
-
 const iframe = document.createElement('iframe');
 iframe.style.position = 'absolute';
 iframe.style.width = '80%';
 iframe.style.height = '80%';
 iframe.style.border = 'none';
 iframe.style.display = 'none';
-iframe.src = 'https://marioallstars.vercel.app';
 document.body.appendChild(iframe);
 
-
 const closeButton = document.createElement('button');
-closeButton.innerText = 'Close Game';
+closeButton.innerText = 'exit';
 closeButton.style.position = 'absolute';
 closeButton.style.top = '10px';
 closeButton.style.right = '10px';
@@ -217,7 +213,7 @@ closeButton.style.borderRadius = '5px';
 closeButton.style.cursor = 'pointer';
 closeButton.style.zIndex = '1000';
 closeButton.style.display = 'none';
-iframe.contentWindow.document.body.appendChild(closeButton);
+document.body.appendChild(closeButton);
 
 loader.load('/textures/game_boy.glb', (gltf) => {
   gameBoy = gltf.scene;
@@ -226,6 +222,15 @@ loader.load('/textures/game_boy.glb', (gltf) => {
   gameBoy.rotation.x = -Math.PI / 2;
   gameBoy.rotation.z = Math.PI / 8;
   scene.add(gameBoy);
+});
+
+loader.load('/textures/free_iphone.glb', (gltf) => {
+  iphone = gltf.scene;
+  iphone.position.set(1.3, 0.2, 1.0);
+  iphone.scale.set(0.001, 0.001, 0.001);
+  iphone.rotation.x = -Math.PI / 6;
+  iphone.rotation.z = Math.PI / 3;
+  scene.add(iphone);
 });
 
 function getMousePosition(event) {
@@ -242,14 +247,22 @@ function onMove(event) {
   mouse.set(x, y);
   raycaster.setFromCamera(mouse, camera);
 
-  if (gameBoy) {
-    const intersects = raycaster.intersectObject(gameBoy, true);
+  if (gameBoy || iphone) {
+    const intersectsGameBoy = gameBoy ? raycaster.intersectObject(gameBoy, true) : [];
+    const intersectsIphone = iphone ? raycaster.intersectObject(iphone, true) : [];
 
-    if (intersects.length > 0) {
+    if (intersectsGameBoy.length > 0) {
       popupElement.style.display = 'block';
+      popupElement.innerHTML = 'Play Game Boy!';
       const bounds = event.target.getBoundingClientRect();
-      popupElement.style.left = `${event.clientX + 10}px`;
-      popupElement.style.top = `${event.clientY + 10}px`;
+      popupElement.style.left = `${event.clientX + window.scrollX + 10}px`;
+      popupElement.style.top = `${event.clientY + window.scrollY + 10}px`;
+    } else if (intersectsIphone.length > 0) {
+      popupElement.style.display = 'block';
+      popupElement.innerHTML = 'Use ipad!';
+      const bounds = event.target.getBoundingClientRect();
+      popupElement.style.left = `${event.clientX + window.scrollX + 10}px`;
+      popupElement.style.top = `${event.clientY + window.scrollY + 10}px`;
     } else {
       popupElement.style.display = 'none';
     }
@@ -261,37 +274,47 @@ function onClick(event) {
   mouse.set(x, y);
   raycaster.setFromCamera(mouse, camera);
 
-  if (gameBoy) {
-    const intersects = raycaster.intersectObject(gameBoy, true);
+  if (gameBoy || iphone) {
+    const intersectsGameBoy = gameBoy ? raycaster.intersectObject(gameBoy, true) : [];
+    const intersectsIphone = iphone ? raycaster.intersectObject(iphone, true) : [];
 
-    if (intersects.length > 0) {
+    if (intersectsGameBoy.length > 0) {
       console.log('Game Boy clicked! Opening iframe...');
-      
-
+      iframe.src = 'https://marioallstars.vercel.app';
       iframe.style.display = 'block';
       iframe.style.left = `${(window.innerWidth - iframe.offsetWidth) / 2}px`;
       iframe.style.top = `${(window.innerHeight - iframe.offsetHeight) / 2}px`;
-      
-    
       closeButton.style.display = 'block';
-
-      
-      closeButton.addEventListener('click', () => {
-        iframe.style.display = 'none';
-        closeButton.style.display = 'none';
-      });
-
-
-      window.addEventListener('click', function outsideClick(event) {
-        if (!iframe.contains(event.target) && !closeButton.contains(event.target)) {
-          iframe.style.display = 'none';
-          closeButton.style.display = 'none';
-          window.removeEventListener('click', outsideClick); 
-        }
-      });
+      enableOutsideClickListener();
+    } else if (intersectsIphone.length > 0) {
+      console.log('iPhone clicked! Opening iframe...');
+      iframe.src = 'https://JesseJames.web.app';
+      iframe.style.display = 'block';
+      iframe.style.left = `${(window.innerWidth - iframe.offsetWidth) / 2}px`;
+      iframe.style.top = `${(window.innerHeight - iframe.offsetHeight) / 2}px`;
+      closeButton.style.display = 'block';
+      enableOutsideClickListener();
     }
   }
 }
+
+function enableOutsideClickListener() {
+  window.addEventListener('click', outsideClick);
+}
+
+function outsideClick(event) {
+  if (!iframe.contains(event.target) && !closeButton.contains(event.target)) {
+    iframe.style.display = 'none';
+    closeButton.style.display = 'none';
+    window.removeEventListener('click', outsideClick);
+  }
+}
+
+closeButton.addEventListener('click', () => {
+  iframe.style.display = 'none';
+  closeButton.style.display = 'none';
+  window.removeEventListener('click', outsideClick);
+});
 
 window.addEventListener('mousemove', onMove, false);
 window.addEventListener('click', onClick, false);
@@ -305,6 +328,7 @@ window.addEventListener('touchstart', (event) => {
   event.preventDefault();
   onClick(event);
 }, { passive: false });
+
 
 
 
@@ -537,14 +561,6 @@ const models = [
     position: [0.6, 0.63, 0.2],
     scale: [0.0002, 0.0002, 0.0002],
     rotationY: Math.PI / 5,
-  },
-
-  {
-    url: "/textures/free_iphone.glb",
-    position: [1.3, 0.2, 1.0],
-    scale: [0.001, 0.001, 0.001],
-    rotationX: -Math.PI / 6,
-    rotationZ: Math.PI / 3,
   },
 
   {
@@ -783,6 +799,8 @@ function animate() {
 animate();
 
 export default ThreeScene;
+
+
 
 
 
