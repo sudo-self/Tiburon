@@ -175,6 +175,9 @@ function changeLightColor() {
 
 setInterval(changeLightColor, 2000);
 
+
+
+
 let gameBoy = null;
 const mouse = new THREE.Vector2();
 const raycaster = new THREE.Raycaster();
@@ -189,6 +192,32 @@ popupElement.style.borderRadius = '5px';
 popupElement.style.display = 'none';
 popupElement.innerHTML = 'Click to play Game Boy!';
 document.body.appendChild(popupElement);
+
+
+const iframe = document.createElement('iframe');
+iframe.style.position = 'absolute';
+iframe.style.width = '80%';
+iframe.style.height = '80%';
+iframe.style.border = 'none';
+iframe.style.display = 'none';
+iframe.src = 'https://marioallstars.vercel.app';
+document.body.appendChild(iframe);
+
+
+const closeButton = document.createElement('button');
+closeButton.innerText = 'Close Game';
+closeButton.style.position = 'absolute';
+closeButton.style.top = '10px';
+closeButton.style.right = '10px';
+closeButton.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+closeButton.style.color = 'white';
+closeButton.style.border = 'none';
+closeButton.style.padding = '10px';
+closeButton.style.borderRadius = '5px';
+closeButton.style.cursor = 'pointer';
+closeButton.style.zIndex = '1000';
+closeButton.style.display = 'none';
+iframe.contentWindow.document.body.appendChild(closeButton);
 
 loader.load('/textures/game_boy.glb', (gltf) => {
   gameBoy = gltf.scene;
@@ -236,16 +265,36 @@ function onClick(event) {
     const intersects = raycaster.intersectObject(gameBoy, true);
 
     if (intersects.length > 0) {
-      console.log('Game Boy clicked! Opening URL...');
-      window.open('https://marioallstars.vercel.app', '_blank');
+      console.log('Game Boy clicked! Opening iframe...');
+      
+
+      iframe.style.display = 'block';
+      iframe.style.left = `${(window.innerWidth - iframe.offsetWidth) / 2}px`;
+      iframe.style.top = `${(window.innerHeight - iframe.offsetHeight) / 2}px`;
+      
+    
+      closeButton.style.display = 'block';
+
+      
+      closeButton.addEventListener('click', () => {
+        iframe.style.display = 'none';
+        closeButton.style.display = 'none';
+      });
+
+
+      window.addEventListener('click', function outsideClick(event) {
+        if (!iframe.contains(event.target) && !closeButton.contains(event.target)) {
+          iframe.style.display = 'none';
+          closeButton.style.display = 'none';
+          window.removeEventListener('click', outsideClick); 
+        }
+      });
     }
   }
 }
 
-
 window.addEventListener('mousemove', onMove, false);
 window.addEventListener('click', onClick, false);
-
 
 window.addEventListener('touchmove', (event) => {
   event.preventDefault();
@@ -256,7 +305,6 @@ window.addEventListener('touchstart', (event) => {
   event.preventDefault();
   onClick(event);
 }, { passive: false });
-
 
 
 
