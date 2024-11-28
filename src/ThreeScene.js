@@ -720,7 +720,7 @@ models.forEach(({ url, position, scale, rotationY, rotationX, rotationZ }) => {
 
  
       if (url === "/textures/flash_light.glb") {
-        const light = new THREE.SpotLight(0xffffff, 2); 
+        const light = new THREE.SpotLight(0xffffff, 5); 
         light.position.set(0, 2, 0); 
         light.angle = Math.PI / 4; 
         light.penumbra = 0.5; 
