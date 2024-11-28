@@ -189,7 +189,7 @@ popupElement.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
 popupElement.style.color = 'white';
 popupElement.style.borderRadius = '5px';
 popupElement.style.display = 'none';
-popupElement.innerHTML = 'Click to play Game Boy!';
+popupElement.innerHTML = 'click to play Game Boy';
 document.body.appendChild(popupElement);
 
 const iframe = document.createElement('iframe');
@@ -259,7 +259,7 @@ function onMove(event) {
       popupElement.style.top = `${event.clientY + window.scrollY + 10}px`;
     } else if (intersectsIphone.length > 0) {
       popupElement.style.display = 'block';
-      popupElement.innerHTML = 'Use ipad!';
+      popupElement.innerHTML = 'click to use ipad';
       const bounds = event.target.getBoundingClientRect();
       popupElement.style.left = `${event.clientX + window.scrollX + 10}px`;
       popupElement.style.top = `${event.clientY + window.scrollY + 10}px`;
@@ -287,8 +287,8 @@ function onClick(event) {
       closeButton.style.display = 'block';
       enableOutsideClickListener();
     } else if (intersectsIphone.length > 0) {
-      console.log('iPhone clicked! Opening iframe...');
-      iframe.src = 'https://imac.jessejesse.com';
+      console.log('ipad clicked! Opening iframe...');
+      iframe.src = 'https://jessejesse.xyz';
       iframe.style.display = 'block';
       iframe.style.left = `${(window.innerWidth - iframe.offsetWidth) / 2}px`;
       iframe.style.top = `${(window.innerHeight - iframe.offsetHeight) / 2}px`;
@@ -328,8 +328,6 @@ window.addEventListener('touchstart', (event) => {
   event.preventDefault();
   onClick(event);
 }, { passive: false });
-
-
 
 
 loader.load(
