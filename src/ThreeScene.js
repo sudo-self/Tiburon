@@ -4,21 +4,29 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
+
 const width = window.innerWidth;
 const height = window.innerHeight;
+
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(width, height);
 renderer.shadowMap.enabled = true;
 document.body.appendChild(renderer.domElement);
 
+
 const camera = new THREE.PerspectiveCamera(70, width / height, 0.1, 100);
 camera.position.set(0, 1, 5);
 
+
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
+controls.dampingFactor = 0.25;
+controls.screenSpacePanning = false;
+
 
 const scene = new THREE.Scene();
+
 
 const textureLoader = new THREE.TextureLoader();
 const floorTexture = textureLoader.load("/textures/floor.jpeg");
@@ -167,7 +175,77 @@ function changeLightColor() {
 
 setInterval(changeLightColor, 2000);
 
+
+
+
+let gameBoy = null;
+const mouse = new THREE.Vector2();
+const raycaster = new THREE.Raycaster();
 const loader = new GLTFLoader();
+
+const popupElement = document.createElement('div');
+popupElement.style.position = 'absolute';
+popupElement.style.padding = '10px';
+popupElement.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+popupElement.style.color = 'white';
+popupElement.style.borderRadius = '5px';
+popupElement.style.display = 'none';
+popupElement.innerHTML = 'Click to play Game Boy!';
+document.body.appendChild(popupElement);
+
+loader.load('/textures/game_boy.glb', (gltf) => {
+  gameBoy = gltf.scene;
+  gameBoy.position.set(0.3, 0.64, -0.1);
+  gameBoy.scale.set(1.5, 1.5, 1.5);
+  gameBoy.rotation.x = -Math.PI / 2;
+  gameBoy.rotation.z = Math.PI / 8;
+  scene.add(gameBoy);
+});
+
+function onMouseMove(event) {
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+
+  if (gameBoy) {
+    const intersects = raycaster.intersectObject(gameBoy, true);
+
+    if (intersects.length > 0) {
+
+      popupElement.style.display = 'block';
+      const bounds = event.target.getBoundingClientRect();
+      popupElement.style.left = `${event.clientX + 10}px`;
+      popupElement.style.top = `${event.clientY + 10}px`;
+    } else {
+
+      popupElement.style.display = 'none';
+    }
+  }
+}
+
+function onMouseClick(event) {
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+
+  if (gameBoy) {
+    const intersects = raycaster.intersectObject(gameBoy, true);
+
+    if (intersects.length > 0) {
+      console.log('Game Boy clicked! Opening URL...');
+      window.open('https://marioallstars.vercel.app', '_blank');
+    }
+  }
+}
+
+window.addEventListener('mousemove', onMouseMove, false);
+window.addEventListener('click', onMouseClick, false);
+
+
+
+
 loader.load(
   "/textures/macbook.glb",
   (gltf) => {
@@ -179,7 +257,7 @@ loader.load(
   undefined,
   (error) => {
     console.error("An error occurred while loading the MacBook model:", error);
-  },
+  }
 );
 
 const models = [
@@ -390,14 +468,6 @@ const models = [
     position: [0.5, 0.65, -0.1],
     scale: [0.03, 0.03, 0.03],
     rotationY: Math.PI / 5,
-  },
-
-    {
-    url: "/textures/game_boy.glb",
-    position: [0.3, 0.64, -0.1],
-    scale: [1.5, 1.5, 1.5],
-    rotationX: -Math.PI / 2,
-    rotationZ: Math.PI / 8,
   },
   
   {
