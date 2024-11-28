@@ -35,6 +35,7 @@
         right: 10px;
         z-index: 1000;
         display: flex;
+        flex-direction: column; 
         gap: 10px;
         font-size: 14px;
       }
@@ -52,24 +53,38 @@
       .corner-link a:hover {
         background-color: #000;
       }
+
+     
+      .bmc-button iframe {
+        border-radius: 4px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      }
     </style>
   </head>
   <body>
     <div class="corner-link">
-      <a
-        href="https://x.com/ilostmyipad"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Visit @iLostmyipad on X (formerly Twitter)"
-      >
-        @iLostmyipad
-      </a>
+    
+      <script
+        type="text/javascript"
+        src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
+        data-name="bmc-button"
+        data-slug="Jessew"
+        data-color="#000000"
+        data-emoji="🍺"
+        data-font="Bree"
+        data-text="Buy me a beer"
+        data-outline-color="#ffffff"
+        data-font-color="#ffffff"
+        data-coffee-color="#FFDD00"
+      ></script>
     </div>
+
     <div id="root"></div>
     <noscript>Please enable JavaScript to view this website.</noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
+
 
 
 
