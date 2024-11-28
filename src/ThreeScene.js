@@ -175,9 +175,6 @@ function changeLightColor() {
 
 setInterval(changeLightColor, 2000);
 
-
-
-
 let gameBoy = null;
 const mouse = new THREE.Vector2();
 const raycaster = new THREE.Raycaster();
@@ -202,32 +199,37 @@ loader.load('/textures/game_boy.glb', (gltf) => {
   scene.add(gameBoy);
 });
 
-function onMouseMove(event) {
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+function getMousePosition(event) {
+  let x = event.clientX || event.touches[0].clientX;
+  let y = event.clientY || event.touches[0].clientY;
+  return {
+    x: (x / window.innerWidth) * 2 - 1,
+    y: -(y / window.innerHeight) * 2 + 1
+  };
+}
 
+function onMove(event) {
+  const { x, y } = getMousePosition(event);
+  mouse.set(x, y);
   raycaster.setFromCamera(mouse, camera);
 
   if (gameBoy) {
     const intersects = raycaster.intersectObject(gameBoy, true);
 
     if (intersects.length > 0) {
-
       popupElement.style.display = 'block';
       const bounds = event.target.getBoundingClientRect();
       popupElement.style.left = `${event.clientX + 10}px`;
       popupElement.style.top = `${event.clientY + 10}px`;
     } else {
-
       popupElement.style.display = 'none';
     }
   }
 }
 
-function onMouseClick(event) {
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
+function onClick(event) {
+  const { x, y } = getMousePosition(event);
+  mouse.set(x, y);
   raycaster.setFromCamera(mouse, camera);
 
   if (gameBoy) {
@@ -240,8 +242,20 @@ function onMouseClick(event) {
   }
 }
 
-window.addEventListener('mousemove', onMouseMove, false);
-window.addEventListener('click', onMouseClick, false);
+
+window.addEventListener('mousemove', onMove, false);
+window.addEventListener('click', onClick, false);
+
+
+window.addEventListener('touchmove', (event) => {
+  event.preventDefault();
+  onMove(event);
+}, { passive: false });
+
+window.addEventListener('touchstart', (event) => {
+  event.preventDefault();
+  onClick(event);
+}, { passive: false });
 
 
 
