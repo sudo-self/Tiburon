@@ -3,17 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="title" content="JesseJesse.com" />
     <meta name="description" content="JesseJesse.com" />
-    <meta property="og:type" content="JesseJesse.com" />
+    <meta property="og:type" content="website" />
     <meta property="og:url" content="https://jessejesse.com/" />
-    <meta property="og:title" content="Three-js" />
+    <meta property="og:title" content="3D living room" />
     <meta property="og:description" content="JesseJesse.com" />
     <meta property="og:image" content="https://jessejesse.com/favicon-192.png" />
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://jessejesse.com" />
-    <meta property="twitter:title" content="Three-js" />
+    <meta property="twitter:title" content="3D living room" />
     <meta property="twitter:description" content="JesseJesse.com" />
     <meta property="twitter:image" content="https://jessejesse.com/favicon-192.png" />
     <meta name="author" content="JesseJesse" />
@@ -23,6 +22,13 @@
     <link rel="apple-touch-icon" sizes="any" href="apple-touch-icon.png" />
     <link rel="icon" sizes="32x32" href="favicon-32.png" />
     <style>
+      body {
+        background-color: #ffffff;
+        color: #000000;
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+
       .corner-link {
         position: fixed;
         top: 10px;
@@ -36,7 +42,7 @@
       .corner-link a {
         text-decoration: none;
         color: #fff;
-        background-color: #A59344;
+        background-color: #a59344;
         padding: 8px 12px;
         border-radius: 4px;
         font-family: Arial, sans-serif;
@@ -50,14 +56,21 @@
   </head>
   <body>
     <div class="corner-link">
-      <a href="https://x.com/ilostmyipad" target="_blank" rel="noopener noreferrer">
-       @iLostmyipad
+      <a
+        href="https://x.com/ilostmyipad"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Visit @iLostmyipad on X (formerly Twitter)"
+      >
+        @iLostmyipad
       </a>
     </div>
     <div id="root"></div>
+    <noscript>Please enable JavaScript to view this website.</noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
+
 
 
 
