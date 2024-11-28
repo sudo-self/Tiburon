@@ -704,25 +704,70 @@ function createSteamEffect(position) {
   animateParticles();
 }
 
+
 models.forEach(({ url, position, scale, rotationY, rotationX, rotationZ }) => {
   loader.load(
     url,
     (gltf) => {
       const model = gltf.scene;
+
+     
       model.scale.set(...scale);
       model.position.set(...position);
       if (rotationY) model.rotation.y = rotationY;
       if (rotationX) model.rotation.x = rotationX;
       if (rotationZ) model.rotation.z = rotationZ;
+
+ 
+      if (url === "/textures/flash_light.glb") {
+        const light = new THREE.SpotLight(0xffffff, 2); 
+        light.position.set(0, 2, 0); 
+        light.angle = Math.PI / 4; 
+        light.penumbra = 0.5; 
+        light.distance = 5; 
+        light.castShadow = true; 
+        light.visible = false; 
+        scene.add(light);
+
+     
+        window.addEventListener("mousemove", (event) => {
+     
+          const mouse = new THREE.Vector2(
+            (event.clientX / window.innerWidth) * 2 - 1,
+            -(event.clientY / window.innerHeight) * 2 + 1
+          );
+
+        
+          const raycaster = new THREE.Raycaster();
+          raycaster.setFromCamera(mouse, camera);
+
+     
+          const intersects = raycaster.intersectObject(model, true); 
+
+          
+          console.log("Intersecting:", intersects.length);
+
+        
+          if (intersects.length > 0) {
+            console.log("Light ON");
+            light.visible = true;
+          } else {
+            console.log("Light OFF");
+            light.visible = false;
+          }
+        });
+      }
+
+   
       scene.add(model);
     },
     undefined,
     (error) => {
       console.error(
         `An error occurred while loading the model at ${url}:`,
-        error,
+        error
       );
-    },
+    }
   );
 });
 
