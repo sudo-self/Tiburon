@@ -253,13 +253,13 @@ function onMove(event) {
 
     if (intersectsGameBoy.length > 0) {
       popupElement.style.display = 'block';
-      popupElement.innerHTML = 'Play Game Boy!';
+      popupElement.innerHTML = 'Play Game Boy';
       const bounds = event.target.getBoundingClientRect();
       popupElement.style.left = `${event.clientX + window.scrollX + 10}px`;
       popupElement.style.top = `${event.clientY + window.scrollY + 10}px`;
     } else if (intersectsIphone.length > 0) {
       popupElement.style.display = 'block';
-      popupElement.innerHTML = 'Use iPad!';
+      popupElement.innerHTML = 'iPad';
       const bounds = event.target.getBoundingClientRect();
       popupElement.style.left = `${event.clientX + window.scrollX + 10}px`;
       popupElement.style.top = `${event.clientY + window.scrollY + 10}px`;
