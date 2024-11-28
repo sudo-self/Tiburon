@@ -237,7 +237,7 @@ const models = [
 
   {
     url: "/textures/nike_shoes.glb",
-    position: [-1.9, 0.1, -0.5],
+    position: [-1.9, 0.009, -0.5],
     scale: [0.02, 0.02, 0.02],
     rotationY: Math.PI / 2,
   },
@@ -298,21 +298,21 @@ const models = [
   },
   {
     url: "/textures/stuff_Bear.glb",
-    position: [-1.75, 0.1, 2],
+    position: [-1.75, 0.05, 2],
     scale: [1.6, 1.6, 1.6],
     rotationY: Math.PI / 1.89,
   },
   
   {
     url: "/textures/foosball.glb",
-    position: [-1.4, 0.1, -0.9],
-    scale: [0.4, 0.4, 0.4],
+    position: [-1.4, 0.05, -0.7],
+    scale: [0.45, 0.5, 0.45],
     rotationY: Math.PI / 1.95,
   },
   
   {
     url: "/textures/pirate_flag.glb",
-    position: [-1.9, 0.1, 1.1],
+    position: [-1.9, 0.03, 1.1],
     scale: [0.004, 0.004, 0.004],
     rotationY: Math.PI / -1.3,
   },
@@ -481,10 +481,10 @@ new GLTFLoader().load(
 );
 
 const pretzelPositions = [
-  { x: -1.8, y: 0.01, z: -2.2 },
-  { x: -1.6, y: 0.01, z: -1.6 },
-  { x: -1.4, y: 0.01, z: -1.4 },
-  { x: -1.2, y: 0.01, z: -1.2 },
+  { x: -1.8, y: 0.05, z: -2.2 },
+  { x: -1.6, y: 0.05, z: -1.6 },
+  { x: -1.4, y: 0.05, z: -1.4 },
+  { x: -1.2, y: 0.05, z: -1.2 },
 ];
 
 pretzelPositions.forEach((position) => {
