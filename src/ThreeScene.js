@@ -241,7 +241,7 @@ const floorTexture = textureLoader.load("/textures/stone.jpg");
 const windowTexture = textureLoader.load("/textures/window.png");
 const photoTexture = textureLoader.load("/textures/jj.jpeg");
 const rockyTexture = textureLoader.load("/textures/rocky_terrain.webp");
-
+const carpetTexture = new THREE.TextureLoader().load("/textures/carpet.jpg");
 
 const planeMaterial = new THREE.MeshStandardMaterial({ map: rockyTexture });
 
@@ -259,12 +259,14 @@ floor.position.y = 0.01;
 scene.add(floor);
 
 
-const secondFloor = new THREE.Mesh(new THREE.PlaneGeometry(5, 5), floorMaterial.clone());
-secondFloor.rotation.x = -Math.PI / 2;
+const carpetMaterial = new THREE.MeshStandardMaterial({ map: carpetTexture });
+const secondFloor = new THREE.Mesh(new THREE.PlaneGeometry(5, 5), carpetMaterial);
+secondFloor.rotation.x = -Math.PI / 2; 
 secondFloor.receiveShadow = true;
 secondFloor.position.y = 2.5;
 secondFloor.position.z = 4.3;
 scene.add(secondFloor);
+
 
 const pointLight = new THREE.PointLight(0xffaa88, 1, 10);
 pointLight.position.set(0, 2, 0);
