@@ -165,7 +165,7 @@ function getRandomNeonColor() {
 }
 
 const light = new THREE.PointLight(getRandomNeonColor(), 1.5, 10);
-light.position.set(1.7, 1.6, -2.8); 
+light.position.set(1.7, 1.6, -2.8);
 scene.add(light);
 
 
@@ -246,14 +246,28 @@ function getMousePosition(event) {
   };
 }
 
+let chess = null;
+
+
+loader.load('/textures/chess_coines.glb', (gltf) => {
+  chess = gltf.scene;
+  chess.position.set(-0.3, 0.8, -2.0);
+  chess.scale.set(0.03, 0.03, 0.03);
+  chess.rotation.x = -Math.PI / 55;
+  chess.rotation.z = Math.PI / 55;
+  chess.rotation.y = Math.PI / 2;
+  scene.add(chess);
+});
+
 function onMove(event) {
   const { x, y } = getMousePosition(event);
   mouse.set(x, y);
   raycaster.setFromCamera(mouse, camera);
 
-  if (gameBoy || iphone) {
+  if (gameBoy || iphone || chess) {
     const intersectsGameBoy = gameBoy ? raycaster.intersectObject(gameBoy, true) : [];
     const intersectsIphone = iphone ? raycaster.intersectObject(iphone, true) : [];
+    const intersectsChess = chess ? raycaster.intersectObject(chess, true) : [];
 
     if (intersectsGameBoy.length > 0) {
       popupElement.style.display = 'block';
@@ -263,6 +277,11 @@ function onMove(event) {
     } else if (intersectsIphone.length > 0) {
       popupElement.style.display = 'block';
       popupElement.innerHTML = 'iPad';
+      popupElement.style.left = `${event.clientX + window.scrollX + 10}px`;
+      popupElement.style.top = `${event.clientY + window.scrollY + 10}px`;
+    } else if (intersectsChess.length > 0) {
+      popupElement.style.display = 'block';
+      popupElement.innerHTML = 'Play Chess';
       popupElement.style.left = `${event.clientX + window.scrollX + 10}px`;
       popupElement.style.top = `${event.clientY + window.scrollY + 10}px`;
     } else {
@@ -276,9 +295,10 @@ function onClick(event) {
   mouse.set(x, y);
   raycaster.setFromCamera(mouse, camera);
 
-  if (gameBoy || iphone) {
+  if (gameBoy || iphone || chess) {
     const intersectsGameBoy = gameBoy ? raycaster.intersectObject(gameBoy, true) : [];
     const intersectsIphone = iphone ? raycaster.intersectObject(iphone, true) : [];
+    const intersectsChess = chess ? raycaster.intersectObject(chess, true) : [];
 
     if (intersectsGameBoy.length > 0) {
       iframe.src = 'https://marioallstars.vercel.app';
@@ -289,6 +309,13 @@ function onClick(event) {
       enableOutsideClickListener();
     } else if (intersectsIphone.length > 0) {
       iframe.src = 'https://imac.jessejesse.com';
+      iframe.style.display = 'block';
+      iframe.style.left = `${(window.innerWidth - iframe.offsetWidth) / 2}px`;
+      iframe.style.top = `${(window.innerHeight - iframe.offsetHeight) / 2}px`;
+      closeButton.style.display = 'block';
+      enableOutsideClickListener();
+    } else if (intersectsChess.length > 0) {
+      iframe.src = 'https://www.chessonlinefree.com/play-chess-online#google_vignette';
       iframe.style.display = 'block';
       iframe.style.left = `${(window.innerWidth - iframe.offsetWidth) / 2}px`;
       iframe.style.top = `${(window.innerHeight - iframe.offsetHeight) / 2}px`;
@@ -720,13 +747,13 @@ models.forEach(({ url, position, scale, rotationY, rotationX, rotationZ }) => {
 
  
       if (url === "/textures/flash_light.glb") {
-        const light = new THREE.SpotLight(0xffffff, 5); 
-        light.position.set(0, 2, 0); 
-        light.angle = Math.PI / 4; 
-        light.penumbra = 0.5; 
-        light.distance = 5; 
-        light.castShadow = true; 
-        light.visible = false; 
+        const light = new THREE.SpotLight(0xffffff, 5);
+        light.position.set(0, 2, 0);
+        light.angle = Math.PI / 4;
+        light.penumbra = 0.5;
+        light.distance = 5;
+        light.castShadow = true;
+        light.visible = false;
         scene.add(light);
 
      
@@ -742,7 +769,7 @@ models.forEach(({ url, position, scale, rotationY, rotationX, rotationZ }) => {
           raycaster.setFromCamera(mouse, camera);
 
      
-          const intersects = raycaster.intersectObject(model, true); 
+          const intersects = raycaster.intersectObject(model, true);
 
           
           console.log("Intersecting:", intersects.length);
@@ -777,7 +804,7 @@ video.crossOrigin = "anonymous";
 video.loop = true;
 video.muted = true;
 video.autoplay = true;
-video.playsInline = true; 
+video.playsInline = true;
 
 video.addEventListener("canplaythrough", () => {
   console.log("Video ready to play");
