@@ -204,7 +204,7 @@ iframe.style.zIndex = '1001';
 document.body.appendChild(iframe);
 
 const closeButton = document.createElement('button');
-closeButton.innerText = 'exit';
+closeButton.innerText = 'EXIT';
 closeButton.style.position = 'absolute';
 closeButton.style.top = '10px';
 closeButton.style.left = '10px';
