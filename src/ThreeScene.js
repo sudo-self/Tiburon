@@ -250,6 +250,14 @@ floor.receiveShadow = true;
 floor.position.y = 0.01;
 scene.add(floor);
 
+
+const secondFloor = new THREE.Mesh(new THREE.PlaneGeometry(5, 5), floorMaterial.clone());
+secondFloor.rotation.x = -Math.PI / 2;
+secondFloor.receiveShadow = true;
+secondFloor.position.y = 2.5; 
+secondFloor.position.z = 4.5; 
+scene.add(secondFloor)
+
 const pointLight = new THREE.PointLight(0xffaa88, 1, 10);
 pointLight.position.set(0, 2, 0);
 pointLight.castShadow = true;
