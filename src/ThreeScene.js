@@ -1,9 +1,10 @@
-//JesseJesse.com
+// JesseJesse.com
 
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-
+import { Sky } from "three/examples/jsm/objects/Sky.js";
+import { MathUtils, Vector3 } from "three";
 
 const width = window.innerWidth;
 const height = window.innerHeight;
@@ -14,10 +15,8 @@ renderer.setSize(width, height);
 renderer.shadowMap.enabled = true;
 document.body.appendChild(renderer.domElement);
 
-
 const camera = new THREE.PerspectiveCamera(70, width / height, 0.1, 100);
 camera.position.set(0, 1, 5);
-
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
@@ -26,10 +25,27 @@ controls.screenSpacePanning = false;
 
 
 const planeGeometry = new THREE.PlaneGeometry(50, 50);
-const planeMaterial = new THREE.MeshStandardMaterial({ color: 0x000000 });
+const planeMaterial = new THREE.MeshStandardMaterial({ color: 0x228B22 });
 const ground = new THREE.Mesh(planeGeometry, planeMaterial);
 ground.rotation.x = -Math.PI / 2;
 scene.add(ground);
+
+
+const sky = new Sky();
+sky.scale.setScalar(450000);
+scene.add(sky);
+
+const sun = new Vector3();
+const phi = MathUtils.degToRad(90); 
+const theta = MathUtils.degToRad(180); /
+sun.setFromSphericalCoords(1, phi, theta);
+
+sky.material.uniforms.sunPosition.value.copy(sun);
+
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+directionalLight.position.copy(sun).multiplyScalar(450000); 
+scene.add(directionalLight);
 
 
 const loader = new GLTFLoader();
