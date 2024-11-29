@@ -1,5 +1,3 @@
-// JesseJesse.com
-
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
@@ -23,13 +21,11 @@ controls.enableDamping = true;
 controls.dampingFactor = 0.25;
 controls.screenSpacePanning = false;
 
-
 const planeGeometry = new THREE.PlaneGeometry(50, 50);
 const planeMaterial = new THREE.MeshStandardMaterial({ color: 0x228B22 });
 const ground = new THREE.Mesh(planeGeometry, planeMaterial);
 ground.rotation.x = -Math.PI / 2;
 scene.add(ground);
-
 
 const sky = new Sky();
 sky.scale.setScalar(450000);
@@ -37,15 +33,18 @@ scene.add(sky);
 
 const sun = new Vector3();
 const phi = MathUtils.degToRad(90); 
-const theta = MathUtils.degToRad(180); /
+const theta = MathUtils.degToRad(180); 
 sun.setFromSphericalCoords(1, phi, theta);
 
 sky.material.uniforms.sunPosition.value.copy(sun);
 
-
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
 directionalLight.position.copy(sun).multiplyScalar(450000); 
 scene.add(directionalLight);
+
+const environmentLight = new THREE.AmbientLight(0x505050, 0.4); 
+scene.add(environmentLight);
+
 
 
 const loader = new GLTFLoader();
