@@ -162,8 +162,8 @@ const movement = {
   right: false,
 };
 
-const speed = 0.2;
-const rotationSpeed = 0.04;
+const speed = 0.4;
+const rotationSpeed = 0.05;
 
 function setupControls() {
   window.addEventListener("keydown", (event) => {
