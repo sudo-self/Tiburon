@@ -41,37 +41,32 @@ loader.load(
   (gltf) => {
     fireTruck = gltf.scene;
 
- 
-    fireTruck.position.set(-1.7, 0.01, -2.1);
-    fireTruck.scale.set(0.0002, 0.0002, 0.0002);
+    fireTruck.position.set(-1.9, 0.01, -2.1);
+    fireTruck.scale.set(0.18, 0.18, 0.18);
     fireTruck.rotation.y = Math.PI / -2;
 
- 
+  
     fireTruck.traverse((child) => {
       if (child.isMesh) {
-      
-        if (child.name.toLowerCase().includes("tire")) {
-          child.material.color.set(0x000000);
-          child.material.roughness = 0.9;
-          child.material.metalness = 0.2;
-        } else if (child.name.toLowerCase().includes("window")) {
-          child.material.color.set(0x000000);
-          child.material.transparent = true;
-          child.material.opacity = 0.8;
-          child.material.roughness = 0.3;
-          child.material.metalness = 0.7;
-        } else {
-          child.material.color.set(0xffffff);
-          child.material.roughness = 0.6;
-          child.material.metalness = 0.3;
-        }
+    
+        child.material.roughness = 0.6;  
+        child.material.metalness = 0.1; 
       }
     });
 
-
+ 
     scene.add(fireTruck);
 
     console.log("Fire truck loaded successfully with modified materials!");
+
+
+    const ambientLight = new THREE.AmbientLight(0x505050, 0.4); 
+    scene.add(ambientLight);
+
+   
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8); 
+    directionalLight.position.set(5, 5, 5);
+    scene.add(directionalLight);
   },
   undefined,
   (error) => {
