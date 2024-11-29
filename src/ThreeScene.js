@@ -791,7 +791,7 @@ const models = [
   },
     {
     url: "/textures/chinese_stairs.glb",
-    position: [3.6, 0.1, 1.4],
+    position: [3.8, 0.1, 1.4],
     scale: [0.003, 0.003, 0.003],
     rotationY: Math.PI / -2,
   },
