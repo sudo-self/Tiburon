@@ -701,20 +701,30 @@ const models = [
     rotationY: 3.15,
   },
   
-  {
-    url: "/textures/bed.glb",
-      position: [-0.5, 2.6, 5.8],
-    scale: [0.005, 0.005, 0.005],
-    rotationY: 3.15,
-  },
   
   {
     url: "/textures/the_piano.glb",
-      position: [2.1, 3.0, 5.8],
+      position: [2.1, 3.0, 4.8],
     scale: [0.4, 0.4, 0.4],
     rotationY: -14.15,
   },
+  
+  {
+    url: "/textures/sofa.glb",
+      position: [-.5, 2.9, 2.5],
+    scale: [1.0, 1.0, 1.0],
+    rotationY: -12.55,
+  },
+  
+  {
+    url: "/textures/retro_tv.glb",
+      position: [1.2, 1.55, 5.1],
+    scale: [.05, .05, .05],
+    rotationY: -40.5,
+  },
 
+  
+  
   {
     url: "/textures/ps5_customized.glb",
     position: [-1.0, 0.03, -2.0],
