@@ -96,7 +96,7 @@ scene.add(backWall);
 
 
 const tooltip = document.createElement("div");
-tooltip.style.position = "absolute";
+tooltip.style.position = "fixed";
 tooltip.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
 tooltip.style.color = "#fff";
 tooltip.style.padding = "5px";
@@ -584,7 +584,7 @@ loader.load(
 );
 
 
-const squareGeometry = new THREE.BoxGeometry(0.8, 0.09, 0.6);
+const squareGeometry = new THREE.BoxGeometry(0.79, 0.079, 0.85);
 const squareMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
 doorSquare = new THREE.Mesh(squareGeometry, squareMaterial);
 doorSquare.position.set(-2.53, 0.41, -2.09);
@@ -678,7 +678,7 @@ const models = [
 
   {
     url: "/textures/ps5_customized.glb",
-    position: [-1.0, 0.1, -2.0],
+    position: [-1.0, 0.03, -2.0],
     scale: [0.3, 0.3, 0.3],
     rotationY: 0,
   },
@@ -914,7 +914,6 @@ new GLTFLoader().load(
 );
 
 const pretzelPositions = [
-  { x: -1.8, y: 0.05, z: -2.2 },
   { x: -1.6, y: 0.05, z: -1.6 },
   { x: -1.4, y: 0.05, z: -1.4 },
   { x: -1.2, y: 0.05, z: -1.2 },
@@ -1134,6 +1133,33 @@ console.log('Renderer:', renderer);
 
 
 export default ThreeScene;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
 
 
 
