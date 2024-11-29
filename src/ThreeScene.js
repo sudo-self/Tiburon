@@ -23,11 +23,9 @@ controls.enableDamping = true;
 controls.dampingFactor = 0.25;
 controls.screenSpacePanning = false;
 
-const planeGeometry = new THREE.PlaneGeometry(50, 50);
-const planeMaterial = new THREE.MeshStandardMaterial({ color: 0x228B22 });
-const ground = new THREE.Mesh(planeGeometry, planeMaterial);
-ground.rotation.x = -Math.PI / 2;
-scene.add(ground);
+
+
+
 
 // Add procedural sky
 const sky = new Sky();
@@ -35,15 +33,15 @@ sky.scale.setScalar(450000);
 scene.add(sky);
 
 const sun = new Vector3();
-const phi = MathUtils.degToRad(90); // Adjust for sun inclination
-const theta = MathUtils.degToRad(180); // Adjust for azimuth
+const phi = MathUtils.degToRad(90);
+const theta = MathUtils.degToRad(180);
 sun.setFromSphericalCoords(1, phi, theta);
 
 sky.material.uniforms.sunPosition.value.copy(sun);
 
-// Add directional light to match sun
+
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-directionalLight.position.copy(sun).multiplyScalar(450000); // Align light to sun
+directionalLight.position.copy(sun).multiplyScalar(450000);
 scene.add(directionalLight);
 
 
@@ -98,12 +96,6 @@ const leftWall = new THREE.Mesh(new THREE.PlaneGeometry(5, 2.5), wallMaterial);
 leftWall.position.set(-2.5, 1.25, 0);
 leftWall.rotation.y = Math.PI / 2;
 scene.add(leftWall);
-
-
-const rightWall = new THREE.Mesh(new THREE.PlaneGeometry(5, 2.5), wallMaterial);
-rightWall.position.set(2.5, 3.75, 5.5);
-rightWall.rotation.y = -Math.PI / 2;
-scene.add(rightWall);
 
 
 const backWall = new THREE.Mesh(new THREE.PlaneGeometry(5, 2.5), wallMaterial);
@@ -248,6 +240,16 @@ const textureLoader = new THREE.TextureLoader();
 const floorTexture = textureLoader.load("/textures/stone.jpg");
 const windowTexture = textureLoader.load("/textures/window.png");
 const photoTexture = textureLoader.load("/textures/jj.jpeg");
+const rockyTexture = textureLoader.load("/textures/rocky_terrain.webp");
+
+
+const planeMaterial = new THREE.MeshStandardMaterial({ map: rockyTexture });
+
+
+const planeGeometry = new THREE.PlaneGeometry(50, 50);
+const ground = new THREE.Mesh(planeGeometry, planeMaterial);
+ground.rotation.x = -Math.PI / 2;
+scene.add(ground);
 
 const floorMaterial = new THREE.MeshStandardMaterial({ map: floorTexture });
 const floor = new THREE.Mesh(new THREE.PlaneGeometry(5, 5), floorMaterial);
@@ -255,15 +257,6 @@ floor.rotation.x = -Math.PI / 2;
 floor.receiveShadow = true;
 floor.position.y = 0.01;
 scene.add(floor);
-
-
-
-const secondFloor = new THREE.Mesh(new THREE.PlaneGeometry(5, 5), floorMaterial.clone());
-secondFloor.rotation.x = -Math.PI / 2;
-secondFloor.receiveShadow = true;
-secondFloor.position.y = 2.5;
-secondFloor.position.z = 5.5;
-scene.add(secondFloor)
 
 const pointLight = new THREE.PointLight(0xffaa88, 1, 10);
 pointLight.position.set(0, 2, 0);
@@ -666,7 +659,6 @@ const models = [
     scale: [1.2, 0.9, 0.9],
     rotationY: 10,
   },
-  
 
   {
     url: "/textures/apple_watch.glb",
@@ -726,12 +718,6 @@ const models = [
     scale: [0.4, 0.4, 0.4],
     rotationY: Math.PI / 2,
   },
-  {
-  url: "/textures/balconey.glb",
-  position: [0, 2.5, -3.0],
-  scale: [0.4, 0.4, 0.4],
-  rotationY: Math.PI / 2,
-},
  
   
     {
@@ -795,6 +781,12 @@ const models = [
     rotationX: -Math.PI / 8,
     rotationZ: Math.PI / 8,
   },
+    {
+    url: "/textures/chinese_stairs.glb",
+    position: [4.0, 0.1, 1.4],
+    scale: [0.003, 0.003, 0.003],
+    rotationY: Math.PI / -2,
+  },
 
   {
     url: "/textures/hoodie.glb",
@@ -823,12 +815,6 @@ const models = [
     position: [1.6, 0.5, -0.7],
     scale: [0.3, 0.3, 0.3],
     rotationY: Math.PI / 12,
-  },
-  {
-    url: "/textures/chinese_stairs.glb",
-    position: [4.0, 0.1, 1.4],
-    scale: [0.003, 0.003, 0.003],
-    rotationY: Math.PI / -2,
   },
 
   {
@@ -1169,6 +1155,80 @@ console.log('Renderer:', renderer);
 
 
 export default ThreeScene;
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
