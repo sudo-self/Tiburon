@@ -773,6 +773,12 @@ const models = [
     rotationX: -Math.PI / 8,
     rotationZ: Math.PI / 8,
   },
+    {
+    url: "/textures/chinese_stairs.glb",
+    position: [4.0, 0.1, 1.4],
+    scale: [0.003, 0.003, 0.003],
+    rotationY: Math.PI / -2,
+  },
 
   {
     url: "/textures/hoodie.glb",
