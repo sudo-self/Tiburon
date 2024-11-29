@@ -24,7 +24,7 @@ controls.dampingFactor = 0.25;
 controls.screenSpacePanning = false;
 
 const planeGeometry = new THREE.PlaneGeometry(50, 50);
-const planeMaterial = new THREE.MeshStandardMaterial({ color: 0x228B22 });
+const planeMaterial = new THREE.MeshStandardMaterial({ color: 0x111111 });
 const ground = new THREE.Mesh(planeGeometry, planeMaterial);
 ground.rotation.x = -Math.PI / 2;
 scene.add(ground);
