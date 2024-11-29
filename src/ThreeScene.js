@@ -35,15 +35,15 @@ sky.scale.setScalar(450000);
 scene.add(sky);
 
 const sun = new Vector3();
-const phi = MathUtils.degToRad(90); // Adjust for sun inclination
-const theta = MathUtils.degToRad(180); // Adjust for azimuth
+const phi = MathUtils.degToRad(90); 
+const theta = MathUtils.degToRad(180); 
 sun.setFromSphericalCoords(1, phi, theta);
 
 sky.material.uniforms.sunPosition.value.copy(sun);
 
-// Add directional light to match sun
+
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-directionalLight.position.copy(sun).multiplyScalar(450000); // Align light to sun
+directionalLight.position.copy(sun).multiplyScalar(450000); 
 scene.add(directionalLight);
 
 
@@ -239,7 +239,7 @@ animateScene();
 
 
 const textureLoader = new THREE.TextureLoader();
-const floorTexture = textureLoader.load("/textures/floor.jpeg");
+const floorTexture = textureLoader.load("/textures/stone.jpg");
 const windowTexture = textureLoader.load("/textures/window.png");
 const photoTexture = textureLoader.load("/textures/jj.jpeg");
 
