@@ -253,3 +253,41 @@ let object = {
 let model;
 
 ```
+
+### Three JS Scene
+
+```
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+
+
+const width = window.innerWidth;
+const height = window.innerHeight;
+
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(width, height);
+renderer.shadowMap.enabled = true;
+document.body.appendChild(renderer.domElement);
+
+
+const camera = new THREE.PerspectiveCamera(70, width / height, 0.1, 100);
+camera.position.set(0, 1, 5);
+
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.25;
+controls.screenSpacePanning = false;
+
+
+const scene = new THREE.Scene();
+
+```
+
+
+
+
+
+
