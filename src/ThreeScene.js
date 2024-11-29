@@ -4,13 +4,11 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
+
 const width = window.innerWidth;
 const height = window.innerHeight;
 
-
 const scene = new THREE.Scene();
-
-
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(width, height);
 renderer.shadowMap.enabled = true;
@@ -28,25 +26,139 @@ controls.screenSpacePanning = false;
 
 
 const planeGeometry = new THREE.PlaneGeometry(50, 50);
-const planeMaterial = new THREE.MeshStandardMaterial({ color: 0x808080 });
+const planeMaterial = new THREE.MeshStandardMaterial({ color: 0x000000 });
 const ground = new THREE.Mesh(planeGeometry, planeMaterial);
 ground.rotation.x = -Math.PI / 2;
 scene.add(ground);
 
 
 const loader = new GLTFLoader();
-
 let fireTruck;
 
 
-loader.load("/textures/fire_truck.glb", (gltf) => {
-  fireTruck = gltf.scene;
-  fireTruck.position.set(-2, 0, -2.1);
-  fireTruck.scale.set(1.0, 1.0, 1.0);
-  fireTruck.rotation.y = Math.PI / 2;
-  scene.add(fireTruck);
-});
+loader.load(
+  "/textures/fire_truck.glb",
+  (gltf) => {
+    fireTruck = gltf.scene;
 
+ 
+    fireTruck.position.set(-1.7, 0.01, -2.1);
+    fireTruck.scale.set(0.0002, 0.0002, 0.0002);
+    fireTruck.rotation.y = Math.PI / -2;
+
+ 
+    fireTruck.traverse((child) => {
+      if (child.isMesh) {
+      
+        if (child.name.toLowerCase().includes("tire")) {
+          child.material.color.set(0x000000);
+          child.material.roughness = 0.9;
+          child.material.metalness = 0.2;
+        } else if (child.name.toLowerCase().includes("window")) {
+          child.material.color.set(0x000000);
+          child.material.transparent = true;
+          child.material.opacity = 0.8;
+          child.material.roughness = 0.3;
+          child.material.metalness = 0.7;
+        } else {
+          child.material.color.set(0xffffff);
+          child.material.roughness = 0.6;
+          child.material.metalness = 0.3;
+        }
+      }
+    });
+
+
+    scene.add(fireTruck);
+
+    console.log("Fire truck loaded successfully with modified materials!");
+  },
+  undefined,
+  (error) => {
+    console.error("Error loading the fire truck model:", error);
+  }
+);
+
+
+const wallTexture = new THREE.TextureLoader().load('/textures/wall.jpeg');
+const wallMaterial = new THREE.MeshStandardMaterial({ map: wallTexture });
+
+
+const leftWall = new THREE.Mesh(new THREE.PlaneGeometry(5, 2.5), wallMaterial);
+leftWall.position.set(-2.5, 1.25, 0);
+leftWall.rotation.y = Math.PI / 2;
+scene.add(leftWall);
+
+
+const backWall = new THREE.Mesh(new THREE.PlaneGeometry(5, 2.5), wallMaterial);
+backWall.position.set(0, 1.25, -2.5);
+scene.add(backWall);
+
+
+const tooltip = document.createElement("div");
+tooltip.style.position = "absolute";
+tooltip.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+tooltip.style.color = "#fff";
+tooltip.style.padding = "5px";
+tooltip.style.borderRadius = "3px";
+tooltip.style.display = "none";
+document.body.appendChild(tooltip);
+
+
+window.addEventListener("mousemove", onMouseMove, false);
+window.addEventListener("click", onMouseClick, false);
+
+function onMouseMove(event) {
+
+  const mouse = new THREE.Vector2();
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+
+  const raycaster = new THREE.Raycaster();
+  raycaster.ray.origin.set(camera.position.x, camera.position.y, camera.position.z);
+  raycaster.ray.direction.set(mouse.x, mouse.y, 1).normalize();
+
+
+  const intersects = raycaster.intersectObject(fireTruck);
+
+  if (intersects.length > 0) {
+    tooltip.style.display = "block";
+
+
+    const tooltipWidth = tooltip.offsetWidth;
+    const tooltipHeight = tooltip.offsetHeight;
+
+
+    let left = event.clientX + 10;
+    let top = event.clientY + 10;
+  
+    if (left + tooltipWidth > window.innerWidth) {
+      left = event.clientX - tooltipWidth - 10;
+    }
+
+ 
+    if (top + tooltipHeight > window.innerHeight) {
+      top = event.clientY - tooltipHeight - 10;
+    }
+
+    tooltip.style.left = `${left}px`;
+    tooltip.style.top = `${top}px`;
+    tooltip.innerHTML = "Press 1 to Open Garage";
+  } else {
+    tooltip.style.display = "none";
+  }
+}
+
+function onMouseClick() {
+  const raycaster = new THREE.Raycaster();
+  raycaster.ray.origin.set(camera.position.x, camera.position.y, camera.position.z);
+  raycaster.ray.direction.set(0, 0, 1).normalize();
+  const intersects = raycaster.intersectObject(fireTruck);
+  if (intersects.length > 0) {
+    console.log("Truck clicked!");
+  }
+}
 
 const movement = {
   forward: false,
@@ -54,26 +166,25 @@ const movement = {
   left: false,
   right: false,
 };
-const speed = 0.1;
-const rotationSpeed = 0.03;
 
+const speed = 0.2;
+const rotationSpeed = 0.04;
 
 function setupControls() {
   window.addEventListener("keydown", (event) => {
-    if (event.key === "w") movement.forward = true;
-    if (event.key === "s") movement.backward = true;
+    if (event.key === "s") movement.forward = true;
+    if (event.key === "w") movement.backward = true;
     if (event.key === "a") movement.left = true;
     if (event.key === "d") movement.right = true;
   });
 
   window.addEventListener("keyup", (event) => {
-    if (event.key === "w") movement.forward = false;
-    if (event.key === "s") movement.backward = false;
+    if (event.key === "s") movement.forward = false;
+    if (event.key === "w") movement.backward = false;
     if (event.key === "a") movement.left = false;
     if (event.key === "d") movement.right = false;
   });
 }
-
 
 function updateMovement() {
   if (!fireTruck) return;
@@ -82,19 +193,21 @@ function updateMovement() {
   if (movement.forward) {
     fireTruck.translateZ(-speed);
   }
+
+
   if (movement.backward) {
     fireTruck.translateZ(speed);
   }
 
- 
+
   if (movement.left) {
     fireTruck.rotation.y += rotationSpeed;
   }
+
   if (movement.right) {
     fireTruck.rotation.y -= rotationSpeed;
   }
 }
-
 
 function animateScene() {
   requestAnimationFrame(animateScene);
@@ -105,20 +218,18 @@ function animateScene() {
   renderer.render(scene, camera);
 }
 
-
 window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-
 setupControls();
 animateScene();
 
+
 const textureLoader = new THREE.TextureLoader();
 const floorTexture = textureLoader.load("/textures/floor.jpeg");
-const wallTexture = textureLoader.load("/textures/wall.jpeg");
 const windowTexture = textureLoader.load("/textures/window.png");
 const photoTexture = textureLoader.load("/textures/jj.jpeg");
 
@@ -128,17 +239,6 @@ floor.rotation.x = -Math.PI / 2;
 floor.receiveShadow = true;
 floor.position.y = 0.01;
 scene.add(floor);
-
-const wallMaterial = new THREE.MeshStandardMaterial({ map: wallTexture });
-
-const leftWall = new THREE.Mesh(new THREE.PlaneGeometry(5, 2.5), wallMaterial);
-leftWall.position.set(-2.5, 1.25, 0);
-leftWall.rotation.y = Math.PI / 2;
-scene.add(leftWall);
-
-const backWall = new THREE.Mesh(new THREE.PlaneGeometry(5, 2.5), wallMaterial);
-backWall.position.set(0, 1.25, -2.5);
-scene.add(backWall);
 
 const pointLight = new THREE.PointLight(0xffaa88, 1, 10);
 pointLight.position.set(0, 2, 0);
@@ -449,6 +549,87 @@ window.addEventListener('resize', () => {
   iframe.style.height = window.innerWidth < 600 ? '70%' : '80%';
 });
 
+
+let mixer;
+let doorAction;
+let doorOpen = false;
+let doorSquare;
+
+loader.load(
+  '/textures/garage_door.glb',
+  (gltf) => {
+      const garageDoor = gltf.scene;
+        garageDoor.position.set(-2.44, 0.4, -2.08);
+        garageDoor.scale.set(0.2, 0.2, 0.2);
+        garageDoor.rotation.y = Math.PI / 2;
+        scene.add(garageDoor);
+
+   
+    if (gltf.animations && gltf.animations.length) {
+      mixer = new THREE.AnimationMixer(garageDoor);
+      gltf.animations.forEach((clip) => {
+        doorAction = mixer.clipAction(clip);
+        doorAction.loop = THREE.LoopOnce;
+        doorAction.clampWhenFinished = true;
+      });
+    }
+
+ 
+    camera.position.z = 5;
+  },
+  undefined,
+  (error) => {
+    console.error('Error loading model:', error);
+  }
+);
+
+
+const squareGeometry = new THREE.BoxGeometry(0.8, 0.09, 0.6);
+const squareMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+doorSquare = new THREE.Mesh(squareGeometry, squareMaterial);
+doorSquare.position.set(-2.53, 0.41, -2.09);
+
+
+doorSquare.rotation.z = Math.PI / 2;
+
+scene.add(doorSquare);
+
+
+document.addEventListener('keydown', (event) => {
+  if (!mixer) return;
+
+  if (event.key === '1' || event.key === '1') {
+    if (!doorOpen) {
+    
+      doorAction.reset();
+      doorAction.play();
+      doorOpen = true;
+    }
+  } else if (event.key === '2' || event.key === '2') {
+    if (doorOpen) {
+     
+      doorAction.time = doorAction.getClip().duration;
+      doorAction.play();
+      doorOpen = false;
+    }
+  }
+});
+
+
+const animateGarageDoor = () => {
+  requestAnimationFrame(animateGarageDoor);
+
+
+  if (mixer) {
+    mixer.update(0.02);
+  }
+
+  renderer.render(scene, camera);
+};
+
+animateGarageDoor();
+
+
 loader.load(
   "/textures/macbook.glb",
   (gltf) => {
@@ -525,10 +706,11 @@ const models = [
   
     {
     url: "/textures/donnie.glb",
-    position: [-2.4, 0, -1.9],
+    position: [-2.2, 0, -1.2],
     scale: [0.4, 0.4, 0.4],
     rotationY: Math.PI / 2,
   },
+ 
   
     {
     url: "/textures/bookshelf_speaker.glb",
