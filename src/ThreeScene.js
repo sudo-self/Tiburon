@@ -263,7 +263,7 @@ const secondFloor = new THREE.Mesh(new THREE.PlaneGeometry(5, 5), floorMaterial.
 secondFloor.rotation.x = -Math.PI / 2;
 secondFloor.receiveShadow = true;
 secondFloor.position.y = 2.5;  
-secondFloor.position.z = -2.5; 
+secondFloor.position.z = -4.5; 
 scene.add(secondFloor);
 
 const pointLight = new THREE.PointLight(0xffaa88, 1, 10);
