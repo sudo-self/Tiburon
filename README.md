@@ -281,13 +281,25 @@ controls.enableDamping = true;
 controls.dampingFactor = 0.25;
 controls.screenSpacePanning = false;
 
-
-const scene = new THREE.Scene();
+```
+### App.jsx
 
 ```
+import React from 'react';
+import ThreeScene from './ThreeScene';
+
+const App = () => {
+  return (
+    <div>
+      <h1>Three.js</h1>
+      <ThreeScene />
+    </div>
+  );
+};
+
+export default App;
 
 
-
-
+```
 
 
