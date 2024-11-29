@@ -701,6 +701,12 @@ const models = [
     rotationY: 3.15,
   },
   
+  {
+    url: "/textures/bed.glb",
+      position: [-0.5, 2.6, 5.8],
+    scale: [0.005, 0.005, 0.005],
+    rotationY: 3.15,
+  },
 
   {
     url: "/textures/ps5_customized.glb",
