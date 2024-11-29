@@ -593,18 +593,6 @@ loader.load(
   }
 );
 
-
-const squareGeometry = new THREE.BoxGeometry(0.79, 0.079, 0.85);
-const squareMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-doorSquare = new THREE.Mesh(squareGeometry, squareMaterial);
-doorSquare.position.set(-2.53, 0.41, -2.09);
-
-
-doorSquare.rotation.z = Math.PI / 2;
-
-scene.add(doorSquare);
-
-
 document.addEventListener('keydown', (event) => {
   if (!mixer) return;
 
