@@ -707,6 +707,13 @@ const models = [
     scale: [0.005, 0.005, 0.005],
     rotationY: 3.15,
   },
+  
+  {
+    url: "/textures/the_piano.glb",
+      position: [2.1, 3.0, 5.8],
+    scale: [0.4, 0.4, 0.4],
+    rotationY: -14.15,
+  },
 
   {
     url: "/textures/ps5_customized.glb",
