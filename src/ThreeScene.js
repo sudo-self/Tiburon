@@ -4,9 +4,11 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
-
 const width = window.innerWidth;
 const height = window.innerHeight;
+
+
+const scene = new THREE.Scene();
 
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -25,8 +27,94 @@ controls.dampingFactor = 0.25;
 controls.screenSpacePanning = false;
 
 
-const scene = new THREE.Scene();
+const planeGeometry = new THREE.PlaneGeometry(50, 50);
+const planeMaterial = new THREE.MeshStandardMaterial({ color: 0x808080 });
+const ground = new THREE.Mesh(planeGeometry, planeMaterial);
+ground.rotation.x = -Math.PI / 2;
+scene.add(ground);
 
+
+const loader = new GLTFLoader();
+
+let fireTruck;
+
+
+loader.load("/textures/fire_truck.glb", (gltf) => {
+  fireTruck = gltf.scene;
+  fireTruck.position.set(-2, 0, -2.1);
+  fireTruck.scale.set(1.0, 1.0, 1.0);
+  fireTruck.rotation.y = Math.PI / 2;
+  scene.add(fireTruck);
+});
+
+
+const movement = {
+  forward: false,
+  backward: false,
+  left: false,
+  right: false,
+};
+const speed = 0.1;
+const rotationSpeed = 0.03;
+
+
+function setupControls() {
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "w") movement.forward = true;
+    if (event.key === "s") movement.backward = true;
+    if (event.key === "a") movement.left = true;
+    if (event.key === "d") movement.right = true;
+  });
+
+  window.addEventListener("keyup", (event) => {
+    if (event.key === "w") movement.forward = false;
+    if (event.key === "s") movement.backward = false;
+    if (event.key === "a") movement.left = false;
+    if (event.key === "d") movement.right = false;
+  });
+}
+
+
+function updateMovement() {
+  if (!fireTruck) return;
+
+
+  if (movement.forward) {
+    fireTruck.translateZ(-speed);
+  }
+  if (movement.backward) {
+    fireTruck.translateZ(speed);
+  }
+
+ 
+  if (movement.left) {
+    fireTruck.rotation.y += rotationSpeed;
+  }
+  if (movement.right) {
+    fireTruck.rotation.y -= rotationSpeed;
+  }
+}
+
+
+function animateScene() {
+  requestAnimationFrame(animateScene);
+
+  updateMovement();
+  controls.update();
+
+  renderer.render(scene, camera);
+}
+
+
+window.addEventListener("resize", () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+
+setupControls();
+animateScene();
 
 const textureLoader = new THREE.TextureLoader();
 const floorTexture = textureLoader.load("/textures/floor.jpeg");
@@ -38,6 +126,7 @@ const floorMaterial = new THREE.MeshStandardMaterial({ map: floorTexture });
 const floor = new THREE.Mesh(new THREE.PlaneGeometry(5, 5), floorMaterial);
 floor.rotation.x = -Math.PI / 2;
 floor.receiveShadow = true;
+floor.position.y = 0.01;
 scene.add(floor);
 
 const wallMaterial = new THREE.MeshStandardMaterial({ map: wallTexture });
@@ -180,7 +269,6 @@ let gameBoy = null;
 let iphone = null;
 const mouse = new THREE.Vector2();
 const raycaster = new THREE.Raycaster();
-const loader = new GLTFLoader();
 
 const popupElement = document.createElement('div');
 popupElement.style.position = 'absolute';
@@ -434,13 +522,6 @@ const models = [
     scale: [0.02, 0.02, 0.02],
     rotationY: Math.PI / 2,
   },
-
-  {
-    url: "/textures/fire_truck.glb",
-    position: [-2, 0, -2.1],
-    scale: [1.0, 1.0, 1.0],
-    rotationY: Math.PI / 2,
-  },
   
     {
     url: "/textures/donnie.glb",
@@ -494,13 +575,6 @@ const models = [
     position: [-1.75, 0.05, 2],
     scale: [1.6, 1.6, 1.6],
     rotationY: Math.PI / 1.89,
-  },
-  
-  {
-    url: "/textures/foosball.glb",
-    position: [-1.4, 0.05, -0.7],
-    scale: [0.45, 0.5, 0.45],
-    rotationY: Math.PI / 1.95,
   },
   
   {
@@ -871,6 +945,11 @@ function animate() {
   requestAnimationFrame(animate);
 }
 animate();
+
+console.log('Scene:', scene);
+console.log('Camera:', camera);
+console.log('Renderer:', renderer);
+
 
 export default ThreeScene;
 
