@@ -1,3 +1,5 @@
+// JesseJesse.com
+
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
@@ -27,24 +29,22 @@ const ground = new THREE.Mesh(planeGeometry, planeMaterial);
 ground.rotation.x = -Math.PI / 2;
 scene.add(ground);
 
+// Add procedural sky
 const sky = new Sky();
 sky.scale.setScalar(450000);
 scene.add(sky);
 
 const sun = new Vector3();
-const phi = MathUtils.degToRad(90); 
-const theta = MathUtils.degToRad(180); 
+const phi = MathUtils.degToRad(90); // Adjust for sun inclination
+const theta = MathUtils.degToRad(180); // Adjust for azimuth
 sun.setFromSphericalCoords(1, phi, theta);
 
 sky.material.uniforms.sunPosition.value.copy(sun);
 
+// Add directional light to match sun
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-directionalLight.position.copy(sun).multiplyScalar(450000); 
+directionalLight.position.copy(sun).multiplyScalar(450000); // Align light to sun
 scene.add(directionalLight);
-
-const environmentLight = new THREE.AmbientLight(0x505050, 0.4); 
-scene.add(environmentLight);
-
 
 
 const loader = new GLTFLoader();
@@ -64,8 +64,8 @@ loader.load(
     fireTruck.traverse((child) => {
       if (child.isMesh) {
     
-        child.material.roughness = 0.6;  
-        child.material.metalness = 0.1; 
+        child.material.roughness = 0.6;
+        child.material.metalness = 0.1;
       }
     });
 
@@ -75,11 +75,11 @@ loader.load(
     console.log("Fire truck loaded successfully with modified materials!");
 
 
-    const ambientLight = new THREE.AmbientLight(0x505050, 0.4); 
+    const ambientLight = new THREE.AmbientLight(0x505050, 0.4);
     scene.add(ambientLight);
 
    
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8); 
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
     directionalLight.position.set(5, 5, 5);
     scene.add(directionalLight);
   },
@@ -177,8 +177,8 @@ const movement = {
   right: false,
 };
 
-const speed = 0.4;
-const rotationSpeed = 0.05;
+const speed = 0.2;
+const rotationSpeed = 0.04;
 
 function setupControls() {
   window.addEventListener("keydown", (event) => {
@@ -593,6 +593,8 @@ loader.load(
   }
 );
 
+
+
 document.addEventListener('keydown', (event) => {
   if (!mixer) return;
 
@@ -774,7 +776,7 @@ const models = [
 
   {
     url: "/textures/hoodie.glb",
-    position: [2.3, 0.5, 2.0],
+    position: [2.3, 0.4, 2.0],
     scale: [0.8, 0.8, 0.8],
     rotationX: -Math.PI / 2,
     rotationZ: Math.PI / 8,
@@ -852,6 +854,15 @@ const models = [
     scale: [0.2, 0.2, 0.2],
     rotationY: Math.PI / -2,
   },
+  
+  {
+    url: "/textures/side_roof.glb",
+    position: [-5.0, -0.1, -10.75],
+    scale: [0.039, 0.058, 0.059],
+    rotationY: Math.PI / 1,
+  },
+  
+  
 
   {
     url: "/textures/jj.jpeg",
@@ -1131,6 +1142,33 @@ console.log('Renderer:', renderer);
 
 
 export default ThreeScene;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
 
 
 
