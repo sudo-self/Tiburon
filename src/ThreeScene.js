@@ -676,7 +676,7 @@ loader.load(
 const models = [
   {
     url: "/textures/mountain_bike.glb",
-    position: [1.5, 0.6, -1.2],
+    position: [1.5, 0.6, 3.2],
     scale: [1.2, 0.9, 0.9],
     rotationY: 10,
   },
@@ -885,12 +885,32 @@ const models = [
     url: "/textures/stuff_Bear.glb",
     position: [-1.75, 0.05, 2],
     scale: [1.6, 1.6, 1.6],
-    rotationY: Math.PI / 1.89,
+    rotationY: Math.PI / 2.5,
   },
+  
+  {
+    url: "/textures/pool_table.glb",
+    position: [-1.5, 0.05, 9.65],
+    scale: [.01, .01, .01],
+    rotationY: Math.PI / 2.5,
+  },
+  {
+    url: "/textures/lamp_02.glb",
+    position: [1.0, 1.0, 5.5],
+    scale: [.4, .4, .4],
+    rotationY: Math.PI / 2.5,
+  },
+  {
+    url: "/textures/lamp_02.glb",
+    position: [1.5, 1.0, 5.5],
+    scale: [.4, .4, .4],
+    rotationY: Math.PI / 2.5,
+  },
+
 
   {
     url: "/textures/pirate_flag.glb",
-    position: [-1.9, 0.03, 1.1],
+    position: [-2.2, 0.03, 1.1],
     scale: [0.004, 0.004, 0.004],
     rotationY: Math.PI / -1.3,
   },
@@ -933,7 +953,7 @@ const models = [
   
   {
     url: "/textures/bmx.glb",
-    position: [1.6, 0.5, -0.7],
+    position: [0.6, 0.5, 2.7],
     scale: [0.3, 0.3, 0.3],
     rotationY: Math.PI / 12,
   },
