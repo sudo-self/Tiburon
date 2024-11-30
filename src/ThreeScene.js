@@ -628,7 +628,6 @@ window.addEventListener('resize', () => {
 });
 
 
-
 loader.load(
   "/textures/macbook.glb",
   (gltf) => {
@@ -642,6 +641,27 @@ loader.load(
     console.error("An error occurred while loading the MacBook model:", error);
   }
 );
+
+
+
+
+loader.load(
+  "/textures/black_hawk.glb",
+  (gltf) => {
+    helicopter = gltf.scene;
+    helicopter.position.set(20.0, 3.5, 18.0);
+    helicopter.scale.set(0.3, 0.3, 0.3);
+    helicopter.rotation.set(6.5, 0, 0);
+    scene.add(helicopter);
+    console.log("Helicopter loaded successfully!");
+
+
+    animateHelicopter();
+  },
+  undefined,
+  (error) => console.error("Error loading the helicopter model:", error)
+);
+
 
 
 const models = [
@@ -833,8 +853,6 @@ const models = [
       
   },
   
-  
-
     {
     url: "/textures/bookshelf_speaker.glb",
     position: [-2.4, 1.5, -1.6],
@@ -992,6 +1010,13 @@ const models = [
   rotationY: Math.PI / 1,
   },
 
+  {
+  url: "/textures/helipad.glb",
+  position: [21.0, 0.1, 18.0],
+  scale: [0.003, 0.003, 0.003],
+  rotationY: Math.PI / 1,
+  },
+
 
 
   {
@@ -1033,6 +1058,14 @@ const models = [
     scale: [5.4, 3.2, 5.4],
     rotationY: Math.PI / -100,
   },
+  {
+  url: "/textures/black_hawk.glb",
+   position: [20.0, 1.0, 18.0],
+   scale: [0.3, 0.3, 0.3],
+   rotationY: 0,
+   rotationX: 6.5,
+     
+ },
   
 ];
 
@@ -1153,6 +1186,73 @@ function createSteamEffect(position) {
   }
 
   animateParticles();
+}
+
+
+let canister;
+
+
+
+loader.load(
+  "/textures/smoke.glb",
+  (gltf) => {
+    canister = gltf.scene;
+    canister.position.set(21.5, 0.5, 18.5);
+    canister.scale.set(0.05, 0.05, 0.05);
+    scene.add(canister);
+    console.log("Canister loaded successfully!");
+
+    
+    createGreenSmoke(canister.position);
+  },
+  undefined,
+  (error) => console.error("Error loading the canister model:", error)
+);
+
+
+function createGreenSmoke(position) {
+  const particleCount = 200;
+  const particlesGeometry = new THREE.BufferGeometry();
+  const particlesMaterial = new THREE.PointsMaterial({
+    color: 0x00ff00,
+    size: 0.05,
+    transparent: true,
+    opacity: 0.7,
+  });
+
+  const positions = [];
+
+  for (let i = 0; i < particleCount; i++) {
+    const x = position.x + (Math.random() - 0.5) * 0.5;
+    const y = position.y + Math.random() * 1.5;
+    const z = position.z + (Math.random() - 0.5) * 0.5;
+    positions.push(x, y, z);
+  }
+
+
+  particlesGeometry.setAttribute(
+    "position",
+    new THREE.Float32BufferAttribute(positions, 3)
+  );
+
+
+  const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+  scene.add(particles);
+
+
+  function animateSmoke() {
+    const positions = particlesGeometry.attributes.position.array;
+    for (let i = 1; i < positions.length; i += 3) {
+      positions[i] += 0.01;
+    
+      if (positions[i] > position.y + 1.5) positions[i] = position.y;
+    }
+    particlesGeometry.attributes.position.needsUpdate = true;
+    requestAnimationFrame(animateSmoke);
+  }
+
+
+  animateSmoke();
 }
 
 
