@@ -50,8 +50,8 @@ loader.load(
   (gltf) => {
     fireTruck = gltf.scene;
 
-    fireTruck.position.set(-1.9, 0.01, -2.1);
-    fireTruck.scale.set(0.18, 0.18, 0.18);
+    fireTruck.position.set(5.0, 0.01, 9.0);
+    fireTruck.scale.set(0.5, 0.5, 0.5);
     fireTruck.rotation.y = Math.PI / -2;
 
   
@@ -680,6 +680,13 @@ const models = [
     scale: [1.2, 0.9, 0.9],
     rotationY: 10,
   },
+  
+  {
+    url: "/textures/darts.glb",
+    position: [3.0, 1.6, 2.95],
+    scale: [0.8, 0.8, 0.8],
+  },
+
 
   {
     url: "/textures/apple_watch.glb",
