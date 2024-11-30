@@ -24,10 +24,6 @@ controls.dampingFactor = 0.25;
 controls.screenSpacePanning = false;
 
 
-
-
-
-// Add procedural sky
 const sky = new Sky();
 sky.scale.setScalar(450000);
 scene.add(sky);
@@ -101,6 +97,10 @@ scene.add(leftWall);
 const backWall = new THREE.Mesh(new THREE.PlaneGeometry(5, 2.5), wallMaterial);
 backWall.position.set(0, 1.25, -2.5);
 scene.add(backWall);
+
+const secondBackWall = new THREE.Mesh(new THREE.PlaneGeometry(5, 2.5), wallMaterial);
+secondBackWall.position.set(5, 1, 2.9);
+scene.add(secondBackWall);
 
 
 const tooltip = document.createElement("div");
@@ -251,26 +251,23 @@ const ground = new THREE.Mesh(planeGeometry, planeMaterial);
 ground.rotation.x = -Math.PI / 2;
 scene.add(ground);
 
-// Create the first floor piece (original floor)
+
 const floorMaterial = new THREE.MeshStandardMaterial({ map: floorTexture });
 const floor1 = new THREE.Mesh(new THREE.PlaneGeometry(5, 5), floorMaterial);
 floor1.rotation.x = -Math.PI / 2;
 floor1.receiveShadow = true;
-floor1.position.set(0, 0.01, 0); // Original position
+floor1.position.set(0, 0.01, 0);
 scene.add(floor1);
 
-// Add another floor piece along the Z axis (forward)
-const floor3 = floor1.clone(); // Clone the first floor
-floor3.position.set(0, 0.01, 5); // Offset by 5 units along the Z axis
+
+const floor3 = floor1.clone();
+floor3.position.set(0, 0.01, 5);
 scene.add(floor3);
 
-// Add another floor piece diagonally (both X and Z)
-const floor4 = floor1.clone(); // Clone the first floor
-floor4.position.set(5, 0.01, 5); // Offset by 5 units along both X and Z axes
+
+const floor4 = floor1.clone();
+floor4.position.set(5, 0.01, 5);
 scene.add(floor4);
-
-
-
 
 
 const carpetMaterial = new THREE.MeshStandardMaterial({ map: carpetTexture });
@@ -702,13 +699,13 @@ const models = [
   },
   
   {
-  url: "/textures/modern_kitchen.glb",
-  position: [4.2, 0.01, 3.8],
-  scale: [0.4, 0.4, 0.4],
-  rotationZ: Math.PI / 80,
-  rotationY: Math.PI / -2,
-  rotationX: Math.PI / -70,
-},
+    url: "/textures/modern_kitchen.glb",
+    position: [6.0, 0.1, 5.8],
+    scale: [0.4, 0.4, 0.4],
+    rotationZ: Math.PI / 60,
+    rotationY: Math.PI,
+    rotationX: 0,
+  },
 
   {
     url: "/textures/vape.glb",
@@ -741,6 +738,13 @@ const models = [
   },
   
   {
+    url: "/textures/railing.glb",
+      position: [-4.5, 1.6, -23.0],
+    scale: [0.5, 0.4, 0.5],
+    rotationY: -14.15,
+  },
+  
+  {
     url: "/textures/sofa.glb",
       position: [-.5, 2.9, 2.5],
     scale: [1.0, 1.0, 1.0],
@@ -755,14 +759,14 @@ const models = [
   },
   {
     url: "/textures/up_window.glb",
-      position: [4.9, 1.65, 2.6],
+      position: [4.4, 0.8, 2.9],
     scale: [.5, 0.5, 0.5],
     rotationY: -153.95,
   },
   
   {
     url: "/textures/up_window.glb",
-      position: [2.8, 0.6, -1.6],
+      position: [2.5, .8, -1.6],
     scale: [.6, 0.6, 0.6],
     rotationY: -174.3,
   },
