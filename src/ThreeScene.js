@@ -720,6 +720,13 @@ const models = [
   },
   
   {
+    url: "/textures/railing.glb",
+      position: [27.8, 1.6, -0.75],
+    scale: [0.5, 0.4, 0.5],
+    rotationY: 3.15,
+  },
+    
+  {
     url: "/textures/a10.glb",
       position: [2.2, 10.6, -15.8],
     scale: [0.06, 0.06, 0.06],
@@ -727,6 +734,7 @@ const models = [
     rotationX: -2,
       
   },
+  
   
   {
     url: "/textures/the_piano.glb",
@@ -750,6 +758,13 @@ const models = [
   },
   
   {
+    url: "/textures/railing.glb",
+      position: [-9.5, 1.6, -23.0],
+    scale: [0.5, 0.4, 0.5],
+    rotationY: -14.15,
+  },
+  
+  {
     url: "/textures/sofa.glb",
       position: [-.5, 2.9, 2.5],
     scale: [1.0, 1.0, 1.0],
@@ -758,7 +773,7 @@ const models = [
   
   {
     url: "/textures/up_window.glb",
-      position: [-2.4, 2.6, 4.8],
+      position: [-2.6, 0.8, 4.8],
     scale: [.5, 0.5, 0.5],
     rotationY: -14.1,
   },
