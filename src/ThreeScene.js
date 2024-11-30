@@ -1057,6 +1057,12 @@ const models = [
     scale: [0.2, 0.2, 0.2],
     rotationY: Math.PI / -2,
   },
+  {
+    url: "/textures/09_edge.glb",
+    position: [5.5, 0.05, -1.5],
+    scale: [0.0005, 0.0005, 0.0005],
+    rotationY: Math.PI / 3.2,
+  },
   
     {
     url: "/textures/frame.glb",
@@ -1074,6 +1080,8 @@ let object = {
   scale: [1.4, 0.8, 1.2],
   rotationY: 0,
 };
+
+
 
 let model;
 
