@@ -24,10 +24,6 @@ controls.dampingFactor = 0.25;
 controls.screenSpacePanning = false;
 
 
-
-
-
-// Add procedural sky
 const sky = new Sky();
 sky.scale.setScalar(450000);
 scene.add(sky);
@@ -101,6 +97,10 @@ scene.add(leftWall);
 const backWall = new THREE.Mesh(new THREE.PlaneGeometry(5, 2.5), wallMaterial);
 backWall.position.set(0, 1.25, -2.5);
 scene.add(backWall);
+
+const secondBackWall = new THREE.Mesh(new THREE.PlaneGeometry(5, 2.5), wallMaterial);
+secondBackWall.position.set(5, 1, 2.9);
+scene.add(secondBackWall);
 
 
 const tooltip = document.createElement("div");
@@ -251,12 +251,23 @@ const ground = new THREE.Mesh(planeGeometry, planeMaterial);
 ground.rotation.x = -Math.PI / 2;
 scene.add(ground);
 
+
 const floorMaterial = new THREE.MeshStandardMaterial({ map: floorTexture });
-const floor = new THREE.Mesh(new THREE.PlaneGeometry(5, 5), floorMaterial);
-floor.rotation.x = -Math.PI / 2;
-floor.receiveShadow = true;
-floor.position.y = 0.01;
-scene.add(floor);
+const floor1 = new THREE.Mesh(new THREE.PlaneGeometry(5, 5), floorMaterial);
+floor1.rotation.x = -Math.PI / 2;
+floor1.receiveShadow = true;
+floor1.position.set(0, 0.01, 0);
+scene.add(floor1);
+
+
+const floor3 = floor1.clone();
+floor3.position.set(0, 0.01, 5);
+scene.add(floor3);
+
+
+const floor4 = floor1.clone();
+floor4.position.set(5, 0.01, 5);
+scene.add(floor4);
 
 
 const carpetMaterial = new THREE.MeshStandardMaterial({ map: carpetTexture });
@@ -661,6 +672,7 @@ loader.load(
   }
 );
 
+
 const models = [
   {
     url: "/textures/mountain_bike.glb",
@@ -685,6 +697,15 @@ const models = [
     rotationY: Math.PI / -2,
     rotationX: Math.PI / -55,
   },
+  
+  {
+    url: "/textures/modern_kitchen.glb",
+    position: [6.0, 0.1, 5.8],
+    scale: [0.4, 0.4, 0.4],
+    rotationZ: Math.PI / 60,
+    rotationY: Math.PI,
+    rotationX: 0,
+  },
 
   {
     url: "/textures/vape.glb",
@@ -703,25 +724,23 @@ const models = [
   {
     url: "/textures/a10.glb",
       position: [2.2, 10.6, -15.8],
-    scale: [0.08, 0.08, 0.08],
+    scale: [0.06, 0.06, 0.06],
     rotationY: 2,
     rotationX: -2,
       
   },
   
   {
-    url: "/textures/a10.glb",
-    position: [-21.0, 1.5, -4.5],
-    scale: [0.1, 0.1, 0.1],
-    rotationY: -1.5,
-    rotationX: 0.5,
-      
+    url: "/textures/the_piano.glb",
+      position: [2.1, 3.0, 4.4],
+    scale: [0.4, 0.4, 0.4],
+    rotationY: -14.15,
   },
   
   {
-    url: "/textures/the_piano.glb",
-      position: [2.1, 3.0, 4.8],
-    scale: [0.4, 0.4, 0.4],
+    url: "/textures/railing.glb",
+      position: [-4.5, 1.6, -23.0],
+    scale: [0.5, 0.4, 0.5],
     rotationY: -14.15,
   },
   
@@ -733,10 +752,37 @@ const models = [
   },
   
   {
+    url: "/textures/up_window.glb",
+      position: [-2.4, 2.6, 6.0],
+    scale: [.5, 0.5, 0.5],
+    rotationY: -14.1,
+  },
+  {
+    url: "/textures/up_window.glb",
+      position: [4.4, 0.8, 2.9],
+    scale: [.5, 0.5, 0.5],
+    rotationY: -153.95,
+  },
+  
+  {
+    url: "/textures/up_window.glb",
+      position: [2.5, .8, -1.6],
+    scale: [.6, 0.6, 0.6],
+    rotationY: -174.3,
+  },
+  
+  {
+    url: "/textures/humvee.glb",
+      position: [-18.1, 0.1, 2.5],
+    scale: [.005, .005, .005],
+    rotationY: -12.55,
+  },
+  
+  {
     url: "/textures/retro_tv.glb",
-      position: [1.2, 1.55, 5.1],
-    scale: [.05, .05, .05],
-    rotationY: -40.5,
+      position: [-1.0, 2.0, 3.6],
+    scale: [.03, .03, .03],
+    rotationY: -41.6,
   },
 
   
@@ -794,13 +840,16 @@ const models = [
 },
   
   {
-  url: "/textures/humvee.glb",
-  position: [-16, 0.01, 9.0],
-  scale: [0.004, 0.004, 0.004],
-},
+    url: "/textures/a10.glb",
+    position: [-21.0, 1.5, -4.5],
+    scale: [0.1, 0.1, 0.1],
+    rotationY: -1.5,
+    rotationX: 0.5,
+      
+  },
   
- 
   
+
     {
     url: "/textures/bookshelf_speaker.glb",
     position: [-2.4, 1.5, -1.6],
@@ -1246,6 +1295,102 @@ export default ThreeScene;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
 
 
