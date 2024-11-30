@@ -42,7 +42,8 @@ scene.add(directionalLight);
 
 
 const loader = new GLTFLoader();
-let fireTruck;
+let fireTruck, edgeVehicle;
+let currentVehicle;
 
 
 loader.load(
@@ -76,6 +77,20 @@ loader.load(
   (error) => {
     console.error("Error loading the fire truck model:", error);
   }
+);
+
+loader.load(
+  "/textures/09_edge.glb",
+  (gltf) => {
+    edgeVehicle = gltf.scene;
+    edgeVehicle.position.set(5.5, 0.05, -1.5);
+    edgeVehicle.scale.set(0.0005, 0.0005, 0.0005);
+    edgeVehicle.rotation.y = Math.PI / 3.2;
+    scene.add(edgeVehicle);
+    console.log("Edge vehicle loaded successfully!");
+  },
+  undefined,
+  (error) => console.error("Error loading the edge vehicle model:", error)
 );
 
 
@@ -148,7 +163,7 @@ function onMouseMove(event) {
 
     tooltip.style.left = `${left}px`;
     tooltip.style.top = `${top}px`;
-    tooltip.innerHTML = "Press 1 to Open Garage";
+    tooltip.innerHTML = "Press 1 & 2 to Switch vehicles";
   } else {
     tooltip.style.display = "none";
   }
@@ -164,6 +179,45 @@ function onMouseClick() {
   }
 }
 
+
+const toast = document.createElement("div");
+toast.style.position = "fixed";
+toast.style.bottom = "20px";
+toast.style.left = "50%";
+toast.style.transform = "translateX(-50%)";
+toast.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+toast.style.color = "#fff";
+toast.style.padding = "10px 20px";
+toast.style.borderRadius = "5px";
+toast.style.fontSize = "16px";
+toast.style.display = "none";
+document.body.appendChild(toast);
+
+
+function showToast(message) {
+  toast.innerText = message;
+  toast.style.display = "block";
+
+  setTimeout(() => {
+    toast.style.display = "none";
+  }, 2000);
+}
+
+window.addEventListener("keydown", (event) => {
+  if (event.key === "1" && fireTruck) {
+    currentVehicle = fireTruck;
+    console.log("Switched to Cyber Truck!");
+    showToast("Switched to Cyber Truck");
+  }
+
+  if (event.key === "2" && edgeVehicle) {
+    currentVehicle = edgeVehicle;
+    console.log("Switched to Edge Vehicle!");
+    showToast("Switched to Ford Edge");
+  }
+});
+
+
 const movement = {
   forward: false,
   backward: false,
@@ -171,8 +225,8 @@ const movement = {
   right: false,
 };
 
-const speed = 0.2;
-const rotationSpeed = 0.04;
+const speed = 0.3;
+const rotationSpeed = 0.05;
 
 function setupControls() {
   window.addEventListener("keydown", (event) => {
@@ -191,25 +245,22 @@ function setupControls() {
 }
 
 function updateMovement() {
-  if (!fireTruck) return;
-
+  if (!currentVehicle) return;
 
   if (movement.forward) {
-    fireTruck.translateZ(-speed);
+    currentVehicle.translateZ(-speed);
   }
-
 
   if (movement.backward) {
-    fireTruck.translateZ(speed);
+    currentVehicle.translateZ(speed);
   }
 
-
   if (movement.left) {
-    fireTruck.rotation.y += rotationSpeed;
+    currentVehicle.rotation.y += rotationSpeed;
   }
 
   if (movement.right) {
-    fireTruck.rotation.y -= rotationSpeed;
+    currentVehicle.rotation.y -= rotationSpeed;
   }
 }
 
@@ -218,19 +269,11 @@ function animateScene() {
 
   updateMovement();
   controls.update();
-
   renderer.render(scene, camera);
 }
 
-window.addEventListener("resize", () => {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-});
-
 setupControls();
 animateScene();
-
 
 const textureLoader = new THREE.TextureLoader();
 const floorTexture = textureLoader.load("/textures/stone.jpg");
@@ -585,74 +628,6 @@ window.addEventListener('resize', () => {
 });
 
 
-let mixer;
-let doorAction;
-let doorOpen = false;
-let doorSquare;
-
-loader.load(
-  '/textures/garage_door.glb',
-  (gltf) => {
-      const garageDoor = gltf.scene;
-        garageDoor.position.set(-2.44, 0.4, -2.08);
-        garageDoor.scale.set(0.2, 0.2, 0.2);
-        garageDoor.rotation.y = Math.PI / 2;
-        scene.add(garageDoor);
-
-   
-    if (gltf.animations && gltf.animations.length) {
-      mixer = new THREE.AnimationMixer(garageDoor);
-      gltf.animations.forEach((clip) => {
-        doorAction = mixer.clipAction(clip);
-        doorAction.loop = THREE.LoopOnce;
-        doorAction.clampWhenFinished = true;
-      });
-    }
-
- 
-    camera.position.z = 5;
-  },
-  undefined,
-  (error) => {
-    console.error('Error loading model:', error);
-  }
-);
-
-
-
-document.addEventListener('keydown', (event) => {
-  if (!mixer) return;
-
-  if (event.key === '1' || event.key === '1') {
-    if (!doorOpen) {
-    
-      doorAction.reset();
-      doorAction.play();
-      doorOpen = true;
-    }
-  } else if (event.key === '2' || event.key === '2') {
-    if (doorOpen) {
-     
-      doorAction.time = doorAction.getClip().duration;
-      doorAction.play();
-      doorOpen = false;
-    }
-  }
-});
-
-
-const animateGarageDoor = () => {
-  requestAnimationFrame(animateGarageDoor);
-
-
-  if (mixer) {
-    mixer.update(0.02);
-  }
-
-  renderer.render(scene, camera);
-};
-
-animateGarageDoor();
 
 loader.load(
   "/textures/macbook.glb",
@@ -895,12 +870,6 @@ const models = [
   },
   
   {
-    url: "/textures/laundry_basket.glb",
-    position: [2.0, 0.5, -8.4],
-    scale: [0.9, 0.9, 0.9],
-    rotationY: Math.PI / 2,
-  },
-  {
     url: "/textures/stuff_Bear.glb",
     position: [-1.75, 0.05, 2],
     scale: [1.6, 1.6, 1.6],
@@ -1056,12 +1025,6 @@ const models = [
     position: [-1.4, 0.9, -2.5],
     scale: [0.2, 0.2, 0.2],
     rotationY: Math.PI / -2,
-  },
-  {
-    url: "/textures/09_edge.glb",
-    position: [5.5, 0.05, -1.5],
-    scale: [0.0005, 0.0005, 0.0005],
-    rotationY: Math.PI / 3.2,
   },
   
     {
