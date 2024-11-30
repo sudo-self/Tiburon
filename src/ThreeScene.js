@@ -251,17 +251,31 @@ const ground = new THREE.Mesh(planeGeometry, planeMaterial);
 ground.rotation.x = -Math.PI / 2;
 scene.add(ground);
 
+// Create the first floor piece (original floor)
 const floorMaterial = new THREE.MeshStandardMaterial({ map: floorTexture });
-const floor = new THREE.Mesh(new THREE.PlaneGeometry(5, 5), floorMaterial);
-floor.rotation.x = -Math.PI / 2;
-floor.receiveShadow = true;
-floor.position.y = 0.01;
-scene.add(floor);
+const floor1 = new THREE.Mesh(new THREE.PlaneGeometry(5, 5), floorMaterial);
+floor1.rotation.x = -Math.PI / 2;
+floor1.receiveShadow = true;
+floor1.position.set(0, 0.01, 0); // Original position
+scene.add(floor1);
+
+// Add another floor piece along the Z axis (forward)
+const floor3 = floor1.clone(); // Clone the first floor
+floor3.position.set(0, 0.01, 5); // Offset by 5 units along the Z axis
+scene.add(floor3);
+
+// Add another floor piece diagonally (both X and Z)
+const floor4 = floor1.clone(); // Clone the first floor
+floor4.position.set(5, 0.01, 5); // Offset by 5 units along both X and Z axes
+scene.add(floor4);
+
+
+
 
 
 const carpetMaterial = new THREE.MeshStandardMaterial({ map: carpetTexture });
 const secondFloor = new THREE.Mesh(new THREE.PlaneGeometry(5, 5), carpetMaterial);
-secondFloor.rotation.x = -Math.PI / 2; 
+secondFloor.rotation.x = -Math.PI / 2;
 secondFloor.receiveShadow = true;
 secondFloor.position.y = 2.5;
 secondFloor.position.z = 4.3;
@@ -661,6 +675,7 @@ loader.load(
   }
 );
 
+
 const models = [
   {
     url: "/textures/mountain_bike.glb",
@@ -685,6 +700,15 @@ const models = [
     rotationY: Math.PI / -2,
     rotationX: Math.PI / -55,
   },
+  
+  {
+  url: "/textures/modern_kitchen.glb",
+  position: [4.2, 0.01, 3.8],
+  scale: [0.4, 0.4, 0.4],
+  rotationZ: Math.PI / 80,
+  rotationY: Math.PI / -2,
+  rotationX: Math.PI / -70,
+},
 
   {
     url: "/textures/vape.glb",
@@ -703,7 +727,7 @@ const models = [
   {
     url: "/textures/a10.glb",
       position: [2.2, 10.6, -15.8],
-    scale: [0.08, 0.08, 0.08],
+    scale: [0.06, 0.06, 0.06],
     rotationY: 2,
     rotationX: -2,
       
@@ -711,7 +735,7 @@ const models = [
   
   {
     url: "/textures/the_piano.glb",
-      position: [2.1, 3.0, 4.8],
+      position: [2.1, 3.0, 4.4],
     scale: [0.4, 0.4, 0.4],
     rotationY: -14.15,
   },
@@ -724,10 +748,37 @@ const models = [
   },
   
   {
+    url: "/textures/up_window.glb",
+      position: [-2.4, 2.6, 6.0],
+    scale: [.5, 0.5, 0.5],
+    rotationY: -14.1,
+  },
+  {
+    url: "/textures/up_window.glb",
+      position: [4.9, 1.65, 2.6],
+    scale: [.5, 0.5, 0.5],
+    rotationY: -153.95,
+  },
+  
+  {
+    url: "/textures/up_window.glb",
+      position: [2.8, 0.6, -1.6],
+    scale: [.6, 0.6, 0.6],
+    rotationY: -174.3,
+  },
+  
+  {
+    url: "/textures/humvee.glb",
+      position: [-18.1, 0.1, 2.5],
+    scale: [.005, .005, .005],
+    rotationY: -12.55,
+  },
+  
+  {
     url: "/textures/retro_tv.glb",
-      position: [1.2, 1.55, 5.1],
-    scale: [.05, .05, .05],
-    rotationY: -40.5,
+      position: [-1.0, 2.0, 3.6],
+    scale: [.03, .03, .03],
+    rotationY: -41.6,
   },
 
   
@@ -1327,538 +1378,4 @@ export default ThreeScene;
 
 
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
