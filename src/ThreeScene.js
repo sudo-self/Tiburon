@@ -647,7 +647,6 @@ const animateGarageDoor = () => {
 
 animateGarageDoor();
 
-
 loader.load(
   "/textures/macbook.glb",
   (gltf) => {
@@ -701,6 +700,14 @@ const models = [
     rotationY: 3.15,
   },
   
+  {
+    url: "/textures/a10.glb",
+      position: [2.2, 10.6, -15.8],
+    scale: [0.08, 0.08, 0.08],
+    rotationY: 2,
+    rotationX: -2,
+      
+  },
   
   {
     url: "/textures/the_piano.glb",
@@ -731,6 +738,8 @@ const models = [
     scale: [0.3, 0.3, 0.3],
     rotationY: 0,
   },
+  
+ 
 
   {
     url: "/textures/kitchen_table.glb",
@@ -759,6 +768,22 @@ const models = [
     scale: [0.4, 0.4, 0.4],
     rotationY: Math.PI / 2,
   },
+  
+  
+    {
+    url: "/textures/runway.glb",
+    position: [-21, 0, -8.2],
+    scale: [0.01, 0.01, 0.03],
+    rotationY: Math.PI / 2,
+  },
+  
+  {
+  url: "/textures/runway.glb",
+  position: [-21, 0.01, 2.2],
+  scale: [0.01, 0.01, 0.03],
+  rotationY: Math.PI / 2,
+},
+  
  
   
     {
