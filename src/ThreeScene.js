@@ -1044,6 +1044,14 @@ const models = [
     rotationY: Math.PI / 3,
   },
   
+  {
+    url: "/textures/table21.glb",
+    position: [-1.0, 3.1, 4.5],
+    scale: [1.0, 1.0, 1.0],
+    rotationY: Math.PI / 3,
+  },
+  
+  
 
   {
     url: "/textures/jj.jpeg",
