@@ -676,7 +676,7 @@ loader.load(
 const models = [
   {
     url: "/textures/mountain_bike.glb",
-    position: [1.5, 0.6, -1.2],
+    position: [1.5, 0.6, 3.2],
     scale: [1.2, 0.9, 0.9],
     rotationY: 10,
   },
@@ -732,9 +732,16 @@ const models = [
   
   {
     url: "/textures/the_piano.glb",
-      position: [2.1, 3.0, 4.4],
+    position: [2.1, 3.0, 4.4],
     scale: [0.4, 0.4, 0.4],
     rotationY: -14.15,
+  },
+  
+  {
+    url: "/textures/dj5000.glb",
+      position: [-0.4, 3.2, 6.0],
+    scale: [0.004, 0.004, 0.004],
+    rotationY: 9.08,
   },
   
   {
@@ -753,7 +760,7 @@ const models = [
   
   {
     url: "/textures/up_window.glb",
-      position: [-2.4, 2.6, 6.0],
+      position: [-2.4, 2.6, 4.8],
     scale: [.5, 0.5, 0.5],
     rotationY: -14.1,
   },
@@ -942,9 +949,16 @@ const models = [
   
   {
     url: "/textures/bmx.glb",
-    position: [1.6, 0.5, -0.7],
+    position: [2.0, 0.5, 3.5],
     scale: [0.3, 0.3, 0.3],
     rotationY: Math.PI / 12,
+  },
+  
+  {
+    url: "/textures/pool_table.glb",
+    position: [-1.5, 0.1, 6.3],
+    scale: [.01, .01, .01],
+    rotationY: Math.PI / 3,
   },
 
   {
