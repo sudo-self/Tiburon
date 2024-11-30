@@ -1066,6 +1066,14 @@ const models = [
     rotationY: Math.PI / 3,
   },
   
+  {
+    url: "/textures/bottles.glb",
+    position: [-1.0, 3.35, 4.5],
+    scale: [.005, .005, .005],
+    rotationY: Math.PI / 3,
+  },
+  
+  
   
 
   {
