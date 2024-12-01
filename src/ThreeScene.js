@@ -327,15 +327,17 @@ secondFloor.position.y = 2.5;
 secondFloor.position.z = 4.3;
 scene.add(secondFloor);
 
+
 const thirdTexture = new THREE.TextureLoader().load('/textures/third.jpeg');
 const thirdMaterial = new THREE.MeshStandardMaterial({ map: thirdTexture });
+
 
 const thirdFloor = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), thirdMaterial);
 thirdFloor.rotation.x = -Math.PI / 2;
 thirdFloor.receiveShadow = true;
-thirdFloor.position.y = 3.0;
+thirdFloor.position.y = 2.9;
 thirdFloor.position.x = 5.7;
-thirdFloor.position.z = 7.5;
+thirdFloor.position.z = 7.0;
 scene.add(thirdFloor);
 
 
@@ -343,10 +345,77 @@ const leftThirdFloor = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), thirdMateri
 leftThirdFloor.rotation.x = -Math.PI / 2;
 leftThirdFloor.receiveShadow = true;
 leftThirdFloor.position.y = 3.0;
-leftThirdFloor.position.x = 9.7;
-leftThirdFloor.position.z = 7.5;
+leftThirdFloor.position.x = 9.0;
+leftThirdFloor.position.z = 7.0;
 scene.add(leftThirdFloor);
 
+
+const rightThirdFloor = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), thirdMaterial);
+rightThirdFloor.rotation.x = -Math.PI / 2;
+rightThirdFloor.receiveShadow = true;
+rightThirdFloor.position.y = 3.01;
+rightThirdFloor.position.x = 11.0;
+rightThirdFloor.position.z = 7.01;
+scene.add(rightThirdFloor);
+
+
+const additionalRowFloor = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), thirdMaterial);
+additionalRowFloor.rotation.x = -Math.PI / 2;
+additionalRowFloor.receiveShadow = true;
+additionalRowFloor.position.y = 3.0;
+additionalRowFloor.position.x = 11.0;
+additionalRowFloor.position.z = 3.99;
+scene.add(additionalRowFloor);
+
+
+loader.load('/textures/tidal_3.glb', (gltf) => {
+  const tidalModel = gltf.scene;
+  tidalModel.scale.set(0.0032, 0.0032, 0.0032);
+  tidalModel.position.set(11.3, 3.0, 6.5);
+  tidalModel.rotation.y = Math.PI / 2;
+  scene.add(tidalModel);
+
+  const bubbleGeometry = new THREE.BufferGeometry();
+  const bubbleCount = 100;
+  const positions = [];
+  for (let i = 0; i < bubbleCount; i++) {
+    positions.push(Math.random() * 1.5 - 0.75);
+    positions.push(Math.random() * 0.1 + 0.1);
+    positions.push(Math.random() * 1.5 - 0.10);
+  }
+  bubbleGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+
+  const bubbleMaterial = new THREE.PointsMaterial({
+    color: 0x66FFFF,
+    size: 0.2,
+    transparent: true,
+    opacity: 0.8,
+  });
+
+  const bubbles = new THREE.Points(bubbleGeometry, bubbleMaterial);
+  bubbles.position.set(11.0, 3.0, 6.3);
+  scene.add(bubbles);
+
+  function animateBubblesUp() {
+    bubbleGeometry.attributes.position.array.forEach((_, i) => {
+      if (i % 3 === 1) {
+        bubbleGeometry.attributes.position.array[i] += 0.002;
+        if (bubbleGeometry.attributes.position.array[i] > 3.05) {
+          bubbleGeometry.attributes.position.array[i] = 3.05;
+        }
+      }
+    });
+    bubbleGeometry.attributes.position.needsUpdate = true;
+  }
+
+  function animateScene() {
+    animateBubblesUp();
+    renderer.render(scene, camera);
+    requestAnimationFrame(animateScene);
+  }
+
+  animateScene();
+});
 
 
 
@@ -722,10 +791,6 @@ function animateHelicopter() {
 
 
 
-
-
-
-
 const models = [
   {
     url: "/textures/mountain_bike.glb",
@@ -884,8 +949,29 @@ const models = [
   },
   
   {
+    url: "/textures/pillar.glb", //back
+      position: [12.5, .3, 8.2],
+    scale: [.4, 0.43, 0.4],
+    rotationY: -174.3,
+  },
+  
+  {
+    url: "/textures/pillar.glb", //Front
+      position: [12.5, .3, 2.8],
+    scale: [.4, 0.43, 0.4],
+    rotationY: -174.3,
+  },
+  
+  {
+    url: "/textures/pillar.glb",
+      position: [7.5, .3, 8.2],
+    scale: [.4, 0.43, 0.4],
+    rotationY: -174.3,
+  },
+  
+  {
     url: "/textures/humvee.glb",
-      position: [-15.0, 0.1, 7.5],
+      position: [-12.0, 0.1, 4.0],
     scale: [.004, .004, .004],
     rotationY: -12.55,
   },
@@ -1003,7 +1089,7 @@ const models = [
 
   {
     url: "/textures/pirate_flag.glb",
-    position: [8.0, 0.03, 2.5],
+    position: [8.0, 0.01, 2.5],
     scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / 1.3,
   },
@@ -1259,11 +1345,6 @@ function animateFlower() {
 
   renderer.render(scene, camera);
 }
-
-
-
-
-
 
 
 let model;
