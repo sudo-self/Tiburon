@@ -83,7 +83,7 @@ loader.load(
   "/textures/09_edge.glb",
   (gltf) => {
     edgeVehicle = gltf.scene;
-    edgeVehicle.position.set( 8.5, 0.05, -1.5);
+    edgeVehicle.position.set( 9.0, 0.05, -1.0);
     edgeVehicle.scale.set(0.0005, 0.0005, 0.0005);
     edgeVehicle.rotation.y = Math.PI / 3.2;
     scene.add(edgeVehicle);
@@ -114,8 +114,8 @@ const backWall = new THREE.Mesh(new THREE.PlaneGeometry(5, 2.5), wallMaterial);
 backWall.position.set(0, 1.25, -2.5);
 scene.add(backWall);
 
-const secondBackWall = new THREE.Mesh(new THREE.PlaneGeometry(5, 2.5), wallMaterial);
-secondBackWall.position.set(5, 1, 2.9);
+const secondBackWall = new THREE.Mesh(new THREE.PlaneGeometry(1.0, .88), wallMaterial); //darts
+secondBackWall.position.set(2.5, 1.8, 2.9);
 scene.add(secondBackWall);
 
 
@@ -205,7 +205,7 @@ function showToast(message) {
 
   setTimeout(() => {
     toast.style.display = "none";
-  }, 2000);
+  }, 3000);
 }
 
 window.addEventListener("keydown", (event) => {
@@ -312,6 +312,11 @@ scene.add(floor3);
 const floor4 = floor1.clone();
 floor4.position.set(5, 0.01, 5);
 scene.add(floor4);
+
+//Add
+const floor5 = floor1.clone();
+floor5.position.set(5, 0.01, 0);
+scene.add(floor5);
 
 
 const carpetMaterial = new THREE.MeshStandardMaterial({ map: carpetTexture });
@@ -658,7 +663,7 @@ loader.load(
   "/textures/apache_gunship.glb",
   (gltf) => {
     helicopter = gltf.scene;
-    helicopter.position.set(19.5, 0.5, 19.0);
+    helicopter.position.set(19.5, 2.5, 19.0);
     helicopter.scale.set(0.4, 0.4, 0.4);
     helicopter.rotation.set(0, Math.PI, 0);
     scene.add(helicopter);
@@ -709,14 +714,14 @@ const models = [
   
   {
     url: "/textures/darts.glb",
-    position: [3.0, 1.6, 2.95],
+    position: [2.5, 1.8, 2.95],
     scale: [0.8, 0.8, 0.8],
   },
   
   {
     url: "/textures/bar_sign_board.glb",
-    position: [4.2, 1.6, 2.95],
-    scale: [0.02, 0.02, 0.02],
+    position: [5.8, 1.4, 7.3],
+    scale: [-0.02, 0.02, 0.02],
     rotationY: 3.12,
   },
 
@@ -763,7 +768,7 @@ const models = [
   
   {
     url: "/textures/railing.glb",
-      position: [27.8, 1.6, -0.75],
+      position: [27.2, 1.6, -0.8],
     scale: [0.5, 0.4, 0.5],
     rotationY: 3.15,
   },
@@ -794,13 +799,13 @@ const models = [
   
   {
     url: "/textures/railing.glb",
-      position: [-4.5, 1.6, -23.0],
+      position: [-4.5, 1.6, -23.5], //kitchen Side
     scale: [0.5, 0.4, 0.5],
     rotationY: -14.15,
   },
   
   {
-    url: "/textures/railing.glb",
+    url: "/textures/railing.glb", //Runway Side
       position: [-9.5, 1.6, -23.0],
     scale: [0.5, 0.4, 0.5],
     rotationY: -14.15,
@@ -808,34 +813,50 @@ const models = [
   
   {
     url: "/textures/sofa.glb",
-      position: [-.5, 2.9, 2.5],
+      position: [-0.5, 2.9, 2.5],
     scale: [1.0, 1.0, 1.0],
     rotationY: -12.55,
   },
   
   {
     url: "/textures/up_window.glb",
-      position: [-2.4, 0.8, 4.8],
+      position: [-2.4, 0.8, 3.8], //side runway
     scale: [.5, 0.5, 0.5],
     rotationY: -14.1,
   },
+  
+  {
+    url: "/textures/up_window.glb", //side runway
+      position: [-2.4, 0.8, 6.3],
+    scale: [.5, 0.5, 0.5],
+    rotationY: -14.1,
+  },
+  
   {
     url: "/textures/up_window.glb",
-      position: [6.0, 0.8, 2.9],
+      position: [6.5, 0.8, -2.7], //Front
+    scale: [.5, 0.5, 0.5],
+    rotationY: -153.95,
+  },
+  
+  {
+    url: "/textures/door_arch.glb",
+      position: [4.5, 0.1, -2.3], //arch
+    scale: [.5, 0.5, 0.5],
+    rotationY: -153.95,
+  },
+  
+  
+  {
+    url: "/textures/up_window.glb",
+      position: [6.0, 0.7, 7.6], //Back
     scale: [.5, 0.5, 0.5],
     rotationY: -153.95,
   },
   
   {
     url: "/textures/up_window.glb",
-      position: [6.0, 0.7, 7.6],
-    scale: [.5, 0.5, 0.5],
-    rotationY: -153.95,
-  },
-  
-  {
-    url: "/textures/up_window.glb",
-      position: [2.5, .8, -1.0],
+      position: [7.2, .5, 1.0], //side garage
     scale: [.6, 0.6, 0.6],
     rotationY: -174.3,
   },
@@ -960,9 +981,15 @@ const models = [
 
   {
     url: "/textures/pirate_flag.glb",
-    position: [7.8, 0.03, 0.5],
+    position: [8.0, 0.03, 2.5],
     scale: [0.01, 0.01, 0.01],
-    rotationY: Math.PI / -1.3,
+    rotationY: Math.PI / 1.3,
+  },
+  
+  {
+    url: "/textures/da_stairs.glb",
+    position: [7.0, 0.03, 2.5],
+    scale: [1.0, 1.0, 1.0],
   },
   
   {
@@ -981,7 +1008,7 @@ const models = [
   
   {
     url: "/textures/flower_bed.glb",
-    position: [5.0, 0.05, -1.5],
+      position: [-1.0, 0.03, -5.5],
     scale: [0.3, 0.3, 0.3],
     rotationY: Math.PI / 2,
   },
@@ -1123,24 +1150,17 @@ const models = [
     rotationZ: 0,
   },
 
-
-
-  {
-    url: "/textures/darts.glb",
-    position: [3.0, 1.6, 2.95],
-    scale: [0.8, 0.8, 0.8],
-  },
     
   {
     url: "/textures/table21.glb",
-    position: [-1.0, 3.1, 4.5],
+    position: [0.4, 3.1, 4.5],
     scale: [1.0, 1.0, 1.0],
     rotationY: Math.PI / 3,
   },
   
   {
     url: "/textures/bottles.glb",
-    position: [-1.0, 3.35, 4.5],
+    position: [0.4, 3.35, 4.5],
     scale: [.005, .005, .005],
     rotationY: Math.PI / 3,
   },
@@ -1170,34 +1190,24 @@ let object = {
   rotationY: 0,
 };
 
-
 let flowerModel;
 let mixer;
 
 loader.load(
-  "/textures/simple_flower_loop.glb",
+  "/textures/simple_flower.glb",
   (gltf) => {
+    console.log("Flower model loaded successfully!");
     flowerModel = gltf.scene;
-    flowerModel.position.set(5.0, 0.9, -1.5);
-    flowerModel.scale.set(0.15, 0.15, 0.15);
-    flowerModel.rotation.y = Math.PI / 2;
+    flowerModel.position.set(-1.0, 1.0, -5.5);
+    flowerModel.scale.set(0.2, 0.2, 0.2);
     scene.add(flowerModel);
 
+   
+    console.log("Animations in the model:", gltf.animations);
     if (gltf.animations.length > 0) {
+ 
       mixer = new THREE.AnimationMixer(flowerModel);
-
       const action = mixer.clipAction(gltf.animations[0]);
-
-      
-      action.loop = THREE.LoopRepeat;
-      
-  
-      action.setEffectiveWeight(1);
-      action.setLoop(THREE.LoopRepeat, Infinity);
-      
-
-      action.timeScale = 1;
-      
       action.play();
     }
   },
@@ -1206,6 +1216,19 @@ loader.load(
     console.error("Error loading the GLTF model:", error);
   }
 );
+
+
+function animateFlower() {
+  requestAnimationFrame(animateFlower);
+
+  if (mixer) {
+    mixer.update(0.01);
+  }
+
+  renderer.render(scene, camera); 
+}
+
+
 
 
 let model;
@@ -1423,9 +1446,6 @@ models.forEach(({ url, position, scale, rotationY, rotationX, rotationZ }) => {
 
      
           const intersects = raycaster.intersectObject(model, true);
-
-          
-          console.log("Intersecting:", intersects.length);
 
         
           if (intersects.length > 0) {
