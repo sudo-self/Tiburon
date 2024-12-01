@@ -812,8 +812,8 @@ const models = [
   
   {
     url: "/textures/humvee.glb",
-      position: [-18.1, 0.1, 2.5],
-    scale: [.005, .005, .005],
+      position: [-15.0, 0.1, 7.5],
+    scale: [.004, .004, .004],
     rotationY: -12.55,
   },
   
@@ -880,10 +880,10 @@ const models = [
   
   {
     url: "/textures/a10.glb",
-    position: [-21.0, 1.5, -4.5],
-    scale: [0.1, 0.1, 0.1],
+    position: [-21.0, 0.5, -4.5],
+    scale: [0.2, 0.2, 0.2],
     rotationY: -1.5,
-    rotationX: 0.5,
+    rotationX: 0.1,
       
   },
   
@@ -939,6 +939,13 @@ const models = [
     url: "/textures/tree.glb",
     position: [-3.8, 0.03, -5.5],
     scale: [0.003, 0.003, 0.003],
+    rotationY: Math.PI / -1.3,
+  },
+    
+  {
+    url: "/textures/tree.glb",
+    position: [1.1, 0.03, -6.0],
+    scale: [0.0024, 0.0028, 0.0024],
     rotationY: Math.PI / -1.3,
   },
   
