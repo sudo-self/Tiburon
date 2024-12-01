@@ -381,7 +381,7 @@ loader.load('/textures/tidal_3.glb', (gltf) => {
   for (let i = 0; i < bubbleCount; i++) {
     positions.push(Math.random() * 1.5 - 0.75);
     positions.push(Math.random() * 0.1 + 0.1);
-    positions.push(Math.random() * 1.5 - 0.10);
+    positions.push(Math.random() * 1.5 - 0.75);
   }
   bubbleGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
 
@@ -393,15 +393,15 @@ loader.load('/textures/tidal_3.glb', (gltf) => {
   });
 
   const bubbles = new THREE.Points(bubbleGeometry, bubbleMaterial);
-  bubbles.position.set(11.0, 3.0, 6.3);
+  bubbles.position.set(11.0, 3.0, 6.8);
   scene.add(bubbles);
 
   function animateBubblesUp() {
     bubbleGeometry.attributes.position.array.forEach((_, i) => {
       if (i % 3 === 1) {
         bubbleGeometry.attributes.position.array[i] += 0.002;
-        if (bubbleGeometry.attributes.position.array[i] > 3.05) {
-          bubbleGeometry.attributes.position.array[i] = 3.05;
+        if (bubbleGeometry.attributes.position.array[i] > 3.02) {
+          bubbleGeometry.attributes.position.array[i] = 3.02;
         }
       }
     });
@@ -416,6 +416,7 @@ loader.load('/textures/tidal_3.glb', (gltf) => {
 
   animateScene();
 });
+
 
 
 
