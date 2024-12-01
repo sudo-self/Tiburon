@@ -785,13 +785,13 @@ const models = [
   
   {
     url: "/textures/up_window.glb",
-      position: [-2.6, 0.8, 4.8],
+      position: [-2.4, 0.8, 4.8],
     scale: [.5, 0.5, 0.5],
     rotationY: -14.1,
   },
   {
     url: "/textures/up_window.glb",
-      position: [5.5, 0.8, 2.9],
+      position: [6.0, 0.8, 2.9],
     scale: [.5, 0.5, 0.5],
     rotationY: -153.95,
   },
@@ -805,7 +805,7 @@ const models = [
   
   {
     url: "/textures/up_window.glb",
-      position: [2.5, .8, -1.6],
+      position: [2.5, .8, -1.0],
     scale: [.6, 0.6, 0.6],
     rotationY: -174.3,
   },
@@ -932,6 +932,13 @@ const models = [
     url: "/textures/pirate_flag.glb",
     position: [7.8, 0.03, 0.5],
     scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / -1.3,
+  },
+  
+  {
+    url: "/textures/tree.glb",
+    position: [-3.8, 0.03, -5.5],
+    scale: [0.003, 0.003, 0.003],
     rotationY: Math.PI / -1.3,
   },
   
