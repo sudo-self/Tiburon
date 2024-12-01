@@ -672,9 +672,9 @@ loader.load(
 const models = [
   {
     url: "/textures/mountain_bike.glb",
-    position: [1.5, 0.6, 3.2],
-    scale: [1.2, 0.9, 0.9],
-    rotationY: 10,
+    position: [11.0, 0.6, 6.2],
+    scale: [0.8, 0.8, 0.8],
+    rotationY: 18,
   },
   
   {
@@ -995,14 +995,14 @@ const models = [
   
   {
     url: "/textures/bmx.glb",
-    position: [2.0, 0.5, 3.5],
+    position: [11.0, 0.6, 4.5],
     scale: [0.3, 0.3, 0.3],
-    rotationY: Math.PI / 12,
+    rotationY: Math.PI / 10,
   },
   
   {
     url: "/textures/pool_table.glb",
-    position: [-1.5, 0.1, 6.3],
+    position: [1.0, 0.1, 6.0],
     scale: [.01, .01, .01],
     rotationY: Math.PI / 3,
   },
@@ -1093,12 +1093,6 @@ const models = [
   },
 
 
-  {
-    url: "/textures/pool_table.glb",
-    position: [-1.5, 0.1, 6.3],
-    scale: [.01, .01, .01],
-    rotationY: Math.PI / 3,
-  },
   
   {
     url: "/textures/table21.glb",
