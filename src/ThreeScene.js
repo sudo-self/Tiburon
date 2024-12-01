@@ -230,7 +230,7 @@ const movement = {
   right: false,
 };
 
-const speed = 0.4;
+const speed = 0.5;
 const rotationSpeed = 0.06;
 
 function setupControls() {
@@ -1092,7 +1092,7 @@ const models = [
     url: "/textures/pirate_flag.glb",
     position: [8.0, 0.01, 2.5],
     scale: [0.01, 0.01, 0.01],
-    rotationY: Math.PI / 1.3,
+    rotationY: Math.PI / -2.3,
   },
   
   {
@@ -1300,6 +1300,22 @@ const models = [
   
   
 ];
+
+
+
+loader.setCrossOrigin('anonymous');
+
+loader.load('https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/denver_broncos.glb', (gltf) => {
+  const model = gltf.scene;
+  model.scale.set(0.3, 0.3, 0.3);
+  model.position.set(10.0, 1.7, 3.0);
+  model.rotation.y = Math.PI;
+  scene.add(model);
+}, undefined, (error) => {
+  console.error('An error occurred while loading the GLB model:', error);
+});
+
+
 
 
 let object = {
