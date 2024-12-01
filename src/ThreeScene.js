@@ -83,7 +83,7 @@ loader.load(
   "/textures/09_edge.glb",
   (gltf) => {
     edgeVehicle = gltf.scene;
-    edgeVehicle.position.set(5.5, 0.05, -1.5);
+    edgeVehicle.position.set( 8.5, 0.05, -1.5);
     edgeVehicle.scale.set(0.0005, 0.0005, 0.0005);
     edgeVehicle.rotation.y = Math.PI / 3.2;
     scene.add(edgeVehicle);
@@ -943,6 +943,14 @@ const models = [
   },
   
   {
+    url: "/textures/flower_bed.glb",
+    position: [5.0, 0.05, -1.5],
+    scale: [0.3, 0.3, 0.3],
+    rotationY: Math.PI / 2,
+  },
+  
+  
+  {
     url: "/textures/samsung_tv_remote_control.glb",
     position: [0.5, 0.6, 2],
     scale: [0.1, 0.1, 0.1],
@@ -1130,6 +1138,57 @@ let object = {
   scale: [1.4, 0.8, 1.2],
   rotationY: 0,
 };
+
+
+let flowerModel;
+let mixer;
+
+loader.load(
+  "/textures/simple_flower_loop.glb",
+  (gltf) => {
+    flowerModel = gltf.scene;
+    flowerModel.position.set(5.0, 0.9, -1.5);
+    flowerModel.scale.set(0.15, 0.15, 0.15);
+    flowerModel.rotation.y = Math.PI / 2;
+    scene.add(flowerModel);
+
+    if (gltf.animations.length > 0) {
+      mixer = new THREE.AnimationMixer(flowerModel);
+
+      const action = mixer.clipAction(gltf.animations[0]);
+
+      
+      action.loop = THREE.LoopRepeat;
+      
+  
+      action.setEffectiveWeight(1);
+      action.setLoop(THREE.LoopRepeat, Infinity);
+      
+
+      action.timeScale = 1;
+      
+      action.play();
+    }
+  },
+  undefined,
+  (error) => {
+    console.error("Error loading the GLTF model:", error);
+  }
+);
+
+function render() {
+  requestAnimationFrame(render);
+
+  if (mixer && clock) {
+    const delta = clock.getDelta();
+    mixer.update(delta);
+  }
+
+  renderer.render(scene, camera);
+}
+
+render();
+
 
 
 
