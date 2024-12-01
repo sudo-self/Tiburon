@@ -104,6 +104,11 @@ leftWall.position.set(-2.5, 1.25, 0);
 leftWall.rotation.y = Math.PI / 2;
 scene.add(leftWall);
 
+const leftWallCloser = new THREE.Mesh(new THREE.PlaneGeometry(5, 2.5), wallMaterial);
+leftWallCloser.position.set(-2.5, 1.25, 5.0);
+leftWallCloser.rotation.y = Math.PI / 2;
+scene.add(leftWallCloser);
+
 
 const backWall = new THREE.Mesh(new THREE.PlaneGeometry(5, 2.5), wallMaterial);
 backWall.position.set(0, 1.25, -2.5);
@@ -677,6 +682,13 @@ const models = [
     position: [3.0, 1.6, 2.95],
     scale: [0.8, 0.8, 0.8],
   },
+  
+  {
+    url: "/textures/bar_sign_board.glb",
+    position: [4.2, 1.6, 2.95],
+    scale: [0.02, 0.02, 0.02],
+    rotationY: 3.12,
+  },
 
 
   {
@@ -779,7 +791,14 @@ const models = [
   },
   {
     url: "/textures/up_window.glb",
-      position: [4.4, 0.8, 2.9],
+      position: [5.5, 0.8, 2.9],
+    scale: [.5, 0.5, 0.5],
+    rotationY: -153.95,
+  },
+  
+  {
+    url: "/textures/up_window.glb",
+      position: [6.0, 0.7, 7.6],
     scale: [.5, 0.5, 0.5],
     rotationY: -153.95,
   },
@@ -906,7 +925,7 @@ const models = [
     url: "/textures/stuff_Bear.glb",
     position: [-1.75, 0.05, 2],
     scale: [1.6, 1.6, 1.6],
-    rotationY: Math.PI / 1.89,
+    rotationY: Math.PI / 2.7,
   },
 
   {
@@ -1073,9 +1092,6 @@ const models = [
     rotationY: Math.PI / 3,
   },
   
-  
-  
-
   {
     url: "/textures/jj.jpeg",
     position: [-1.4, 0.9, -2.5],
