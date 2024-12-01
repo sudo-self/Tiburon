@@ -648,24 +648,54 @@ loader.load(
 );
 
 
+let helicopter;
+let helicopterMixer;
+let helicopterRotationSpeed = 0.1;
+
 
 
 loader.load(
-  "/textures/black_hawk.glb",
+  "/textures/apache_gunship.glb",
   (gltf) => {
     helicopter = gltf.scene;
-    helicopter.position.set(20.0, 3.5, 18.0);
-    helicopter.scale.set(0.3, 0.3, 0.3);
-    helicopter.rotation.set(6.5, 0, 0);
+    helicopter.position.set(19.5, 0.5, 19.0);
+    helicopter.scale.set(0.4, 0.4, 0.4);
+    helicopter.rotation.set(0, Math.PI, 0);
     scene.add(helicopter);
+
     console.log("Helicopter loaded successfully!");
 
 
+    if (gltf.animations.length > 0) {
+      helicopterMixer = new THREE.AnimationMixer(helicopter);
+      const action = helicopterMixer.clipAction(gltf.animations[0]);
+      action.loop = THREE.LoopRepeat;
+      action.play();
+    }
+
+ 
     animateHelicopter();
   },
   undefined,
   (error) => console.error("Error loading the helicopter model:", error)
 );
+
+
+function animateHelicopter() {
+  requestAnimationFrame(animateHelicopter);
+
+
+  if (helicopterMixer && clock) {
+    const delta = clock.getDelta();
+    helicopterMixer.update(delta);
+  }
+
+  renderer.render(scene, camera);
+}
+
+
+
+
 
 
 
@@ -1129,14 +1159,6 @@ const models = [
     rotationY: Math.PI / -100,
   },
   
-  {
-  url: "/textures/black_hawk.glb",
-   position: [20.0, 1.0, 18.0],
-   scale: [0.3, 0.3, 0.3],
-   rotationY: 0,
-   rotationX: 6.5,
-     
- },
   
 ];
 
@@ -1184,21 +1206,6 @@ loader.load(
     console.error("Error loading the GLTF model:", error);
   }
 );
-
-function render() {
-  requestAnimationFrame(render);
-
-  if (mixer && clock) {
-    const delta = clock.getDelta();
-    mixer.update(delta);
-  }
-
-  renderer.render(scene, camera);
-}
-
-render();
-
-
 
 
 let model;
