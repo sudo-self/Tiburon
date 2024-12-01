@@ -1002,7 +1002,7 @@ const models = [
   
   {
     url: "/textures/pool_table.glb",
-    position: [1.0, 0.1, 6.0],
+    position: [-1.0, 0.1, 6.0],
     scale: [.01, .01, .01],
     rotationY: Math.PI / 3,
   },
@@ -1084,6 +1084,15 @@ const models = [
     rotationX: 0,
   },
 
+  {
+    url: "/textures/metallic_garden_table.glb",
+    position: [2.8, 0.1, 5.5],
+    scale: [0.03, 0.03, 0.03],
+    rotationX: 0,
+    rotationY: Math.PI / 2,
+    rotationZ: 0,
+  },
+
 
 
   {
@@ -1091,9 +1100,7 @@ const models = [
     position: [3.0, 1.6, 2.95],
     scale: [0.8, 0.8, 0.8],
   },
-
-
-  
+    
   {
     url: "/textures/table21.glb",
     position: [-1.0, 3.1, 4.5],
@@ -1121,6 +1128,7 @@ const models = [
     scale: [5.4, 3.2, 5.4],
     rotationY: Math.PI / -100,
   },
+  
   {
   url: "/textures/black_hawk.glb",
    position: [20.0, 1.0, 18.0],
@@ -1435,6 +1443,8 @@ models.forEach(({ url, position, scale, rotationY, rotationX, rotationZ }) => {
     }
   );
 });
+
+
 
 const video = document.createElement("video");
 video.src = "https://jr-three.vercel.app/textures/video.mp4";
