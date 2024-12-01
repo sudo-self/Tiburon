@@ -1,0 +1,11 @@
+Model Information:
+* title:	stairs
+* source:	https://sketchfab.com/3d-models/stairs-306394fc0a3245ad9c54dcf0ae713063
+* author:	ntldrm (https://sketchfab.com/ntldrm)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "stairs" (https://sketchfab.com/3d-models/stairs-306394fc0a3245ad9c54dcf0ae713063) by ntldrm (https://sketchfab.com/ntldrm) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

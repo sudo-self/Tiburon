@@ -327,6 +327,28 @@ secondFloor.position.y = 2.5;
 secondFloor.position.z = 4.3;
 scene.add(secondFloor);
 
+const thirdTexture = new THREE.TextureLoader().load('/textures/third.jpeg');
+const thirdMaterial = new THREE.MeshStandardMaterial({ map: thirdTexture });
+
+const thirdFloor = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), thirdMaterial);
+thirdFloor.rotation.x = -Math.PI / 2;
+thirdFloor.receiveShadow = true;
+thirdFloor.position.y = 3.0;
+thirdFloor.position.x = 5.7;
+thirdFloor.position.z = 7.5;
+scene.add(thirdFloor);
+
+
+const leftThirdFloor = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), thirdMaterial);
+leftThirdFloor.rotation.x = -Math.PI / 2;
+leftThirdFloor.receiveShadow = true;
+leftThirdFloor.position.y = 3.0;
+leftThirdFloor.position.x = 9.7;
+leftThirdFloor.position.z = 7.5;
+scene.add(leftThirdFloor);
+
+
+
 
 const pointLight = new THREE.PointLight(0xffaa88, 1, 10);
 pointLight.position.set(0, 2, 0);
@@ -1159,6 +1181,16 @@ const models = [
   },
   
   {
+    url: "/textures/stairs.glb",
+    position: [3.8, 2.5, 6.5],
+    scale: [0.3, 0.3, 0.3],
+    rotationY: Math.PI,
+  },
+
+
+
+  
+  {
     url: "/textures/bottles.glb",
     position: [0.4, 3.35, 4.5],
     scale: [.005, .005, .005],
@@ -1225,8 +1257,11 @@ function animateFlower() {
     mixer.update(0.01);
   }
 
-  renderer.render(scene, camera); 
+  renderer.render(scene, camera);
 }
+
+
+
 
 
 
