@@ -939,7 +939,7 @@ const models = [
   {
     url: "/textures/a10.glb",
     position: [2.2, 10.6, -15.8],
-    scale: [0.06, 0.06, 0.06],
+    scale: [0.07, 0.07, 0.07],
     rotationY: 2,
     rotationX: -2,
   },
@@ -981,14 +981,14 @@ const models = [
 
   {
     url: "/textures/up_window.glb",
-    position: [-2.4, 0.8, 3.8], //side runway
+    position: [-2.4, 1.0, 3.8], //side runway
     scale: [0.5, 0.5, 0.5],
     rotationY: -14.1,
   },
 
   {
     url: "/textures/up_window.glb", //side runway
-    position: [-2.4, 0.8, 6.3],
+    position: [-2.4, 1.0, 6.3],
     scale: [0.5, 0.5, 0.5],
     rotationY: -14.1,
   },
@@ -1040,14 +1040,14 @@ const models = [
 
   {
     url: "/textures/up_window.glb",
-    position: [6.0, 0.7, 7.6], //Back
+    position: [6.0, 1.0, 7.6], //Back
     scale: [0.5, 0.5, 0.5],
     rotationY: -153.95,
   },
 
   {
     url: "/textures/up_window.glb",
-    position: [7.5, 0.5, 1.0], //side garage
+    position: [7.5, 1.0, 1.0], //side garage
     scale: [0.6, 0.6, 0.6],
     rotationY: -174.3,
   },
@@ -1075,7 +1075,7 @@ const models = [
 
   {
     url: "/textures/humvee.glb",
-    position: [-12.0, 0.1, 4.0],
+    position: [-16.0, 0.1, 4.0],
     scale: [0.004, 0.004, 0.004],
     rotationY: -12.55,
   },
@@ -1127,22 +1127,22 @@ const models = [
     url: "/textures/runway.glb",
     position: [-21, 0, -8.2],
     scale: [0.01, 0.01, 0.03],
-    rotationY: Math.PI / 2,
+    rotationY: Math.PI / 2.4,
   },
 
   {
     url: "/textures/runway.glb",
-    position: [-21, 0.01, 2.2],
+    position: [-17.8, 0.01, -20.0],
     scale: [0.01, 0.01, 0.03],
-    rotationY: Math.PI / 2,
+    rotationY: Math.PI / 2.4,
   },
 
   {
     url: "/textures/a10.glb",
-    position: [-21.0, 0.5, -4.5],
+    position: [-21.5, 0.5, -4.5],
     scale: [0.2, 0.2, 0.2],
-    rotationY: -1.5,
-    rotationX: 0.1,
+    rotationY: -1.8,
+    rotationX: 0.2,
   },
 
   {
