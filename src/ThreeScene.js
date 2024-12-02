@@ -829,7 +829,7 @@ loader.load(
   "/textures/apache_gunship.glb",
   (gltf) => {
     helicopter = gltf.scene;
-    helicopter.position.set(19.5, 2.5, 19.0);
+    helicopter.position.set(-14.0, 0.6, -2.0);
     helicopter.scale.set(0.4, 0.4, 0.4);
     helicopter.rotation.set(0, Math.PI, 0);
     scene.add(helicopter);
@@ -1075,7 +1075,7 @@ const models = [
 
   {
     url: "/textures/humvee.glb",
-    position: [-16.0, 0.1, 4.0],
+    position: [-13.0, 0.1, 6.0],
     scale: [0.004, 0.004, 0.004],
     rotationY: -12.55,
   },
@@ -1106,6 +1106,12 @@ const models = [
     position: [5.2, 0.1, 1.0],
     scale: [0.02, 0.02, 0.02],
     rotationY: 8.1,
+  },
+  {
+    url: "/textures/infinity_jessie.glb",
+    position: [0.11, 2.5, 5.6],
+    scale: [0.006, 0.006, 0.006],
+    rotationY: 150,
   },
 
   {
@@ -1139,10 +1145,10 @@ const models = [
 
   {
     url: "/textures/a10.glb",
-    position: [-21.5, 0.5, -4.5],
+    position: [-17.5, 4.5, -20.0],
     scale: [0.2, 0.2, 0.2],
     rotationY: -1.8,
-    rotationX: 0.2,
+    rotationX: 0.3,
   },
 
   {
@@ -1473,7 +1479,7 @@ const models = [
 
   {
     url: "/textures/helipad.glb",
-    position: [21.0, 0.1, 18.0],
+    position: [-16, 0, -1.5],
     scale: [0.003, 0.003, 0.003],
     rotationY: Math.PI / 1,
   },
@@ -1739,7 +1745,7 @@ loader.load(
   "/textures/smoke.glb",
   (gltf) => {
     canister = gltf.scene;
-    canister.position.set(21.5, 0.5, 18.5);
+    canister.position.set(-16.5, 0.5, -2.0);
     canister.scale.set(0.05, 0.05, 0.05);
     scene.add(canister);
     console.log("Canister loaded successfully!");
