@@ -992,6 +992,13 @@ const models = [
     scale: [0.01, 0.01, 0.01],
     rotationY: 0,
   },
+  
+  {
+    url: "/textures/wool_rug.glb",
+    position: [5.2, 0.1, 1.0],
+    scale: [0.02, 0.02, 0.02],
+    rotationY: 8.1,
+  },
 
   {
     url: "/textures/playstation_shapes.glb",
@@ -1000,12 +1007,6 @@ const models = [
     rotationY: 0,
   },
 
-  {
-    url: "/textures/nike_shoes.glb",
-    position: [-1.9, 0.009, -0.5],
-    scale: [0.02, 0.02, 0.02],
-    rotationY: Math.PI / 2,
-  },
 
   {
     url: "/textures/donnie.glb",
@@ -1171,14 +1172,20 @@ const models = [
   },
   {
     url: "/textures/tree.glb",
-    position: [14.5, 0.05, -1.5],
+    position: [15.5, 0.05, 1.5],
     scale: [0.0024, 0.0028, 0.0024],
     rotationY: Math.PI / -1.3,
+  },
+  {
+    url: "/textures/tree.glb",
+    position: [14.5, 0.05, 3.5],
+    scale: [0.0024, 0.0028, 0.0024],
+    rotationY: Math.PI / -1.0,
   },
 
   {
     url: "/textures/flower_bed.glb",
-    position: [-1.0, 0.03, -5.5],
+    position: [6.5, 0.03, -3.5],
     scale: [0.3, 0.3, 0.3],
     rotationY: Math.PI / 2,
   },
@@ -1412,7 +1419,7 @@ loader.load(
   (gltf) => {
     console.log("Flower model loaded successfully!");
     flowerModel = gltf.scene;
-    flowerModel.position.set(-1.0, 1.0, -5.5);
+    flowerModel.position.set(6.5, 0.8, -3.5);
     flowerModel.scale.set(0.2, 0.2, 0.2);
     scene.add(flowerModel);
 
