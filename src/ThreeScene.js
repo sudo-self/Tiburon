@@ -23,7 +23,6 @@ controls.enableDamping = true;
 controls.dampingFactor = 0.25;
 controls.screenSpacePanning = false;
 
-
 const sky = new Sky();
 sky.scale.setScalar(450000);
 scene.add(sky);
@@ -35,16 +34,13 @@ sun.setFromSphericalCoords(1, phi, theta);
 
 sky.material.uniforms.sunPosition.value.copy(sun);
 
-
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
 directionalLight.position.copy(sun).multiplyScalar(450000);
 scene.add(directionalLight);
 
-
 const loader = new GLTFLoader();
 let fireTruck, edgeVehicle;
 let currentVehicle;
-
 
 loader.load(
   "/textures/fire_truck.glb",
@@ -76,48 +72,49 @@ loader.load(
   undefined,
   (error) => {
     console.error("Error loading the fire truck model:", error);
-  }
+  },
 );
 
 loader.load(
   "/textures/09_edge.glb",
   (gltf) => {
     edgeVehicle = gltf.scene;
-    edgeVehicle.position.set( 9.0, 0.05, -1.0);
+    edgeVehicle.position.set(9.5, 0.05, -1.0);
     edgeVehicle.scale.set(0.0005, 0.0005, 0.0005);
     edgeVehicle.rotation.y = Math.PI / 3.2;
     scene.add(edgeVehicle);
     console.log("Edge vehicle loaded successfully!");
   },
   undefined,
-  (error) => console.error("Error loading the edge vehicle model:", error)
+  (error) => console.error("Error loading the edge vehicle model:", error),
 );
 
-
-
-const wallTexture = new THREE.TextureLoader().load('/textures/wall.jpeg');
+const wallTexture = new THREE.TextureLoader().load("/textures/wall.jpeg");
 const wallMaterial = new THREE.MeshStandardMaterial({ map: wallTexture });
-
 
 const leftWall = new THREE.Mesh(new THREE.PlaneGeometry(5, 2.5), wallMaterial);
 leftWall.position.set(-2.5, 1.25, 0);
 leftWall.rotation.y = Math.PI / 2;
 scene.add(leftWall);
 
-const leftWallCloser = new THREE.Mesh(new THREE.PlaneGeometry(5, 2.5), wallMaterial);
+const leftWallCloser = new THREE.Mesh(
+  new THREE.PlaneGeometry(5, 2.5),
+  wallMaterial,
+);
 leftWallCloser.position.set(-2.5, 1.25, 5.0);
 leftWallCloser.rotation.y = Math.PI / 2;
 scene.add(leftWallCloser);
-
 
 const backWall = new THREE.Mesh(new THREE.PlaneGeometry(5, 2.5), wallMaterial);
 backWall.position.set(0, 1.25, -2.5);
 scene.add(backWall);
 
-const secondBackWall = new THREE.Mesh(new THREE.PlaneGeometry(1.0, .88), wallMaterial); //darts
+const secondBackWall = new THREE.Mesh(
+  new THREE.PlaneGeometry(1.0, 0.88),
+  wallMaterial,
+); //darts
 secondBackWall.position.set(2.5, 1.8, 2.9);
 scene.add(secondBackWall);
-
 
 const tooltip = document.createElement("div");
 tooltip.style.position = "fixed";
@@ -128,40 +125,37 @@ tooltip.style.borderRadius = "3px";
 tooltip.style.display = "none";
 document.body.appendChild(tooltip);
 
-
 window.addEventListener("mousemove", onMouseMove, false);
 window.addEventListener("click", onMouseClick, false);
 
 function onMouseMove(event) {
-
   const mouse = new THREE.Vector2();
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-
   const raycaster = new THREE.Raycaster();
-  raycaster.ray.origin.set(camera.position.x, camera.position.y, camera.position.z);
+  raycaster.ray.origin.set(
+    camera.position.x,
+    camera.position.y,
+    camera.position.z,
+  );
   raycaster.ray.direction.set(mouse.x, mouse.y, 1).normalize();
-
 
   const intersects = raycaster.intersectObject(fireTruck);
 
   if (intersects.length > 0) {
     tooltip.style.display = "block";
 
-
     const tooltipWidth = tooltip.offsetWidth;
     const tooltipHeight = tooltip.offsetHeight;
 
-
     let left = event.clientX + 10;
     let top = event.clientY + 10;
-  
+
     if (left + tooltipWidth > window.innerWidth) {
       left = event.clientX - tooltipWidth - 10;
     }
 
- 
     if (top + tooltipHeight > window.innerHeight) {
       top = event.clientY - tooltipHeight - 10;
     }
@@ -176,14 +170,17 @@ function onMouseMove(event) {
 
 function onMouseClick() {
   const raycaster = new THREE.Raycaster();
-  raycaster.ray.origin.set(camera.position.x, camera.position.y, camera.position.z);
+  raycaster.ray.origin.set(
+    camera.position.x,
+    camera.position.y,
+    camera.position.z,
+  );
   raycaster.ray.direction.set(0, 0, 1).normalize();
   const intersects = raycaster.intersectObject(fireTruck);
   if (intersects.length > 0) {
     console.log("Truck clicked!");
   }
 }
-
 
 const toast = document.createElement("div");
 toast.style.position = "fixed";
@@ -197,7 +194,6 @@ toast.style.borderRadius = "5px";
 toast.style.fontSize = "16px";
 toast.style.display = "none";
 document.body.appendChild(toast);
-
 
 function showToast(message) {
   toast.innerText = message;
@@ -221,7 +217,6 @@ window.addEventListener("keydown", (event) => {
     showToast("Switched to Ford Edge");
   }
 });
-
 
 const movement = {
   forward: false,
@@ -289,12 +284,10 @@ const carpetTexture = new THREE.TextureLoader().load("/textures/carpet.jpg");
 
 const planeMaterial = new THREE.MeshStandardMaterial({ map: rockyTexture });
 
-
 const planeGeometry = new THREE.PlaneGeometry(50, 50);
 const ground = new THREE.Mesh(planeGeometry, planeMaterial);
 ground.rotation.x = -Math.PI / 2;
 scene.add(ground);
-
 
 const floorMaterial = new THREE.MeshStandardMaterial({ map: floorTexture });
 const floor1 = new THREE.Mesh(new THREE.PlaneGeometry(5, 5), floorMaterial);
@@ -303,11 +296,9 @@ floor1.receiveShadow = true;
 floor1.position.set(0, 0.01, 0);
 scene.add(floor1);
 
-
 const floor3 = floor1.clone();
 floor3.position.set(0, 0.01, 5);
 scene.add(floor3);
-
 
 const floor4 = floor1.clone();
 floor4.position.set(5, 0.01, 5);
@@ -318,19 +309,19 @@ const floor5 = floor1.clone();
 floor5.position.set(5, 0.01, 0);
 scene.add(floor5);
 
-
 const carpetMaterial = new THREE.MeshStandardMaterial({ map: carpetTexture });
-const secondFloor = new THREE.Mesh(new THREE.PlaneGeometry(5, 5), carpetMaterial);
+const secondFloor = new THREE.Mesh(
+  new THREE.PlaneGeometry(5, 5),
+  carpetMaterial,
+);
 secondFloor.rotation.x = -Math.PI / 2;
 secondFloor.receiveShadow = true;
 secondFloor.position.y = 2.5;
 secondFloor.position.z = 4.3;
 scene.add(secondFloor);
 
-
-const thirdTexture = new THREE.TextureLoader().load('/textures/third.jpeg');
+const thirdTexture = new THREE.TextureLoader().load("/textures/third.jpeg");
 const thirdMaterial = new THREE.MeshStandardMaterial({ map: thirdTexture });
-
 
 const thirdFloor = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), thirdMaterial);
 thirdFloor.rotation.x = -Math.PI / 2;
@@ -340,8 +331,10 @@ thirdFloor.position.x = 5.7;
 thirdFloor.position.z = 7.0;
 scene.add(thirdFloor);
 
-
-const leftThirdFloor = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), thirdMaterial);
+const leftThirdFloor = new THREE.Mesh(
+  new THREE.PlaneGeometry(4, 3),
+  thirdMaterial,
+);
 leftThirdFloor.rotation.x = -Math.PI / 2;
 leftThirdFloor.receiveShadow = true;
 leftThirdFloor.position.y = 3.0;
@@ -349,8 +342,10 @@ leftThirdFloor.position.x = 9.0;
 leftThirdFloor.position.z = 7.0;
 scene.add(leftThirdFloor);
 
-
-const rightThirdFloor = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), thirdMaterial);
+const rightThirdFloor = new THREE.Mesh(
+  new THREE.PlaneGeometry(4, 3),
+  thirdMaterial,
+);
 rightThirdFloor.rotation.x = -Math.PI / 2;
 rightThirdFloor.receiveShadow = true;
 rightThirdFloor.position.y = 3.01;
@@ -358,8 +353,10 @@ rightThirdFloor.position.x = 11.0;
 rightThirdFloor.position.z = 7.01;
 scene.add(rightThirdFloor);
 
-
-const additionalRowFloor = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), thirdMaterial);
+const additionalRowFloor = new THREE.Mesh(
+  new THREE.PlaneGeometry(4, 3),
+  thirdMaterial,
+);
 additionalRowFloor.rotation.x = -Math.PI / 2;
 additionalRowFloor.receiveShadow = true;
 additionalRowFloor.position.y = 3.0;
@@ -367,44 +364,48 @@ additionalRowFloor.position.x = 11.0;
 additionalRowFloor.position.z = 3.99;
 scene.add(additionalRowFloor);
 
-
-loader.load('/textures/tidal_3.glb', (gltf) => {
+loader.load("/textures/pool_jacuzzi.glb", (gltf) => {
   const tidalModel = gltf.scene;
-  tidalModel.scale.set(0.0032, 0.0032, 0.0032);
-  tidalModel.position.set(11.3, 3.0, 6.5);
+  tidalModel.scale.set(0.025, 0.03, 0.025);
+  tidalModel.position.set(12.25, 2.0, 8.0);
   tidalModel.rotation.y = Math.PI / 2;
   scene.add(tidalModel);
 
   const bubbleGeometry = new THREE.BufferGeometry();
-  const bubbleCount = 100;
+  const bubbleCount = 50;
   const positions = [];
   for (let i = 0; i < bubbleCount; i++) {
     positions.push(Math.random() * 1.5 - 0.75);
     positions.push(Math.random() * 0.1 + 0.1);
     positions.push(Math.random() * 1.5 - 0.75);
   }
-  bubbleGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+  bubbleGeometry.setAttribute(
+    "position",
+    new THREE.Float32BufferAttribute(positions, 3),
+  );
 
   const bubbleMaterial = new THREE.PointsMaterial({
-    color: 0x66FFFF,
+    color: 0x66ffff,
     size: 0.2,
     transparent: true,
     opacity: 0.8,
   });
 
   const bubbles = new THREE.Points(bubbleGeometry, bubbleMaterial);
-  bubbles.position.set(11.0, 3.0, 6.8);
+  bubbles.position.set(11.5, 2.8, 6.3);
   scene.add(bubbles);
 
   function animateBubblesUp() {
-    bubbleGeometry.attributes.position.array.forEach((_, i) => {
-      if (i % 3 === 1) {
-        bubbleGeometry.attributes.position.array[i] += 0.002;
-        if (bubbleGeometry.attributes.position.array[i] > 3.02) {
-          bubbleGeometry.attributes.position.array[i] = 3.02;
-        }
+    const positions = bubbleGeometry.attributes.position.array;
+
+    for (let i = 0; i < positions.length; i += 3) {
+      positions[i + 1] += 0.002;
+
+      if (positions[i + 1] > 3.0) {
+        positions[i + 1] = 0.0;
       }
-    });
+    }
+
     bubbleGeometry.attributes.position.needsUpdate = true;
   }
 
@@ -416,9 +417,6 @@ loader.load('/textures/tidal_3.glb', (gltf) => {
 
   animateScene();
 });
-
-
-
 
 const pointLight = new THREE.PointLight(0xffaa88, 1, 10);
 pointLight.position.set(0, 2, 0);
@@ -451,7 +449,7 @@ armrest1.position.set(-0.4, 0.45, 2);
 armrest2.position.set(2.4, 0.45, 2);
 scene.add(armrest1, armrest2);
 
-const cushionMaterial = new THREE.MeshStandardMaterial({ color: 0xFF6600 });
+const cushionMaterial = new THREE.MeshStandardMaterial({ color: 0xff6600 });
 const cushionGeometry = new THREE.BoxGeometry(1.3, 0.25, 0.9);
 
 const cushion1 = new THREE.Mesh(cushionGeometry, cushionMaterial);
@@ -512,7 +510,6 @@ photo.position.set(1.7, 1.6, -2.4);
 photo.rotation.y = Math.PI / 100;
 scene.add(photo);
 
-
 const frameGeometry = new THREE.PlaneGeometry(1.6, 1.1);
 const frameMaterial = new THREE.MeshStandardMaterial({
   emissive: getRandomNeonColor(),
@@ -537,57 +534,55 @@ const light = new THREE.PointLight(getRandomNeonColor(), 1.5, 10);
 light.position.set(1.7, 1.6, -2.8);
 scene.add(light);
 
-
 function changeLightColor() {
   light.color.set(getRandomNeonColor());
 }
 
 setInterval(changeLightColor, 2000);
 
-
 let gameBoy = null;
 let iphone = null;
 const mouse = new THREE.Vector2();
 const raycaster = new THREE.Raycaster();
 
-const popupElement = document.createElement('div');
-popupElement.style.position = 'absolute';
-popupElement.style.padding = '10px';
-popupElement.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-popupElement.style.color = 'white';
-popupElement.style.borderRadius = '5px';
-popupElement.style.display = 'none';
-popupElement.style.maxWidth = '90%';
-popupElement.style.wordWrap = 'break-word';
-popupElement.style.zIndex = '1000';
+const popupElement = document.createElement("div");
+popupElement.style.position = "absolute";
+popupElement.style.padding = "10px";
+popupElement.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+popupElement.style.color = "white";
+popupElement.style.borderRadius = "5px";
+popupElement.style.display = "none";
+popupElement.style.maxWidth = "90%";
+popupElement.style.wordWrap = "break-word";
+popupElement.style.zIndex = "1000";
 document.body.appendChild(popupElement);
 
-const iframe = document.createElement('iframe');
-iframe.style.position = 'absolute';
-iframe.style.width = window.innerWidth < 600 ? '90%' : '80%';
-iframe.style.height = window.innerWidth < 600 ? '70%' : '80%';
-iframe.style.border = 'none';
-iframe.style.display = 'none';
-iframe.style.zIndex = '1001';
+const iframe = document.createElement("iframe");
+iframe.style.position = "absolute";
+iframe.style.width = window.innerWidth < 600 ? "90%" : "80%";
+iframe.style.height = window.innerWidth < 600 ? "70%" : "80%";
+iframe.style.border = "none";
+iframe.style.display = "none";
+iframe.style.zIndex = "1001";
 document.body.appendChild(iframe);
 
-const closeButton = document.createElement('button');
-closeButton.innerText = 'EXIT';
-closeButton.style.position = 'absolute';
-closeButton.style.top = '10px';
-closeButton.style.left = '10px';
-closeButton.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-closeButton.style.color = 'white';
-closeButton.style.border = 'none';
-closeButton.style.padding = '15px';
-closeButton.style.borderRadius = '5px';
-closeButton.style.cursor = 'pointer';
-closeButton.style.fontSize = '16px';
-closeButton.style.zIndex = '1002';
-closeButton.style.display = 'none';
+const closeButton = document.createElement("button");
+closeButton.innerText = "EXIT";
+closeButton.style.position = "absolute";
+closeButton.style.top = "10px";
+closeButton.style.left = "10px";
+closeButton.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+closeButton.style.color = "white";
+closeButton.style.border = "none";
+closeButton.style.padding = "15px";
+closeButton.style.borderRadius = "5px";
+closeButton.style.cursor = "pointer";
+closeButton.style.fontSize = "16px";
+closeButton.style.zIndex = "1002";
+closeButton.style.display = "none";
 document.body.appendChild(closeButton);
 
-loader.load('/textures/game_boy.glb', (gltf) => {
+loader.load("/textures/game_boy.glb", (gltf) => {
   gameBoy = gltf.scene;
   gameBoy.position.set(0.3, 0.64, -0.1);
   gameBoy.scale.set(1.5, 1.5, 1.5);
@@ -596,7 +591,7 @@ loader.load('/textures/game_boy.glb', (gltf) => {
   scene.add(gameBoy);
 });
 
-loader.load('/textures/free_iphone.glb', (gltf) => {
+loader.load("/textures/free_iphone.glb", (gltf) => {
   iphone = gltf.scene;
   iphone.position.set(1.3, 0.2, 1.0);
   iphone.scale.set(0.001, 0.001, 0.001);
@@ -610,14 +605,13 @@ function getMousePosition(event) {
   let y = event.clientY || event.touches[0].clientY;
   return {
     x: (x / window.innerWidth) * 2 - 1,
-    y: -(y / window.innerHeight) * 2 + 1
+    y: -(y / window.innerHeight) * 2 + 1,
   };
 }
 
 let chess = null;
 
-
-loader.load('/textures/chess_coines.glb', (gltf) => {
+loader.load("/textures/chess_coines.glb", (gltf) => {
   chess = gltf.scene;
   chess.position.set(-0.3, 0.8, -2.0);
   chess.scale.set(0.03, 0.03, 0.03);
@@ -633,27 +627,31 @@ function onMove(event) {
   raycaster.setFromCamera(mouse, camera);
 
   if (gameBoy || iphone || chess) {
-    const intersectsGameBoy = gameBoy ? raycaster.intersectObject(gameBoy, true) : [];
-    const intersectsIphone = iphone ? raycaster.intersectObject(iphone, true) : [];
+    const intersectsGameBoy = gameBoy
+      ? raycaster.intersectObject(gameBoy, true)
+      : [];
+    const intersectsIphone = iphone
+      ? raycaster.intersectObject(iphone, true)
+      : [];
     const intersectsChess = chess ? raycaster.intersectObject(chess, true) : [];
 
     if (intersectsGameBoy.length > 0) {
-      popupElement.style.display = 'block';
-      popupElement.innerHTML = 'Game Boy';
+      popupElement.style.display = "block";
+      popupElement.innerHTML = "Game Boy";
       popupElement.style.left = `${event.clientX + window.scrollX + 10}px`;
       popupElement.style.top = `${event.clientY + window.scrollY + 10}px`;
     } else if (intersectsIphone.length > 0) {
-      popupElement.style.display = 'block';
-      popupElement.innerHTML = 'iPad';
+      popupElement.style.display = "block";
+      popupElement.innerHTML = "iPad";
       popupElement.style.left = `${event.clientX + window.scrollX + 10}px`;
       popupElement.style.top = `${event.clientY + window.scrollY + 10}px`;
     } else if (intersectsChess.length > 0) {
-      popupElement.style.display = 'block';
-      popupElement.innerHTML = 'Play Chess';
+      popupElement.style.display = "block";
+      popupElement.innerHTML = "Play Chess";
       popupElement.style.left = `${event.clientX + window.scrollX + 10}px`;
       popupElement.style.top = `${event.clientY + window.scrollY + 10}px`;
     } else {
-      popupElement.style.display = 'none';
+      popupElement.style.display = "none";
     }
   }
 }
@@ -664,71 +662,81 @@ function onClick(event) {
   raycaster.setFromCamera(mouse, camera);
 
   if (gameBoy || iphone || chess) {
-    const intersectsGameBoy = gameBoy ? raycaster.intersectObject(gameBoy, true) : [];
-    const intersectsIphone = iphone ? raycaster.intersectObject(iphone, true) : [];
+    const intersectsGameBoy = gameBoy
+      ? raycaster.intersectObject(gameBoy, true)
+      : [];
+    const intersectsIphone = iphone
+      ? raycaster.intersectObject(iphone, true)
+      : [];
     const intersectsChess = chess ? raycaster.intersectObject(chess, true) : [];
 
     if (intersectsGameBoy.length > 0) {
-      iframe.src = 'https://marioallstars.vercel.app';
-      iframe.style.display = 'block';
+      iframe.src = "https://marioallstars.vercel.app";
+      iframe.style.display = "block";
       iframe.style.left = `${(window.innerWidth - iframe.offsetWidth) / 2}px`;
       iframe.style.top = `${(window.innerHeight - iframe.offsetHeight) / 2}px`;
-      closeButton.style.display = 'block';
+      closeButton.style.display = "block";
       enableOutsideClickListener();
     } else if (intersectsIphone.length > 0) {
-      iframe.src = 'https://imac.jessejesse.com';
-      iframe.style.display = 'block';
+      iframe.src = "https://imac.jessejesse.com";
+      iframe.style.display = "block";
       iframe.style.left = `${(window.innerWidth - iframe.offsetWidth) / 2}px`;
       iframe.style.top = `${(window.innerHeight - iframe.offsetHeight) / 2}px`;
-      closeButton.style.display = 'block';
+      closeButton.style.display = "block";
       enableOutsideClickListener();
     } else if (intersectsChess.length > 0) {
-      iframe.src = 'https://www.chessonlinefree.com/play-chess-online#google_vignette';
-      iframe.style.display = 'block';
+      iframe.src =
+        "https://www.chessonlinefree.com/play-chess-online#google_vignette";
+      iframe.style.display = "block";
       iframe.style.left = `${(window.innerWidth - iframe.offsetWidth) / 2}px`;
       iframe.style.top = `${(window.innerHeight - iframe.offsetHeight) / 2}px`;
-      closeButton.style.display = 'block';
+      closeButton.style.display = "block";
       enableOutsideClickListener();
     }
   }
 }
 
 function enableOutsideClickListener() {
-  window.addEventListener('click', outsideClick);
+  window.addEventListener("click", outsideClick);
 }
 
 function outsideClick(event) {
   if (!iframe.contains(event.target) && !closeButton.contains(event.target)) {
-    iframe.style.display = 'none';
-    closeButton.style.display = 'none';
-    window.removeEventListener('click', outsideClick);
+    iframe.style.display = "none";
+    closeButton.style.display = "none";
+    window.removeEventListener("click", outsideClick);
   }
 }
 
-closeButton.addEventListener('click', () => {
-  iframe.style.display = 'none';
-  closeButton.style.display = 'none';
-  window.removeEventListener('click', outsideClick);
+closeButton.addEventListener("click", () => {
+  iframe.style.display = "none";
+  closeButton.style.display = "none";
+  window.removeEventListener("click", outsideClick);
 });
 
+window.addEventListener("mousemove", onMove, false);
+window.addEventListener("click", onClick, false);
+window.addEventListener(
+  "touchmove",
+  (event) => {
+    event.preventDefault();
+    onMove(event);
+  },
+  { passive: false },
+);
+window.addEventListener(
+  "touchstart",
+  (event) => {
+    event.preventDefault();
+    onClick(event);
+  },
+  { passive: false },
+);
 
-window.addEventListener('mousemove', onMove, false);
-window.addEventListener('click', onClick, false);
-window.addEventListener('touchmove', (event) => {
-  event.preventDefault();
-  onMove(event);
-}, { passive: false });
-window.addEventListener('touchstart', (event) => {
-  event.preventDefault();
-  onClick(event);
-}, { passive: false });
-
-
-window.addEventListener('resize', () => {
-  iframe.style.width = window.innerWidth < 600 ? '90%' : '80%';
-  iframe.style.height = window.innerWidth < 600 ? '70%' : '80%';
+window.addEventListener("resize", () => {
+  iframe.style.width = window.innerWidth < 600 ? "90%" : "80%";
+  iframe.style.height = window.innerWidth < 600 ? "70%" : "80%";
 });
-
 
 loader.load(
   "/textures/macbook.glb",
@@ -741,15 +749,12 @@ loader.load(
   undefined,
   (error) => {
     console.error("An error occurred while loading the MacBook model:", error);
-  }
+  },
 );
-
 
 let helicopter;
 let helicopterMixer;
 let helicopterRotationSpeed = 0.1;
-
-
 
 loader.load(
   "/textures/apache_gunship.glb",
@@ -762,7 +767,6 @@ loader.load(
 
     console.log("Helicopter loaded successfully!");
 
-
     if (gltf.animations.length > 0) {
       helicopterMixer = new THREE.AnimationMixer(helicopter);
       const action = helicopterMixer.clipAction(gltf.animations[0]);
@@ -770,17 +774,14 @@ loader.load(
       action.play();
     }
 
- 
     animateHelicopter();
   },
   undefined,
-  (error) => console.error("Error loading the helicopter model:", error)
+  (error) => console.error("Error loading the helicopter model:", error),
 );
-
 
 function animateHelicopter() {
   requestAnimationFrame(animateHelicopter);
-
 
   if (helicopterMixer && clock) {
     const delta = clock.getDelta();
@@ -790,8 +791,6 @@ function animateHelicopter() {
   renderer.render(scene, camera);
 }
 
-
-
 const models = [
   {
     url: "/textures/mountain_bike.glb",
@@ -799,20 +798,19 @@ const models = [
     scale: [0.8, 0.8, 0.8],
     rotationY: 18,
   },
-  
+
   {
     url: "/textures/darts.glb",
     position: [2.5, 1.8, 2.95],
     scale: [0.8, 0.8, 0.8],
   },
-  
+
   {
     url: "/textures/bar_sign_board.glb",
     position: [5.8, 1.4, 7.3],
     scale: [-0.02, 0.02, 0.02],
     rotationY: 3.12,
   },
-
 
   {
     url: "/textures/apple_watch.glb",
@@ -822,7 +820,7 @@ const models = [
     rotationX: -Math.PI / 18,
   },
 
-    {
+  {
     url: "/textures/aviators.glb",
     position: [2.0, 0.6, 2.0],
     scale: [0.0009, 0.0009, 0.0009],
@@ -830,7 +828,7 @@ const models = [
     rotationY: Math.PI / -2,
     rotationX: Math.PI / -55,
   },
-  
+
   {
     url: "/textures/modern_kitchen.glb",
     position: [6.0, 0.1, 5.8],
@@ -846,154 +844,147 @@ const models = [
     scale: [0.2, 0.2, 0.2],
     rotationY: 1,
   },
-  
+
   {
     url: "/textures/railing.glb",
-      position: [27.2, 1.6, -5.8],
+    position: [27.2, 1.6, -5.8],
     scale: [0.5, 0.4, 0.5],
     rotationY: 3.15,
   },
-  
+
   {
     url: "/textures/railing.glb",
-      position: [27.2, 1.6, -0.8],
+    position: [27.2, 1.6, -0.8],
     scale: [0.5, 0.4, 0.5],
     rotationY: 3.15,
   },
-    
+
   {
     url: "/textures/a10.glb",
-      position: [2.2, 10.6, -15.8],
+    position: [2.2, 10.6, -15.8],
     scale: [0.06, 0.06, 0.06],
     rotationY: 2,
     rotationX: -2,
-      
   },
-  
-  
+
   {
     url: "/textures/the_piano.glb",
     position: [2.1, 3.0, 4.4],
     scale: [0.4, 0.4, 0.4],
     rotationY: -14.15,
   },
-  
+
   {
     url: "/textures/dj5000.glb",
-      position: [-0.4, 3.2, 6.0],
+    position: [-0.4, 3.2, 6.0],
     scale: [0.004, 0.004, 0.004],
     rotationY: 9.08,
   },
-  
+
   {
     url: "/textures/railing.glb",
-      position: [-4.5, 1.6, -23.5], //kitchen Side
+    position: [-4.5, 1.6, -23.5], //kitchen Side
     scale: [0.5, 0.4, 0.5],
     rotationY: -14.15,
   },
-  
+
   {
     url: "/textures/railing.glb", //Runway Side
-      position: [-9.5, 1.6, -23.0],
+    position: [-9.5, 1.6, -23.0],
     scale: [0.5, 0.4, 0.5],
     rotationY: -14.15,
   },
-  
+
   {
     url: "/textures/sofa.glb",
-      position: [-0.5, 2.9, 2.5],
+    position: [-0.5, 2.9, 2.5],
     scale: [1.0, 1.0, 1.0],
     rotationY: -12.55,
   },
-  
+
   {
     url: "/textures/up_window.glb",
-      position: [-2.4, 0.8, 3.8], //side runway
-    scale: [.5, 0.5, 0.5],
+    position: [-2.4, 0.8, 3.8], //side runway
+    scale: [0.5, 0.5, 0.5],
     rotationY: -14.1,
   },
-  
+
   {
     url: "/textures/up_window.glb", //side runway
-      position: [-2.4, 0.8, 6.3],
-    scale: [.5, 0.5, 0.5],
+    position: [-2.4, 0.8, 6.3],
+    scale: [0.5, 0.5, 0.5],
     rotationY: -14.1,
   },
-  
+
   {
     url: "/textures/up_window.glb",
-      position: [6.5, 0.8, -2.7], //Front
-    scale: [.5, 0.5, 0.5],
+    position: [6.5, 0.8, -2.7], //Front
+    scale: [0.5, 0.5, 0.5],
     rotationY: -153.95,
   },
-  
+
   {
     url: "/textures/door_arch.glb",
-      position: [4.5, 0.1, -2.3], //arch
-    scale: [.5, 0.5, 0.5],
+    position: [4.5, 0.1, -2.3], //arch
+    scale: [0.5, 0.5, 0.5],
     rotationY: -153.95,
   },
-  
-  
+
   {
     url: "/textures/up_window.glb",
-      position: [6.0, 0.7, 7.6], //Back
-    scale: [.5, 0.5, 0.5],
+    position: [6.0, 0.7, 7.6], //Back
+    scale: [0.5, 0.5, 0.5],
     rotationY: -153.95,
   },
-  
+
   {
     url: "/textures/up_window.glb",
-      position: [7.2, .5, 1.0], //side garage
-    scale: [.6, 0.6, 0.6],
+    position: [7.5, 0.5, 1.0], //side garage
+    scale: [0.6, 0.6, 0.6],
     rotationY: -174.3,
   },
-  
+
   {
     url: "/textures/pillar.glb", //back
-      position: [12.5, .3, 8.2],
-    scale: [.4, 0.43, 0.4],
+    position: [12.5, 0.15, 8.2],
+    scale: [0.4, 0.43, 0.4],
     rotationY: -174.3,
   },
-  
+
   {
     url: "/textures/pillar.glb", //Front
-      position: [12.5, .3, 2.8],
-    scale: [.4, 0.43, 0.4],
+    position: [12.5, 0.15, 2.8],
+    scale: [0.4, 0.43, 0.4],
     rotationY: -174.3,
   },
-  
+
   {
     url: "/textures/pillar.glb",
-      position: [7.5, .3, 8.2],
-    scale: [.4, 0.43, 0.4],
+    position: [7.0, 0.15, 8.2],
+    scale: [0.4, 0.43, 0.4],
     rotationY: -174.3,
   },
-  
+
   {
     url: "/textures/humvee.glb",
-      position: [-12.0, 0.1, 4.0],
-    scale: [.004, .004, .004],
+    position: [-12.0, 0.1, 4.0],
+    scale: [0.004, 0.004, 0.004],
     rotationY: -12.55,
   },
-  
+
   {
     url: "/textures/retro_tv.glb",
-      position: [-1.0, 2.0, 3.6],
-    scale: [.03, .03, .03],
+    position: [-1.0, 2.0, 3.6],
+    scale: [0.03, 0.03, 0.03],
     rotationY: -41.6,
   },
 
-  
-  
   {
     url: "/textures/ps5_customized.glb",
     position: [-1.0, 0.03, -2.0],
     scale: [0.3, 0.3, 0.3],
     rotationY: 0,
   },
-  
- 
 
   {
     url: "/textures/kitchen_table.glb",
@@ -1015,51 +1006,49 @@ const models = [
     scale: [0.02, 0.02, 0.02],
     rotationY: Math.PI / 2,
   },
-  
-    {
+
+  {
     url: "/textures/donnie.glb",
     position: [-2.2, 0, -1.2],
     scale: [0.4, 0.4, 0.4],
     rotationY: Math.PI / 2,
   },
-  
-  
-    {
+
+  {
     url: "/textures/runway.glb",
     position: [-21, 0, -8.2],
     scale: [0.01, 0.01, 0.03],
     rotationY: Math.PI / 2,
   },
-  
+
   {
-  url: "/textures/runway.glb",
-  position: [-21, 0.01, 2.2],
-  scale: [0.01, 0.01, 0.03],
-  rotationY: Math.PI / 2,
-},
-  
+    url: "/textures/runway.glb",
+    position: [-21, 0.01, 2.2],
+    scale: [0.01, 0.01, 0.03],
+    rotationY: Math.PI / 2,
+  },
+
   {
     url: "/textures/a10.glb",
     position: [-21.0, 0.5, -4.5],
     scale: [0.2, 0.2, 0.2],
     rotationY: -1.5,
     rotationX: 0.1,
-      
   },
-  
-    {
+
+  {
     url: "/textures/bookshelf_speaker.glb",
     position: [-2.4, 1.5, -1.6],
     scale: [0.4, 0.4, 0.4],
     rotationY: Math.PI / 2,
   },
-    {
+  {
     url: "/textures/chest_speaker.glb",
     position: [-2.43, 1.75, -1.6],
     scale: [2.5, 2.5, 2.5],
     rotationY: Math.PI / -2,
   },
-  
+
   {
     url: "/textures/babys_highchair.glb",
     position: [0.1, 0, -1.9],
@@ -1067,25 +1056,25 @@ const models = [
     rotationY: Math.PI / 2,
   },
 
-    {
+  {
     url: "/textures/red_energy.glb",
     position: [-2.3, 1.06, -0.3],
     scale: [1.5, 1.5, 1.5],
     rotationY: Math.PI / 4,
   },
-  
-    {
+
+  {
     url: "/textures/rug.glb",
     position: [0.1, 0, 1.0],
     scale: [0.9, 0.9, 0.9],
     rotationY: Math.PI / 40,
   },
-  
+
   {
     url: "/textures/stuff_Bear.glb",
     position: [-1.75, 0.05, 2],
     scale: [1.6, 1.6, 1.6],
-    rotationY: Math.PI / 2.7,
+    rotationY: Math.PI / 3.0,
   },
 
   {
@@ -1094,68 +1083,106 @@ const models = [
     scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / -2.3,
   },
-  
+
   {
     url: "/textures/da_stairs.glb",
     position: [7.0, 0.03, 2.5],
     scale: [1.0, 1.0, 1.0],
   },
-  
+
   {
     url: "/textures/wooden_railing.glb",
-    position: [10.3, 3.5, 2.5],
-    scale: [.01, .01, .01],
+    position: [10.1, 3.3, 2.5],
+    scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI,
   },
   {
     url: "/textures/wooden_railing.glb",
-    position: [12.0, 3.5, 2.5],
-    scale: [.01, .01, .01],
+    position: [12.0, 3.3, 2.5],
+    scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI,
   },
-  
+
   {
     url: "/textures/wooden_railing.glb",
-    position: [4.5, 3.3, 8.6],
-    scale: [.01, .01, .01],
+    position: [4.9, 3.3, 8.6],
+    scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / 150,
   },
   {
     url: "/textures/wooden_railing.glb",
-    position: [8.0, 3.3, 8.6],
-    scale: [.01, .01, .01],
+    position: [8.6, 3.3, 8.6],
+    scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / 150,
   },
-  
+
   {
     url: "/textures/wooden_railing.glb",
-    position: [6.25, 3.3, 8.6],
-    scale: [.01, .01, .01],
+    position: [6.8, 3.3, 8.6],
+    scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / 150,
   },
-  
+
+  {
+    url: "/textures/wooden_railing.glb",
+    position: [10.4, 3.3, 8.6],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 150,
+  },
+  {
+    url: "/textures/wooden_railing.glb",
+    position: [12.2, 3.3, 8.6],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 150,
+  },
+
+  {
+    url: "/textures/wooden_railing.glb",
+    position: [13.0, 3.3, 5.6],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 2,
+  },
+  {
+    url: "/textures/wooden_railing.glb",
+    position: [13.0, 3.3, 3.6],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 2,
+  },
+
+  {
+    url: "/textures/wooden_railing.glb",
+    position: [13.0, 3.3, 7.6],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 2,
+  },
+
   {
     url: "/textures/tree.glb",
     position: [-3.8, 0.03, -5.5],
     scale: [0.003, 0.003, 0.003],
     rotationY: Math.PI / -1.3,
   },
-    
+
   {
     url: "/textures/tree.glb",
     position: [1.1, 0.03, -6.0],
     scale: [0.0024, 0.0028, 0.0024],
     rotationY: Math.PI / -1.3,
   },
-  
+  {
+    url: "/textures/tree.glb",
+    position: [14.5, 0.05, -1.5],
+    scale: [0.0024, 0.0028, 0.0024],
+    rotationY: Math.PI / -1.3,
+  },
+
   {
     url: "/textures/flower_bed.glb",
-      position: [-1.0, 0.03, -5.5],
+    position: [-1.0, 0.03, -5.5],
     scale: [0.3, 0.3, 0.3],
     rotationY: Math.PI / 2,
   },
-  
-  
+
   {
     url: "/textures/samsung_tv_remote_control.glb",
     position: [0.5, 0.6, 2],
@@ -1163,7 +1190,7 @@ const models = [
     rotationX: -Math.PI / 8,
     rotationZ: Math.PI / 8,
   },
-    {
+  {
     url: "/textures/chinese_stairs.glb",
     position: [3.8, 0.1, 1.4],
     scale: [0.003, 0.003, 0.003],
@@ -1177,32 +1204,32 @@ const models = [
     rotationX: -Math.PI / 2,
     rotationZ: Math.PI / 8,
   },
-  
-    {
+
+  {
     url: "/textures/woodtable.glb",
     position: [1.9, 0.01, -2.2],
     scale: [0.5, 0.5, 0.5],
     rotationZ: Math.PI / 84,
   },
-  
+
   {
-  url: "/textures/candy_real.glb",
-  position: [0.8, 0.36, -1.1],
-  scale: [0.1, 0.1, 0.1],
-  rotationZ: Math.PI / 80,
-},
-  
+    url: "/textures/candy_real.glb",
+    position: [0.8, 0.36, -1.1],
+    scale: [0.1, 0.1, 0.1],
+    rotationZ: Math.PI / 80,
+  },
+
   {
     url: "/textures/bmx.glb",
     position: [11.0, 0.6, 4.5],
     scale: [0.3, 0.3, 0.3],
     rotationY: Math.PI / 10,
   },
-  
+
   {
     url: "/textures/pool_table.glb",
     position: [-1.0, 0.1, 6.0],
-    scale: [.01, .01, .01],
+    scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / 3,
   },
 
@@ -1243,7 +1270,7 @@ const models = [
     scale: [0.03, 0.03, 0.03],
     rotationY: Math.PI / 5,
   },
-  
+
   {
     url: "/textures/d_tags.glb",
     position: [0.6, 0.63, 0.2],
@@ -1257,22 +1284,20 @@ const models = [
     scale: [0.2, 0.2, 0.2],
     rotationY: Math.PI / -2,
   },
-  
+
   {
-  url: "/textures/cyber_garage.glb",
-  position: [6.0, -1.9, 1.4],
-  scale: [0.5, 0.5, 0.5],
-  rotationY: Math.PI / 1,
+    url: "/textures/cyber_garage.glb",
+    position: [6.0, -1.9, 1.4],
+    scale: [0.5, 0.5, 0.5],
+    rotationY: Math.PI / 1,
   },
 
   {
-  url: "/textures/helipad.glb",
-  position: [21.0, 0.1, 18.0],
-  scale: [0.003, 0.003, 0.003],
-  rotationY: Math.PI / 1,
+    url: "/textures/helipad.glb",
+    position: [21.0, 0.1, 18.0],
+    scale: [0.003, 0.003, 0.003],
+    rotationY: Math.PI / 1,
   },
-
-
 
   {
     url: "/textures/modern_kitchen.glb",
@@ -1292,14 +1317,13 @@ const models = [
     rotationZ: 0,
   },
 
-    
   {
     url: "/textures/table21.glb",
     position: [0.4, 3.1, 4.5],
     scale: [1.0, 1.0, 1.0],
     rotationY: Math.PI / 3,
   },
-  
+
   {
     url: "/textures/stairs.glb",
     position: [3.8, 2.5, 6.5],
@@ -1307,49 +1331,71 @@ const models = [
     rotationY: Math.PI,
   },
 
-
-
-  
   {
     url: "/textures/bottles.glb",
     position: [0.4, 3.35, 4.5],
-    scale: [.005, .005, .005],
+    scale: [0.005, 0.005, 0.005],
     rotationY: Math.PI / 3,
   },
-  
+
   {
     url: "/textures/jj.jpeg",
     position: [-1.4, 0.9, -2.5],
     scale: [0.2, 0.2, 0.2],
     rotationY: Math.PI / -2,
   },
-  
-    {
+
+  {
     url: "/textures/frame.glb",
     position: [1.7, 1.6, -2.55],
     scale: [5.4, 3.2, 5.4],
     rotationY: Math.PI / -100,
   },
-  
-  
+  {
+    url: "/textures/black_pool.glb",
+    position: [5.0, 3.1, 7.8],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 150,
+  },
+
+  {
+    url: "/textures/black_pool.glb",
+    position: [7.0, 3.1, 7.8],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 150,
+  },
+
+  {
+    url: "/textures/starlink_satellite_dish.glb",
+    position: [8.5, 3.1, 7.8],
+    scale: [0.005, 0.005, 0.005],
+    rotationY: Math.PI / 150,
+  },
+
+  {
+    url: "/textures/camping_fox.glb",
+    position: [13.0, -0.6, 5.8],
+    scale: [3.5, 3.5, 3.5],
+    rotationY: Math.PI / 2,
+  },
 ];
 
+loader.setCrossOrigin("anonymous");
 
-
-loader.setCrossOrigin('anonymous');
-
-loader.load('https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/denver_broncos.glb', (gltf) => {
-  const model = gltf.scene;
-  model.scale.set(0.3, 0.3, 0.3);
-  model.position.set(10.0, 1.7, 3.0);
-  model.rotation.y = Math.PI;
-  scene.add(model);
-}, undefined, (error) => {
-  console.error('An error occurred while loading the GLB model:', error);
-});
-
-
-
+loader.load(
+  "https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/denver_broncos.glb",
+  (gltf) => {
+    const model = gltf.scene;
+    model.scale.set(0.3, 0.3, 0.3);
+    model.position.set(10.0, 1.7, 3.0);
+    model.rotation.y = Math.PI;
+    scene.add(model);
+  },
+  undefined,
+  (error) => {
+    console.error("An error occurred while loading the GLB model:", error);
+  },
+);
 
 let object = {
   url: "/textures/dji_mini_2.glb",
@@ -1370,10 +1416,8 @@ loader.load(
     flowerModel.scale.set(0.2, 0.2, 0.2);
     scene.add(flowerModel);
 
-   
     console.log("Animations in the model:", gltf.animations);
     if (gltf.animations.length > 0) {
- 
       mixer = new THREE.AnimationMixer(flowerModel);
       const action = mixer.clipAction(gltf.animations[0]);
       action.play();
@@ -1382,9 +1426,8 @@ loader.load(
   undefined,
   (error) => {
     console.error("Error loading the GLTF model:", error);
-  }
+  },
 );
-
 
 function animateFlower() {
   requestAnimationFrame(animateFlower);
@@ -1395,7 +1438,6 @@ function animateFlower() {
 
   renderer.render(scene, camera);
 }
-
 
 let model;
 
@@ -1506,10 +1548,7 @@ function createSteamEffect(position) {
   animateParticles();
 }
 
-
 let canister;
-
-
 
 loader.load(
   "/textures/smoke.glb",
@@ -1520,13 +1559,11 @@ loader.load(
     scene.add(canister);
     console.log("Canister loaded successfully!");
 
-    
     createGreenSmoke(canister.position);
   },
   undefined,
-  (error) => console.error("Error loading the canister model:", error)
+  (error) => console.error("Error loading the canister model:", error),
 );
-
 
 function createGreenSmoke(position) {
   const particleCount = 200;
@@ -1547,32 +1584,27 @@ function createGreenSmoke(position) {
     positions.push(x, y, z);
   }
 
-
   particlesGeometry.setAttribute(
     "position",
-    new THREE.Float32BufferAttribute(positions, 3)
+    new THREE.Float32BufferAttribute(positions, 3),
   );
-
 
   const particles = new THREE.Points(particlesGeometry, particlesMaterial);
   scene.add(particles);
-
 
   function animateSmoke() {
     const positions = particlesGeometry.attributes.position.array;
     for (let i = 1; i < positions.length; i += 3) {
       positions[i] += 0.01;
-    
+
       if (positions[i] > position.y + 1.5) positions[i] = position.y;
     }
     particlesGeometry.attributes.position.needsUpdate = true;
     requestAnimationFrame(animateSmoke);
   }
 
-
   animateSmoke();
 }
-
 
 models.forEach(({ url, position, scale, rotationY, rotationX, rotationZ }) => {
   loader.load(
@@ -1580,14 +1612,12 @@ models.forEach(({ url, position, scale, rotationY, rotationX, rotationZ }) => {
     (gltf) => {
       const model = gltf.scene;
 
-     
       model.scale.set(...scale);
       model.position.set(...position);
       if (rotationY) model.rotation.y = rotationY;
       if (rotationX) model.rotation.x = rotationX;
       if (rotationZ) model.rotation.z = rotationZ;
 
- 
       if (url === "/textures/flash_light.glb") {
         const light = new THREE.SpotLight(0xffffff, 5);
         light.position.set(0, 2, 0);
@@ -1598,22 +1628,17 @@ models.forEach(({ url, position, scale, rotationY, rotationX, rotationZ }) => {
         light.visible = false;
         scene.add(light);
 
-     
         window.addEventListener("mousemove", (event) => {
-     
           const mouse = new THREE.Vector2(
             (event.clientX / window.innerWidth) * 2 - 1,
-            -(event.clientY / window.innerHeight) * 2 + 1
+            -(event.clientY / window.innerHeight) * 2 + 1,
           );
 
-        
           const raycaster = new THREE.Raycaster();
           raycaster.setFromCamera(mouse, camera);
 
-     
           const intersects = raycaster.intersectObject(model, true);
 
-        
           if (intersects.length > 0) {
             console.log("Light ON");
             light.visible = true;
@@ -1624,20 +1649,17 @@ models.forEach(({ url, position, scale, rotationY, rotationX, rotationZ }) => {
         });
       }
 
-   
       scene.add(model);
     },
     undefined,
     (error) => {
       console.error(
         `An error occurred while loading the model at ${url}:`,
-        error
+        error,
       );
-    }
+    },
   );
 });
-
-
 
 const video = document.createElement("video");
 video.src = "https://jr-three.vercel.app/textures/video.mp4";
@@ -1713,2517 +1735,8 @@ function animate() {
 }
 animate();
 
-console.log('Scene:', scene);
-console.log('Camera:', camera);
-console.log('Renderer:', renderer);
-
+console.log("Scene:", scene);
+console.log("Camera:", camera);
+console.log("Renderer:", renderer);
 
 export default ThreeScene;
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
