@@ -869,6 +869,14 @@ const models = [
   },
 
   {
+    url: "/textures/spellbound_mailbox.glb",
+    position: [19.0, 0.6, -18.5],
+    scale: [0.3, 0.3, 0.3],
+    rotationY: 1,
+  },
+  
+  
+  {
     url: "/textures/darts.glb",
     position: [2.5, 1.8, 2.95],
     scale: [0.8, 0.8, 0.8],
@@ -987,14 +995,22 @@ const models = [
 
   {
     url: "/textures/up_window.glb",
-    position: [6.5, 0.8, -2.7], //Front
+    position: [6.5, 1.0, -2.7], //Front
+    scale: [0.5, 0.5, 0.5],
+    rotationY: -153.95,
+  },
+  
+  {
+    url: "/textures/up_window.glb",
+    position: [1.5, 1.0, -2.7], //Front
     scale: [0.5, 0.5, 0.5],
     rotationY: -153.95,
   },
 
+
   {
     url: "/textures/door_arch.glb",
-    position: [4.5, 0.1, -2.3], //arch
+    position: [4.5, 0.1, -2.7], //arch
     scale: [0.5, 0.5, 0.5],
     rotationY: -153.95,
   },
@@ -1182,7 +1198,7 @@ const models = [
     position: [7.0, 0.03, 2.5],
     scale: [1.0, 1.0, 1.0],
   },
-
+  
   {
     url: "/textures/wooden_railing.glb",
     position: [10.1, 3.3, 2.5],
