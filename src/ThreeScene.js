@@ -308,7 +308,7 @@ const drivewaySquare3 = new THREE.Mesh(new THREE.PlaneGeometry(4, 4), drivewayMa
 drivewaySquare3.rotation.x = -Math.PI / 2;
 drivewaySquare3.rotation.z = Math.PI + Math.PI / 2;
 drivewaySquare3.receiveShadow = true;
-drivewaySquare3.position.set(10.0, 0.2, -7.0);
+drivewaySquare3.position.set(10.0, 0.1, -7.0);
 scene.add(drivewaySquare3);
 
 
