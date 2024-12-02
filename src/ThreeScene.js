@@ -1501,6 +1501,15 @@ const models = [
     rotationY: Math.PI / 2,
     rotationZ: 0,
   },
+  
+  {
+    url: "/textures/fire_flower.glb",
+    position: [2.8, 1.3, 5.5],
+    scale: [0.05, 0.05, 0.05],
+    rotationX: 0,
+    rotationY: Math.PI / 4,
+    rotationZ: 0,
+  },
 
   {
     url: "/textures/table21.glb",
