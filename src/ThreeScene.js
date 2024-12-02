@@ -1051,6 +1051,15 @@ const models = [
     scale: [0.6, 0.6, 0.6],
     rotationY: -174.3,
   },
+  
+  {
+    url: "/textures/me.glb",
+    position: [8.2, 1.5, 1.0], //me
+    scale: [0.4, 0.4, 0.4],
+    rotationY: Math.PI / -2,
+  },
+  
+
 
   {
     url: "/textures/pillar.glb", //back
@@ -1197,6 +1206,13 @@ const models = [
     position: [8.0, 0.01, 2.5],
     scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / -2.3,
+  },
+  
+  {
+    url: "/textures/stairs.glb",
+    position: [7.0, 3.0, 4.9],
+    scale: [0.4, 0.4, 0.4],
+    rotationY: Math.PI / -52.0,
   },
 
   {
