@@ -312,42 +312,42 @@ drivewaySquare3.position.set(10.0, 0.2, -7.0);
 scene.add(drivewaySquare3);
 
 
-const drivewaySquare4 = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), drivewayMaterial1);
+const drivewaySquare4 = new THREE.Mesh(new THREE.PlaneGeometry(4, 4), drivewayMaterial1);
 drivewaySquare4.rotation.x = -Math.PI / 2;
 drivewaySquare4.rotation.z = Math.PI + Math.PI / 2;
 drivewaySquare4.receiveShadow = true;
-drivewaySquare4.position.set(12.0, 0.3, -9.0);
+drivewaySquare4.position.set(13.0, 0.1, -9.0);
 scene.add(drivewaySquare4);
 
 
-const drivewaySquare5 = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), drivewayMaterial1);
+const drivewaySquare5 = new THREE.Mesh(new THREE.PlaneGeometry(4, 4), drivewayMaterial1);
 drivewaySquare5.rotation.x = -Math.PI / 2;
 drivewaySquare5.rotation.z = Math.PI + Math.PI / 2;
 drivewaySquare5.receiveShadow = true;
-drivewaySquare5.position.set(14.0, 0.4, -12.0);
+drivewaySquare5.position.set(14.0, 0.1, -12.0);
 scene.add(drivewaySquare5);
 
 
-const drivewaySquare6 = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), drivewayMaterial1);
+const drivewaySquare6 = new THREE.Mesh(new THREE.PlaneGeometry(4, 4), drivewayMaterial1);
 drivewaySquare6.rotation.x = -Math.PI / 2;
 drivewaySquare6.rotation.z = Math.PI + Math.PI / 2;
 drivewaySquare6.receiveShadow = true;
-drivewaySquare6.position.set(16.0, 0.5, -14.0);
+drivewaySquare6.position.set(16.0, 0.1, -14.0);
 scene.add(drivewaySquare6);
 
 
-const drivewaySquare7 = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), drivewayMaterial1);
+const drivewaySquare7 = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), drivewayMaterial1);
 drivewaySquare7.rotation.x = -Math.PI / 2;
 drivewaySquare7.rotation.z = Math.PI + Math.PI / 2;
 drivewaySquare7.receiveShadow = true;
-drivewaySquare7.position.set(18.0, 0.6, -16.5);
+drivewaySquare7.position.set(18.0, 0.1, -16.5);
 scene.add(drivewaySquare7);
 
-const drivewaySquare8 = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), drivewayMaterial1);
+const drivewaySquare8 = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), drivewayMaterial1);
 drivewaySquare8.rotation.x = -Math.PI / 2;
 drivewaySquare8.rotation.z = Math.PI + Math.PI / 2;
 drivewaySquare8.receiveShadow = true;
-drivewaySquare8.position.set(19.0, 0.7, -16.5);
+drivewaySquare8.position.set(19.0, 0.1, -16.5);
 scene.add(drivewaySquare8);
 
 
