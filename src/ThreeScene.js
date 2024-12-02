@@ -998,6 +998,29 @@ const models = [
     scale: [0.5, 0.5, 0.5],
     rotationY: -153.95,
   },
+  
+  {
+    url: "/textures/walkway_stone.glb",
+    position: [4.5, 0.1, -3.3], //arch
+    scale: [0.5, 0.5, 0.5],
+  },
+  {
+    url: "/textures/walkway_stone.glb",
+    position: [5.5, 0.1, -3.3], //arch
+    scale: [0.5, 0.5, 0.5],
+  },
+  {
+    url: "/textures/walkway_stone.glb",
+    position: [6.5, 0.1, -3.3], //arch
+    scale: [0.5, 0.5, 0.5],
+  },
+  {
+    url: "/textures/walkway_stone.glb",
+    position: [7.5, 0.1, -3.3], //arch
+    scale: [0.5, 0.5, 0.5],
+  },
+  
+  
 
   {
     url: "/textures/up_window.glb",
@@ -1253,19 +1276,6 @@ const models = [
   },
 
   {
-    url: "/textures/flower_bed.glb",
-    position: [6.0, 0.03, -5.5],
-    scale: [0.3, 0.3, 0.3],
-    rotationY: Math.PI / 2,
-  },
-  
-  {
-    url: "/textures/floral_cluster.glb",
-    position: [7.8, 0.03, 2.5],
-    scale: [2.5, 2.5, 2.5],
-    rotationY: Math.PI / 2,
-  },
-  {
       
     url: "/textures/floral_cluster.glb",
     position: [12.0, 0.03, 0],
@@ -1280,7 +1290,7 @@ const models = [
   },
   {
     url: "/textures/floral_cluster.glb",
-    position: [7.7, 0.03, 0],
+    position: [7.7, 0.03, 2],
     scale: [2.5, 2.5, 2.5],
     rotationY: Math.PI / 2,
   },
@@ -1292,7 +1302,7 @@ const models = [
   },
   {
     url: "/textures/floral_cluster.glb",
-    position: [8.5, 0.03, 0],
+    position: [8.0, 0.03, 2],
     scale: [2.5, 2.5, 2.5],
     rotationY: Math.PI / 2,
   },
@@ -1531,6 +1541,12 @@ const models = [
     scale: [3.5, 3.5, 3.5],
     rotationY: Math.PI / 2,
   },
+  {
+    url: "/textures/flower_bed.glb",
+    position: [6.0, 0.1, -5.5],
+    scale: [0.3, 0.3, 0.3],
+    rotationY: Math.PI / 2,
+  },
 ];
 
 loader.setCrossOrigin("anonymous");
@@ -1565,7 +1581,7 @@ loader.load(
   (gltf) => {
     console.log("Flower model loaded successfully!");
     flowerModel = gltf.scene;
-    flowerModel.position.set(6.0, 0.8, -5.5);
+    flowerModel.position.set(6.0, 1.5, -5.5);
     flowerModel.scale.set(0.2, 0.2, 0.2);
     scene.add(flowerModel);
 
@@ -1893,3 +1909,4 @@ console.log("Camera:", camera);
 console.log("Renderer:", renderer);
 
 export default ThreeScene;
+
