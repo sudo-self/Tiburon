@@ -1102,6 +1102,39 @@ const models = [
   },
   
   {
+    url: "/textures/wooden_railing.glb",
+    position: [10.3, 3.5, 2.5],
+    scale: [.01, .01, .01],
+    rotationY: Math.PI,
+  },
+  {
+    url: "/textures/wooden_railing.glb",
+    position: [12.0, 3.5, 2.5],
+    scale: [.01, .01, .01],
+    rotationY: Math.PI,
+  },
+  
+  {
+    url: "/textures/wooden_railing.glb",
+    position: [4.5, 3.3, 8.6],
+    scale: [.01, .01, .01],
+    rotationY: Math.PI / 150,
+  },
+  {
+    url: "/textures/wooden_railing.glb",
+    position: [8.0, 3.3, 8.6],
+    scale: [.01, .01, .01],
+    rotationY: Math.PI / 150,
+  },
+  
+  {
+    url: "/textures/wooden_railing.glb",
+    position: [6.25, 3.3, 8.6],
+    scale: [.01, .01, .01],
+    rotationY: Math.PI / 150,
+  },
+  
+  {
     url: "/textures/tree.glb",
     position: [-3.8, 0.03, -5.5],
     scale: [0.003, 0.003, 0.003],
