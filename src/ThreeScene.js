@@ -1110,7 +1110,7 @@ const models = [
 
   {
     url: "/textures/sofa.glb",
-    position: [-0.5, 2.9, 2.5],
+    position: [-0.5, 3.1, 2.5],
     scale: [1.4, 1.4, 1.4],
     rotationY: -12.55,
   },
