@@ -1365,6 +1365,12 @@ const models = [
     rotationY: Math.PI,
   },
 
+    {
+    url: "/textures/bullseye.glb",
+    position: [-1.8, 0.03, -5.5],
+    scale: [0.007, 0.007, 0.007],
+  },
+
   {
     url: "/textures/wooden_railing.glb",
     position: [4.9, 3.3, 8.6],
