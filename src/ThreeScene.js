@@ -48,7 +48,7 @@ loader.load(
     fireTruck = gltf.scene;
 
     fireTruck.position.set(9.3, 0.05, 5.5);
-    fireTruck.scale.set(0.5, 0.5, 0.5);
+    fireTruck.scale.set(0.55, 0.55, 0.55);
     fireTruck.rotation.y = Math.PI;
 
     fireTruck.traverse((child) => {
@@ -432,6 +432,53 @@ additionalRowFloor.position.y = 3.0;
 additionalRowFloor.position.x = 11.0;
 additionalRowFloor.position.z = 3.99;
 scene.add(additionalRowFloor);
+
+
+// Load the new texture
+const uniqueDarkTopTexture = new THREE.TextureLoader().load("/textures/dark_top.jpg");
+const uniqueDarkTopMaterial = new THREE.MeshStandardMaterial({
+  map: uniqueDarkTopTexture,
+  side: THREE.DoubleSide, // Visible from both sides
+});
+
+// Add the floor
+const uniqueFloorMesh = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), uniqueDarkTopMaterial);
+uniqueFloorMesh.rotation.x = -Math.PI / 2; // Horizontal alignment
+uniqueFloorMesh.position.set(5.0, 3.9, 4.0); // Floor position
+uniqueFloorMesh.receiveShadow = true;
+scene.add(uniqueFloorMesh);
+
+// Add the front wall
+const frontWallMesh = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), uniqueDarkTopMaterial);
+frontWallMesh.position.set(5.0, 4.9, 5.5);
+scene.add(frontWallMesh);
+
+
+// Load the dj5000 model and place it on the new floor
+loader.load("/textures/dj5000.glb", (gltf) => {
+  const dj5000 = gltf.scene;
+  dj5000.position.set(5.0, 5.0, 3.5); // Centered on the floor with a slight offset
+  dj5000.scale.set(0.006, 0.006, 0.006); // Scale
+  dj5000.rotation.y = 0.16; // Small rotation adjustment
+  scene.add(dj5000);
+}, undefined, (error) => {
+  console.error("An error occurred loading dj5000:", error);
+});
+
+// Load the jessie model and place it on the new floor
+loader.load("/textures/infinity_jessie.glb", (gltf) => {
+  const jessie = gltf.scene;
+  jessie.position.set(5.3, 4.0, 4.5); // Slightly to the right and back on the floor
+  jessie.scale.set(0.008, 0.008, 0.008); // Scale
+  jessie.rotation.y = THREE.MathUtils.degToRad(150); // 150° rotation
+  scene.add(jessie);
+}, undefined, (error) => {
+  console.error("An error occurred loading infinity_jessie:", error);
+});
+
+
+
+
 
 loader.load("/textures/pool_jacuzzi.glb", (gltf) => {
   const tidalModel = gltf.scene;
@@ -830,7 +877,7 @@ loader.load(
   (gltf) => {
     helicopter = gltf.scene;
     helicopter.position.set(-14.0, 0.6, -2.0);
-    helicopter.scale.set(0.4, 0.4, 0.4);
+    helicopter.scale.set(0.5, 0.5, 0.5);
     helicopter.rotation.set(0, Math.PI, 0);
     scene.add(helicopter);
 
@@ -952,13 +999,6 @@ const models = [
   },
 
   {
-    url: "/textures/dj5000.glb",
-    position: [-0.4, 3.2, 6.0],
-    scale: [0.004, 0.004, 0.004],
-    rotationY: 9.08,
-  },
-
-  {
     url: "/textures/railing.glb",
     position: [-4.5, 1.6, -23.5], //kitchen Side
     scale: [0.5, 0.4, 0.5],
@@ -975,7 +1015,7 @@ const models = [
   {
     url: "/textures/sofa.glb",
     position: [-0.5, 2.9, 2.5],
-    scale: [1.0, 1.0, 1.0],
+    scale: [1.4, 1.4, 1.4],
     rotationY: -12.55,
   },
 
@@ -1091,9 +1131,9 @@ const models = [
 
   {
     url: "/textures/retro_tv.glb",
-    position: [-1.0, 2.0, 3.6],
-    scale: [0.03, 0.03, 0.03],
-    rotationY: -41.6,
+    position: [0.9, 2.0, 4.5],
+    scale: [0.06, 0.06, 0.06],
+    rotationY: -40.9,
   },
 
   {
@@ -1116,12 +1156,7 @@ const models = [
     scale: [0.02, 0.02, 0.02],
     rotationY: 8.1,
   },
-  {
-    url: "/textures/infinity_jessie.glb",
-    position: [0.11, 2.5, 5.6],
-    scale: [0.006, 0.006, 0.006],
-    rotationY: 150,
-  },
+
 
   {
     url: "/textures/playstation_shapes.glb",
@@ -1203,8 +1238,8 @@ const models = [
 
   {
     url: "/textures/pirate_flag.glb",
-    position: [8.0, 0.01, 2.5],
-    scale: [0.01, 0.01, 0.01],
+    position: [13.0, 0.01, 2.5],
+    scale: [0.02, 0.02, 0.02],
     rotationY: Math.PI / -2.3,
   },
   
@@ -1956,6 +1991,10 @@ console.log("Camera:", camera);
 console.log("Renderer:", renderer);
 
 export default ThreeScene;
+
+
+
+
 
 
 
