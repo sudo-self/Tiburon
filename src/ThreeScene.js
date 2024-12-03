@@ -281,75 +281,102 @@ const windowTexture = textureLoader.load("/textures/window.png");
 const photoTexture = textureLoader.load("/textures/jj.jpeg");
 const rockyTexture = textureLoader.load("/textures/rocky_terrain.webp");
 const carpetTexture = new THREE.TextureLoader().load("/textures/carpet.jpg");
-const uniqueFloorTexture = new THREE.TextureLoader().load("/textures/driveway.jpeg");
-const uniqueFloorMaterial = new THREE.MeshStandardMaterial({ map: uniqueFloorTexture });
-const uniqueFloor = new THREE.Mesh(new THREE.PlaneGeometry(5, 5), uniqueFloorMaterial);
+const uniqueFloorTexture = new THREE.TextureLoader().load(
+  "/textures/driveway.jpeg",
+);
+const uniqueFloorMaterial = new THREE.MeshStandardMaterial({
+  map: uniqueFloorTexture,
+});
+const uniqueFloor = new THREE.Mesh(
+  new THREE.PlaneGeometry(5, 5),
+  uniqueFloorMaterial,
+);
 
-
-const drivewayTexture1 = new THREE.TextureLoader().load("/textures/driveway.jpeg");
-const drivewayMaterial1 = new THREE.MeshStandardMaterial({ map: drivewayTexture1 });
-const drivewaySquare1 = new THREE.Mesh(new THREE.PlaneGeometry(4, 4), drivewayMaterial1);
+const drivewayTexture1 = new THREE.TextureLoader().load(
+  "/textures/driveway.jpeg",
+);
+const drivewayMaterial1 = new THREE.MeshStandardMaterial({
+  map: drivewayTexture1,
+});
+const drivewaySquare1 = new THREE.Mesh(
+  new THREE.PlaneGeometry(4, 4),
+  drivewayMaterial1,
+);
 drivewaySquare1.rotation.x = -Math.PI / 2;
 drivewaySquare1.rotation.z = Math.PI + Math.PI / 2;
 drivewaySquare1.receiveShadow = true;
 drivewaySquare1.position.set(10.0, 0.1, 1.0);
 scene.add(drivewaySquare1);
 
-
-const drivewaySquare2 = new THREE.Mesh(new THREE.PlaneGeometry(4, 4), drivewayMaterial1);
+const drivewaySquare2 = new THREE.Mesh(
+  new THREE.PlaneGeometry(4, 4),
+  drivewayMaterial1,
+);
 drivewaySquare2.rotation.x = -Math.PI / 2;
 drivewaySquare2.rotation.z = Math.PI + Math.PI / 2;
 drivewaySquare2.receiveShadow = true;
 drivewaySquare2.position.set(10.0, 0.1, -3.0);
 scene.add(drivewaySquare2);
 
-
-const drivewaySquare3 = new THREE.Mesh(new THREE.PlaneGeometry(4, 4), drivewayMaterial1);
+const drivewaySquare3 = new THREE.Mesh(
+  new THREE.PlaneGeometry(4, 4),
+  drivewayMaterial1,
+);
 drivewaySquare3.rotation.x = -Math.PI / 2;
 drivewaySquare3.rotation.z = Math.PI + Math.PI / 2;
 drivewaySquare3.receiveShadow = true;
 drivewaySquare3.position.set(10.0, 0.1, -7.0);
 scene.add(drivewaySquare3);
 
-
-const drivewaySquare4 = new THREE.Mesh(new THREE.PlaneGeometry(4, 4), drivewayMaterial1);
+const drivewaySquare4 = new THREE.Mesh(
+  new THREE.PlaneGeometry(4, 4),
+  drivewayMaterial1,
+);
 drivewaySquare4.rotation.x = -Math.PI / 2;
 drivewaySquare4.rotation.z = Math.PI + Math.PI / 2;
 drivewaySquare4.receiveShadow = true;
 drivewaySquare4.position.set(13.0, 0.1, -9.0);
 scene.add(drivewaySquare4);
 
-
-const drivewaySquare5 = new THREE.Mesh(new THREE.PlaneGeometry(4, 4), drivewayMaterial1);
+const drivewaySquare5 = new THREE.Mesh(
+  new THREE.PlaneGeometry(4, 4),
+  drivewayMaterial1,
+);
 drivewaySquare5.rotation.x = -Math.PI / 2;
 drivewaySquare5.rotation.z = Math.PI + Math.PI / 2;
 drivewaySquare5.receiveShadow = true;
 drivewaySquare5.position.set(14.0, 0.1, -12.0);
 scene.add(drivewaySquare5);
 
-
-const drivewaySquare6 = new THREE.Mesh(new THREE.PlaneGeometry(4, 4), drivewayMaterial1);
+const drivewaySquare6 = new THREE.Mesh(
+  new THREE.PlaneGeometry(4, 4),
+  drivewayMaterial1,
+);
 drivewaySquare6.rotation.x = -Math.PI / 2;
 drivewaySquare6.rotation.z = Math.PI + Math.PI / 2;
 drivewaySquare6.receiveShadow = true;
 drivewaySquare6.position.set(16.0, 0.1, -14.0);
 scene.add(drivewaySquare6);
 
-
-const drivewaySquare7 = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), drivewayMaterial1);
+const drivewaySquare7 = new THREE.Mesh(
+  new THREE.PlaneGeometry(4, 3),
+  drivewayMaterial1,
+);
 drivewaySquare7.rotation.x = -Math.PI / 2;
 drivewaySquare7.rotation.z = Math.PI + Math.PI / 2;
 drivewaySquare7.receiveShadow = true;
 drivewaySquare7.position.set(18.0, 0.1, -16.5);
 scene.add(drivewaySquare7);
 
-const drivewaySquare8 = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), drivewayMaterial1);
+const drivewaySquare8 = new THREE.Mesh(
+  new THREE.PlaneGeometry(4, 3),
+  drivewayMaterial1,
+);
 drivewaySquare8.rotation.x = -Math.PI / 2;
 drivewaySquare8.rotation.z = Math.PI + Math.PI / 2;
 drivewaySquare8.receiveShadow = true;
 drivewaySquare8.position.set(19.0, 0.1, -16.5);
 scene.add(drivewaySquare8);
-
 
 const planeMaterial = new THREE.MeshStandardMaterial({ map: rockyTexture });
 
@@ -433,32 +460,35 @@ additionalRowFloor.position.x = 11.0;
 additionalRowFloor.position.z = 3.99;
 scene.add(additionalRowFloor);
 
-
-
-const uniqueDarkTopTexture = new THREE.TextureLoader().load("/textures/dark_top.jpg");
+const uniqueDarkTopTexture = new THREE.TextureLoader().load(
+  "/textures/dark_top.jpg",
+);
 const uniqueDarkTopMaterial = new THREE.MeshStandardMaterial({
   map: uniqueDarkTopTexture,
   side: THREE.DoubleSide,
 });
 
-
-const uniqueFloorMesh = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), uniqueDarkTopMaterial);
-uniqueFloorMesh.rotation.x = -Math.PI / 2; 
-uniqueFloorMesh.position.set(5.0, 3.9, 4.0); 
+const uniqueFloorMesh = new THREE.Mesh(
+  new THREE.PlaneGeometry(4, 3),
+  uniqueDarkTopMaterial,
+);
+uniqueFloorMesh.rotation.x = -Math.PI / 2;
+uniqueFloorMesh.position.set(5.0, 3.9, 4.0);
 uniqueFloorMesh.receiveShadow = true;
 scene.add(uniqueFloorMesh);
 
-
-const frontWallMesh = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), uniqueDarkTopMaterial);
+const frontWallMesh = new THREE.Mesh(
+  new THREE.PlaneGeometry(4, 2),
+  uniqueDarkTopMaterial,
+);
 frontWallMesh.position.set(5.0, 4.9, 5.5);
 scene.add(frontWallMesh);
-
 
 function createLaser(startPos, endPos, color) {
   const laserMaterial = new THREE.LineBasicMaterial({
     color: color,
     opacity: 0.8,
-    transparent: true
+    transparent: true,
   });
 
   const laserGeometry = new THREE.BufferGeometry();
@@ -470,41 +500,33 @@ function createLaser(startPos, endPos, color) {
   return laser;
 }
 
-
 const colors = [0xff0000, 0x00ff00, 0x0000ff, 0xffff00, 0xff00ff, 0x00ffff];
 
-
-const laserStart = new THREE.Vector3(5.0, 4.9, 5.5); 
-
+const laserStart = new THREE.Vector3(5.0, 4.9, 5.5);
 
 const lasers = [];
 for (let i = 0; i < 5; i++) {
-  const angle = Math.random() * Math.PI * 2; 
-  const distance = Math.random() * 5 + 3;  
+  const angle = Math.random() * Math.PI * 2;
+  const distance = Math.random() * 5 + 3;
 
- 
   const color = colors[Math.floor(Math.random() * colors.length)];
 
-
   const laserEnd = new THREE.Vector3(
-    laserStart.x + Math.cos(angle) * distance, 
-    laserStart.y - Math.random() * 2, 
-    laserStart.z + Math.sin(angle) * distance 
+    laserStart.x + Math.cos(angle) * distance,
+    laserStart.y - Math.random() * 2,
+    laserStart.z + Math.sin(angle) * distance,
   );
-
 
   const laser = createLaser(laserStart, laserEnd, color);
   lasers.push(laser);
 }
 
-
 function animateLasers() {
-  lasers.forEach(laser => {
+  lasers.forEach((laser) => {
     const randomMovementX = Math.random() * 0.1 - 0.05;
     const randomMovementY = Math.random() * 0.1 - 0.05;
     const randomMovementZ = Math.random() * 0.1 - 0.05;
 
- 
     laser.geometry.attributes.position.array[0] += randomMovementX;
     laser.geometry.attributes.position.array[1] += randomMovementY;
     laser.geometry.attributes.position.array[2] += randomMovementZ;
@@ -520,61 +542,63 @@ function animateLasers() {
 
 animateLasers();
 
-
 const cloudTexture = new THREE.TextureLoader().load("/textures/clouds.jpg");
 const cloudMaterial = new THREE.PointsMaterial({
   map: cloudTexture,
-  size: 0.2,  
+  size: 0.2,
   transparent: true,
-  opacity: 0.5, 
+  opacity: 0.5,
 });
-
 
 const cloudGeometry = new THREE.BufferGeometry();
 const cloudPositions = [];
-const numClouds = 50; 
-
+const numClouds = 50;
 
 for (let i = 0; i < numClouds; i++) {
   cloudPositions.push(
-    Math.random() * 2 - 1 + 5.3, 
-    Math.random() * 2 + 4.0,     
-    Math.random() * 2 - 1 + 4.5  
+    Math.random() * 2 - 1 + 5.3,
+    Math.random() * 2 + 4.0,
+    Math.random() * 2 - 1 + 4.5,
   );
 }
 
-cloudGeometry.setAttribute("position", new THREE.Float32BufferAttribute(cloudPositions, 3));
-
+cloudGeometry.setAttribute(
+  "position",
+  new THREE.Float32BufferAttribute(cloudPositions, 3),
+);
 
 const clouds = new THREE.Points(cloudGeometry, cloudMaterial);
 scene.add(clouds);
 
+loader.load(
+  "/textures/dj5000.glb",
+  (gltf) => {
+    const dj5000 = gltf.scene;
+    dj5000.position.set(5.0, 5.0, 3.5);
+    dj5000.scale.set(0.006, 0.006, 0.006);
+    dj5000.rotation.y = 0.16;
+    scene.add(dj5000);
+  },
+  undefined,
+  (error) => {
+    console.error("An error occurred loading dj5000:", error);
+  },
+);
 
-
-loader.load("/textures/dj5000.glb", (gltf) => {
-  const dj5000 = gltf.scene;
-  dj5000.position.set(5.0, 5.0, 3.5); 
-  dj5000.scale.set(0.006, 0.006, 0.006); 
-  dj5000.rotation.y = 0.16; 
-  scene.add(dj5000);
-}, undefined, (error) => {
-  console.error("An error occurred loading dj5000:", error);
-});
-
-
-loader.load("/textures/infinity_jessie.glb", (gltf) => {
-  const jessie = gltf.scene;
-  jessie.position.set(5.3, 4.0, 4.5); 
-  jessie.scale.set(0.008, 0.008, 0.008); 
-  jessie.rotation.y = THREE.MathUtils.degToRad(150); 
-  scene.add(jessie);
-}, undefined, (error) => {
-  console.error("An error occurred loading infinity_jessie:", error);
-});
-
-
-
-
+loader.load(
+  "/textures/infinity_jessie.glb",
+  (gltf) => {
+    const jessie = gltf.scene;
+    jessie.position.set(5.3, 4.0, 4.5);
+    jessie.scale.set(0.008, 0.008, 0.008);
+    jessie.rotation.y = THREE.MathUtils.degToRad(150);
+    scene.add(jessie);
+  },
+  undefined,
+  (error) => {
+    console.error("An error occurred loading infinity_jessie:", error);
+  },
+);
 
 loader.load("/textures/pool_jacuzzi.glb", (gltf) => {
   const tidalModel = gltf.scene;
@@ -1017,8 +1041,7 @@ const models = [
     scale: [0.3, 0.3, 0.3],
     rotationY: 1,
   },
-  
-  
+
   {
     url: "/textures/darts.glb",
     position: [2.5, 1.8, 2.95],
@@ -1135,7 +1158,7 @@ const models = [
     scale: [0.5, 0.5, 0.5],
     rotationY: -153.95,
   },
-  
+
   {
     url: "/textures/up_window.glb",
     position: [1.5, 1.0, -2.7], //Front
@@ -1143,14 +1166,13 @@ const models = [
     rotationY: -153.95,
   },
 
-
   {
     url: "/textures/door_arch.glb",
     position: [4.5, 0.1, -2.7], //arch
     scale: [0.5, 0.5, 0.5],
     rotationY: -153.95,
   },
-  
+
   {
     url: "/textures/walkway_stone.glb",
     position: [4.5, 0.1, -3.3], //arch
@@ -1171,8 +1193,6 @@ const models = [
     position: [7.5, 0.1, -3.3], //arch
     scale: [0.5, 0.5, 0.5],
   },
-  
-  
 
   {
     url: "/textures/up_window.glb",
@@ -1187,15 +1207,13 @@ const models = [
     scale: [0.6, 0.6, 0.6],
     rotationY: -174.3,
   },
-  
+
   {
     url: "/textures/me.glb",
     position: [8.2, 1.5, 1.0], //me
     scale: [0.4, 0.4, 0.4],
     rotationY: Math.PI / -2,
   },
-  
-
 
   {
     url: "/textures/pillar.glb", //back
@@ -1245,7 +1263,7 @@ const models = [
     scale: [0.01, 0.01, 0.01],
     rotationY: 0,
   },
-  
+
   {
     url: "/textures/wool_rug.glb",
     position: [5.2, 0.1, 1.0],
@@ -1253,14 +1271,12 @@ const models = [
     rotationY: 8.1,
   },
 
-
   {
     url: "/textures/playstation_shapes.glb",
     position: [-0.2, 0.8, -2.4],
     scale: [0.1, 0.1, 0.1],
     rotationY: 0,
   },
-
 
   {
     url: "/textures/donnie.glb",
@@ -1338,7 +1354,7 @@ const models = [
     scale: [0.02, 0.02, 0.02],
     rotationY: Math.PI / -2.3,
   },
-  
+
   {
     url: "/textures/stairs.glb",
     position: [7.0, 3.0, 4.9],
@@ -1351,7 +1367,7 @@ const models = [
     position: [7.0, 0.03, 2.5],
     scale: [1.0, 1.0, 1.0],
   },
-  
+
   {
     url: "/textures/wooden_railing.glb",
     position: [10.1, 3.3, 2.5],
@@ -1365,7 +1381,7 @@ const models = [
     rotationY: Math.PI,
   },
 
-    {
+  {
     url: "/textures/bullseye.glb",
     position: [-1.8, 0.03, -5.5],
     scale: [0.007, 0.007, 0.007],
@@ -1451,7 +1467,6 @@ const models = [
   },
 
   {
-      
     url: "/textures/floral_cluster.glb",
     position: [12.0, 0.03, 0],
     scale: [2.5, 2.5, 2.5],
@@ -1481,7 +1496,7 @@ const models = [
     scale: [2.5, 2.5, 2.5],
     rotationY: Math.PI / 2,
   },
-  
+
   {
     url: "/textures/floral_cluster.glb",
     position: [12.0, 0.03, -2.5],
@@ -1514,12 +1529,10 @@ const models = [
   },
   {
     url: "/textures/floral_cluster.glb",
-    position: [8.0, 0.03,-4.0],
+    position: [8.0, 0.03, -4.0],
     scale: [2.5, 2.5, 2.5],
     rotationY: Math.PI / 2,
   },
-  
-
 
   {
     url: "/textures/samsung_tv_remote_control.glb",
@@ -1654,7 +1667,7 @@ const models = [
     rotationY: Math.PI / 2,
     rotationZ: 0,
   },
-  
+
   {
     url: "/textures/fire_flower.glb",
     position: [2.8, 1.3, 5.5],
