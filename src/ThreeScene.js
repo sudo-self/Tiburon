@@ -521,8 +521,33 @@ function animateLasers() {
 animateLasers();
 
 
+const cloudTexture = new THREE.TextureLoader().load("/textures/clouds.jpg");
+const cloudMaterial = new THREE.PointsMaterial({
+  map: cloudTexture,
+  size: 0.2,  
+  transparent: true,
+  opacity: 0.5, 
+});
 
 
+const cloudGeometry = new THREE.BufferGeometry();
+const cloudPositions = [];
+const numClouds = 50; 
+
+
+for (let i = 0; i < numClouds; i++) {
+  cloudPositions.push(
+    Math.random() * 2 - 1 + 5.3, 
+    Math.random() * 2 + 4.0,     
+    Math.random() * 2 - 1 + 4.5  
+  );
+}
+
+cloudGeometry.setAttribute("position", new THREE.Float32BufferAttribute(cloudPositions, 3));
+
+
+const clouds = new THREE.Points(cloudGeometry, cloudMaterial);
+scene.add(clouds);
 
 
 
