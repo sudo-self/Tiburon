@@ -434,43 +434,114 @@ additionalRowFloor.position.z = 3.99;
 scene.add(additionalRowFloor);
 
 
-// Load the new texture
+
 const uniqueDarkTopTexture = new THREE.TextureLoader().load("/textures/dark_top.jpg");
 const uniqueDarkTopMaterial = new THREE.MeshStandardMaterial({
   map: uniqueDarkTopTexture,
-  side: THREE.DoubleSide, // Visible from both sides
+  side: THREE.DoubleSide,
 });
 
-// Add the floor
+
 const uniqueFloorMesh = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), uniqueDarkTopMaterial);
-uniqueFloorMesh.rotation.x = -Math.PI / 2; // Horizontal alignment
-uniqueFloorMesh.position.set(5.0, 3.9, 4.0); // Floor position
+uniqueFloorMesh.rotation.x = -Math.PI / 2; 
+uniqueFloorMesh.position.set(5.0, 3.9, 4.0); 
 uniqueFloorMesh.receiveShadow = true;
 scene.add(uniqueFloorMesh);
 
-// Add the front wall
+
 const frontWallMesh = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), uniqueDarkTopMaterial);
 frontWallMesh.position.set(5.0, 4.9, 5.5);
 scene.add(frontWallMesh);
 
 
-// Load the dj5000 model and place it on the new floor
+function createLaser(startPos, endPos, color) {
+  const laserMaterial = new THREE.LineBasicMaterial({
+    color: color,
+    opacity: 0.8,
+    transparent: true
+  });
+
+  const laserGeometry = new THREE.BufferGeometry();
+  laserGeometry.setFromPoints([startPos, endPos]);
+
+  const laser = new THREE.Line(laserGeometry, laserMaterial);
+  scene.add(laser);
+
+  return laser;
+}
+
+
+const colors = [0xff0000, 0x00ff00, 0x0000ff, 0xffff00, 0xff00ff, 0x00ffff];
+
+
+const laserStart = new THREE.Vector3(5.0, 4.9, 5.5); 
+
+
+const lasers = [];
+for (let i = 0; i < 5; i++) {
+  const angle = Math.random() * Math.PI * 2; 
+  const distance = Math.random() * 5 + 3;  
+
+ 
+  const color = colors[Math.floor(Math.random() * colors.length)];
+
+
+  const laserEnd = new THREE.Vector3(
+    laserStart.x + Math.cos(angle) * distance, 
+    laserStart.y - Math.random() * 2, 
+    laserStart.z + Math.sin(angle) * distance 
+  );
+
+
+  const laser = createLaser(laserStart, laserEnd, color);
+  lasers.push(laser);
+}
+
+
+function animateLasers() {
+  lasers.forEach(laser => {
+    const randomMovementX = Math.random() * 0.1 - 0.05;
+    const randomMovementY = Math.random() * 0.1 - 0.05;
+    const randomMovementZ = Math.random() * 0.1 - 0.05;
+
+ 
+    laser.geometry.attributes.position.array[0] += randomMovementX;
+    laser.geometry.attributes.position.array[1] += randomMovementY;
+    laser.geometry.attributes.position.array[2] += randomMovementZ;
+    laser.geometry.attributes.position.array[3] += randomMovementX;
+    laser.geometry.attributes.position.array[4] += randomMovementY;
+    laser.geometry.attributes.position.array[5] += randomMovementZ;
+
+    laser.geometry.attributes.position.needsUpdate = true;
+  });
+
+  requestAnimationFrame(animateLasers);
+}
+
+animateLasers();
+
+
+
+
+
+
+
 loader.load("/textures/dj5000.glb", (gltf) => {
   const dj5000 = gltf.scene;
-  dj5000.position.set(5.0, 5.0, 3.5); // Centered on the floor with a slight offset
-  dj5000.scale.set(0.006, 0.006, 0.006); // Scale
-  dj5000.rotation.y = 0.16; // Small rotation adjustment
+  dj5000.position.set(5.0, 5.0, 3.5); 
+  dj5000.scale.set(0.006, 0.006, 0.006); 
+  dj5000.rotation.y = 0.16; 
   scene.add(dj5000);
 }, undefined, (error) => {
   console.error("An error occurred loading dj5000:", error);
 });
 
-// Load the jessie model and place it on the new floor
+
 loader.load("/textures/infinity_jessie.glb", (gltf) => {
   const jessie = gltf.scene;
-  jessie.position.set(5.3, 4.0, 4.5); // Slightly to the right and back on the floor
-  jessie.scale.set(0.008, 0.008, 0.008); // Scale
-  jessie.rotation.y = THREE.MathUtils.degToRad(150); // 150° rotation
+  jessie.position.set(5.3, 4.0, 4.5); 
+  jessie.scale.set(0.008, 0.008, 0.008); 
+  jessie.rotation.y = THREE.MathUtils.degToRad(150); 
   scene.add(jessie);
 }, undefined, (error) => {
   console.error("An error occurred loading infinity_jessie:", error);
