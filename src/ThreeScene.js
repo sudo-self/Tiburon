@@ -1901,64 +1901,6 @@ function createSteamEffect(position) {
   animateParticles();
 }
 
-let canister;
-
-loader.load(
-  "/textures/smoke.glb",
-  (gltf) => {
-    canister = gltf.scene;
-    canister.position.set(-16.5, 0.5, -2.0);
-    canister.scale.set(0.05, 0.05, 0.05);
-    scene.add(canister);
-    console.log("Canister loaded successfully!");
-
-    createGreenSmoke(canister.position);
-  },
-  undefined,
-  (error) => console.error("Error loading the canister model:", error),
-);
-
-function createGreenSmoke(position) {
-  const particleCount = 200;
-  const particlesGeometry = new THREE.BufferGeometry();
-  const particlesMaterial = new THREE.PointsMaterial({
-    color: 0x00ff00,
-    size: 0.05,
-    transparent: true,
-    opacity: 0.7,
-  });
-
-  const positions = [];
-
-  for (let i = 0; i < particleCount; i++) {
-    const x = position.x + (Math.random() - 0.5) * 0.5;
-    const y = position.y + Math.random() * 1.5;
-    const z = position.z + (Math.random() - 0.5) * 0.5;
-    positions.push(x, y, z);
-  }
-
-  particlesGeometry.setAttribute(
-    "position",
-    new THREE.Float32BufferAttribute(positions, 3),
-  );
-
-  const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-  scene.add(particles);
-
-  function animateSmoke() {
-    const positions = particlesGeometry.attributes.position.array;
-    for (let i = 1; i < positions.length; i += 3) {
-      positions[i] += 0.01;
-
-      if (positions[i] > position.y + 1.5) positions[i] = position.y;
-    }
-    particlesGeometry.attributes.position.needsUpdate = true;
-    requestAnimationFrame(animateSmoke);
-  }
-
-  animateSmoke();
-}
-
 models.forEach(({ url, position, scale, rotationY, rotationX, rotationZ }) => {
   loader.load(
     url,
