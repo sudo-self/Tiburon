@@ -996,7 +996,7 @@ loader.load(
   "/textures/apache_gunship.glb",
   (gltf) => {
     helicopter = gltf.scene;
-    helicopter.position.set(-14.0, 0.6, -2.0);
+    helicopter.position.set(-10.0, 4.6, -2.0);
     helicopter.scale.set(0.5, 0.5, 0.5);
     helicopter.rotation.set(0, Math.PI, 0);
     scene.add(helicopter);
