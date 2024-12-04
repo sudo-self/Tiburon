@@ -590,7 +590,7 @@ const cloudMaterial = new THREE.PointsMaterial({
 
 const cloudGeometry = new THREE.BufferGeometry();
 const cloudPositions = [];
-const numClouds = 50;
+const numClouds = 25;
 
 for (let i = 0; i < numClouds; i++) {
   cloudPositions.push(
@@ -602,7 +602,7 @@ for (let i = 0; i < numClouds; i++) {
 
 cloudGeometry.setAttribute(
   "position",
-  new THREE.Float32BufferAttribute(cloudPositions, 3),
+  new THREE.Float32BufferAttribute(cloudPositions, 4),
 );
 
 const clouds = new THREE.Points(cloudGeometry, cloudMaterial);
@@ -694,7 +694,7 @@ loader.load("/textures/pool_jacuzzi.glb", (gltf) => {
 
 const objectParams = {
   url: "/textures/jessejesse.glb",
-  position: [5.3, 7.0, 4.5],
+  position: [5.3, 8.0, 4.5],
   scale: [0.05, 0.05, -0.05],
   rotationY: 3.25,
 };
