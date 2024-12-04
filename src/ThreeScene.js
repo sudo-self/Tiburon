@@ -1037,7 +1037,7 @@ const models = [
 
   {
     url: "/textures/spellbound_mailbox.glb",
-    position: [19.0, 0.6, -18.5],
+    position: [19.0, 0.4, -18.5],
     scale: [0.3, 0.3, 0.3],
     rotationY: 1,
   },
