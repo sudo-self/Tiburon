@@ -700,6 +700,47 @@ loader.load("/textures/pool_jacuzzi.glb", (gltf) => {
   animateScene();
 });
 
+
+
+const objectParams = {
+  url: "/textures/jessejesse.glb",
+  position: [5.3, 6.5, 4.5],
+  scale: [0.02, 0.02, -0.02],
+  rotationY: 3.25, 
+};
+
+
+
+loader.load(objectParams.url, (gltf) => {
+  const object = gltf.scene;
+  object.position.set(...objectParams.position);
+  object.scale.set(...objectParams.scale);
+  scene.add(object);
+
+
+  const animateCustom = () => {
+    requestAnimationFrame(animateCustom);
+
+
+    const cameraPosition = new THREE.Vector3();
+    camera.getWorldPosition(cameraPosition);
+
+    const objectPosition = new THREE.Vector3();
+    object.getWorldPosition(objectPosition);
+
+    const direction = new THREE.Vector3().subVectors(cameraPosition, objectPosition).normalize();
+
+  
+    const angleY = Math.atan2(direction.x, direction.z);
+    object.rotation.y = angleY;
+
+    renderer.render(scene, camera);
+  };
+
+  animateCustom();
+});
+
+
 const pointLight = new THREE.PointLight(0xffaa88, 1, 10);
 pointLight.position.set(0, 2, 0);
 pointLight.castShadow = true;
@@ -1080,6 +1121,7 @@ const models = [
     scale: [0.8, 0.8, 0.8],
     rotationY: 18,
   },
+    
 
   {
     url: "/textures/spellbound_mailbox.glb",
