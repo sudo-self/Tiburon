@@ -1,19 +1,20 @@
-// JesseJesse.com - Nighttime with Stars
+// JesseJesse.com
 
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { Sky } from "three/examples/jsm/objects/Sky.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { MathUtils, Vector3 } from "three";
 
 
+const isMobile = typeof navigator !== "undefined" && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;
 document.body.appendChild(renderer.domElement);
-
 
 const camera = new THREE.PerspectiveCamera(
   70,
@@ -23,30 +24,24 @@ const camera = new THREE.PerspectiveCamera(
 );
 camera.position.set(0, 1, 5);
 
-
 const sky = new Sky();
 sky.scale.setScalar(450000);
 scene.add(sky);
-
 
 const sun = new Vector3();
 const phi = MathUtils.degToRad(90);
 const theta = MathUtils.degToRad(180);
 
-
-
 scene.background = new THREE.Color(0x000022);
-
 
 const createStars = () => {
   const starGeometry = new THREE.BufferGeometry();
   const starMaterial = new THREE.PointsMaterial({
     color: 0xffffff,
-    size: 0.16,
+    size: isMobile ? 0.1 : 0.16, // Smaller stars on mobile
   });
 
-
-  const starCount = 90000;
+  const starCount = isMobile ? 20000 : 90000; // Fewer stars on mobile
   const starPositions = [];
   for (let i = 0; i < starCount; i++) {
     const x = (Math.random() - 0.5) * 1000; // Random X position
@@ -60,7 +55,6 @@ const createStars = () => {
     new THREE.Float32BufferAttribute(starPositions, 3)
   );
 
-
   const stars = new THREE.Points(starGeometry, starMaterial);
   scene.add(stars);
 };
@@ -70,12 +64,18 @@ const directionalLight = new THREE.DirectionalLight(0xffffff, 0.2);
 directionalLight.position.copy(sun).multiplyScalar(450000);
 scene.add(directionalLight);
 
-
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.25;
 controls.screenSpacePanning = false;
 
+
+const renderLoop = () => {
+  controls.update();
+  renderer.render(scene, camera);
+  requestAnimationFrame(renderLoop);
+};
+renderLoop();
 
 window.addEventListener("resize", () => {
   const width = window.innerWidth;
