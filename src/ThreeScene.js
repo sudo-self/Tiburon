@@ -1088,6 +1088,14 @@ const models = [
     rotationY: 1,
   },
 
+    {
+    url: "/textures/radio_tower_antenna.glb", 
+    position: [-14, 0, 4.5],
+    scale: [0.5, 0.5, 0.5],
+    rotationY: -174.3,
+  },
+
+
   {
     url: "/textures/railing.glb",
     position: [27.2, 1.6, -5.8],
