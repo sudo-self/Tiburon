@@ -1744,6 +1744,12 @@ const models = [
     scale: [0.3, 0.3, 0.3],
     rotationY: Math.PI / 2,
   },
+    {
+    url: "/textures/basketball_hoop.glb", //hoop
+    position: [11.0, 1.0, 2.0],
+    scale: [0.5, 0.5, 0.5],
+    rotationY: -174.3,
+  },
 ];
 
 loader.setCrossOrigin("anonymous");
