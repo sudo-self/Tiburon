@@ -208,13 +208,13 @@ window.addEventListener("keydown", (event) => {
   if (event.key === "1" && fireTruck) {
     currentVehicle = fireTruck;
     console.log("Switched to Cyber Truck!");
-    showToast("Switched to Cyber Truck");
+    showToast("Switched to Cyber Truck wasd");
   }
 
   if (event.key === "2" && edgeVehicle) {
     currentVehicle = edgeVehicle;
     console.log("Switched to Edge Vehicle!");
-    showToast("Switched to Ford Edge");
+    showToast("Switched to Ford Edge wasd");
   }
 });
 
