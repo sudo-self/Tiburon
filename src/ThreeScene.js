@@ -1317,14 +1317,14 @@ const models = [
 
   {
     url: "/textures/bookshelf_speaker.glb",
-    position: [-2.4, 1.5, -1.6],
-    scale: [0.4, 0.4, 0.4],
+    position: [-2.4, 1.75, -1.6],
+    scale: [0.6, 0.6, 0.6],
     rotationY: Math.PI / 2,
   },
   {
     url: "/textures/chest_speaker.glb",
-    position: [-2.43, 1.75, -1.6],
-    scale: [2.5, 2.5, 2.5],
+    position: [-2.43, 2.15, -1.6],
+    scale: [4.5, 4.5, 4.5],
     rotationY: Math.PI / -2,
   },
 
