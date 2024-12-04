@@ -38,10 +38,10 @@ const createStars = () => {
   const starGeometry = new THREE.BufferGeometry();
   const starMaterial = new THREE.PointsMaterial({
     color: 0xffffff,
-    size: isMobile ? 0.1 : 0.16, // Smaller stars on mobile
+    size: isMobile ? 0.1 : 0.16, 
   });
 
-  const starCount = isMobile ? 20000 : 90000; // Fewer stars on mobile
+  const starCount = isMobile ? 20000 : 90000; 
   const starPositions = [];
   for (let i = 0; i < starCount; i++) {
     const x = (Math.random() - 0.5) * 1000; // Random X position
@@ -97,7 +97,7 @@ loader.load(
     fireTruck = gltf.scene;
 
     fireTruck.position.set(9.3, 0.05, 5.5);
-    fireTruck.scale.set(0.55, 0.55, 0.55);
+    fireTruck.scale.set(0.57, 0.57, 0.57);
     fireTruck.rotation.y = Math.PI;
 
     fireTruck.traverse((child) => {
@@ -125,7 +125,7 @@ loader.load(
   "/textures/09_edge.glb",
   (gltf) => {
     edgeVehicle = gltf.scene;
-    edgeVehicle.position.set(10.9, 0.1, -1.0);
+    edgeVehicle.position.set(10.9, 0.1, -2.0);
     edgeVehicle.scale.set(0.0005, 0.0005, 0.0005);
     edgeVehicle.rotation.y = Math.PI / 14;
     scene.add(edgeVehicle);
@@ -137,7 +137,6 @@ loader.load(
 
 const wallTexture = new THREE.TextureLoader().load("/textures/wall.jpeg");
 const wallMaterial = new THREE.MeshStandardMaterial({ map: wallTexture });
-
 const leftWall = new THREE.Mesh(new THREE.PlaneGeometry(5, 2.5), wallMaterial);
 leftWall.position.set(-2.5, 1.25, 0);
 leftWall.rotation.y = Math.PI / 2;
@@ -161,165 +160,6 @@ const secondBackWall = new THREE.Mesh(
 ); //darts
 secondBackWall.position.set(2.5, 1.8, 2.9);
 scene.add(secondBackWall);
-
-const tooltip = document.createElement("div");
-tooltip.style.position = "fixed";
-tooltip.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
-tooltip.style.color = "#fff";
-tooltip.style.padding = "5px";
-tooltip.style.borderRadius = "3px";
-tooltip.style.display = "none";
-document.body.appendChild(tooltip);
-
-window.addEventListener("mousemove", onMouseMove, false);
-window.addEventListener("click", onMouseClick, false);
-
-function onMouseMove(event) {
-  const mouse = new THREE.Vector2();
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-  const raycaster = new THREE.Raycaster();
-  raycaster.ray.origin.set(
-    camera.position.x,
-    camera.position.y,
-    camera.position.z,
-  );
-  raycaster.ray.direction.set(mouse.x, mouse.y, 1).normalize();
-
-  const intersects = raycaster.intersectObject(fireTruck);
-
-  if (intersects.length > 0) {
-    tooltip.style.display = "block";
-
-    const tooltipWidth = tooltip.offsetWidth;
-    const tooltipHeight = tooltip.offsetHeight;
-
-    let left = event.clientX + 10;
-    let top = event.clientY + 10;
-
-    if (left + tooltipWidth > window.innerWidth) {
-      left = event.clientX - tooltipWidth - 10;
-    }
-
-    if (top + tooltipHeight > window.innerHeight) {
-      top = event.clientY - tooltipHeight - 10;
-    }
-
-    tooltip.style.left = `${left}px`;
-    tooltip.style.top = `${top}px`;
-    tooltip.innerHTML = "Press 1 & 2 to Switch vehicles";
-  } else {
-    tooltip.style.display = "none";
-  }
-}
-
-function onMouseClick() {
-  const raycaster = new THREE.Raycaster();
-  raycaster.ray.origin.set(
-    camera.position.x,
-    camera.position.y,
-    camera.position.z,
-  );
-  raycaster.ray.direction.set(0, 0, 1).normalize();
-  const intersects = raycaster.intersectObject(fireTruck);
-  if (intersects.length > 0) {
-    console.log("Truck clicked!");
-  }
-}
-
-const toast = document.createElement("div");
-toast.style.position = "fixed";
-toast.style.bottom = "20px";
-toast.style.left = "50%";
-toast.style.transform = "translateX(-50%)";
-toast.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
-toast.style.color = "#fff";
-toast.style.padding = "10px 20px";
-toast.style.borderRadius = "5px";
-toast.style.fontSize = "16px";
-toast.style.display = "none";
-document.body.appendChild(toast);
-
-function showToast(message) {
-  toast.innerText = message;
-  toast.style.display = "block";
-
-  setTimeout(() => {
-    toast.style.display = "none";
-  }, 3000);
-}
-
-window.addEventListener("keydown", (event) => {
-  if (event.key === "1" && fireTruck) {
-    currentVehicle = fireTruck;
-    console.log("Switched to Cyber Truck!");
-    showToast("Switched to Cyber Truck wasd");
-  }
-
-  if (event.key === "2" && edgeVehicle) {
-    currentVehicle = edgeVehicle;
-    console.log("Switched to Edge Vehicle!");
-    showToast("Switched to Ford Edge wasd");
-  }
-});
-
-const movement = {
-  forward: false,
-  backward: false,
-  left: false,
-  right: false,
-};
-
-const speed = 0.5;
-const rotationSpeed = 0.06;
-
-function setupControls() {
-  window.addEventListener("keydown", (event) => {
-    if (event.key === "s") movement.forward = true;
-    if (event.key === "w") movement.backward = true;
-    if (event.key === "a") movement.left = true;
-    if (event.key === "d") movement.right = true;
-  });
-
-  window.addEventListener("keyup", (event) => {
-    if (event.key === "s") movement.forward = false;
-    if (event.key === "w") movement.backward = false;
-    if (event.key === "a") movement.left = false;
-    if (event.key === "d") movement.right = false;
-  });
-}
-
-function updateMovement() {
-  if (!currentVehicle) return;
-
-  if (movement.forward) {
-    currentVehicle.translateZ(-speed);
-  }
-
-  if (movement.backward) {
-    currentVehicle.translateZ(speed);
-  }
-
-  if (movement.left) {
-    currentVehicle.rotation.y += rotationSpeed;
-  }
-
-  if (movement.right) {
-    currentVehicle.rotation.y -= rotationSpeed;
-  }
-}
-
-function animateScene() {
-  requestAnimationFrame(animateScene);
-
-  updateMovement();
-  controls.update();
-  renderer.render(scene, camera);
-}
-
-setupControls();
-animateScene();
 
 const textureLoader = new THREE.TextureLoader();
 const floorTexture = textureLoader.load("/textures/stone.jpg");
@@ -529,6 +369,167 @@ const frontWallMesh = new THREE.Mesh(
 );
 frontWallMesh.position.set(5.0, 4.9, 5.5);
 scene.add(frontWallMesh);
+
+
+const tooltip = document.createElement("div");
+tooltip.style.position = "fixed";
+tooltip.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+tooltip.style.color = "#fff";
+tooltip.style.padding = "5px";
+tooltip.style.borderRadius = "3px";
+tooltip.style.display = "none";
+document.body.appendChild(tooltip);
+
+window.addEventListener("mousemove", onMouseMove, false);
+window.addEventListener("click", onMouseClick, false);
+
+function onMouseMove(event) {
+  const mouse = new THREE.Vector2();
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  const raycaster = new THREE.Raycaster();
+  raycaster.ray.origin.set(
+    camera.position.x,
+    camera.position.y,
+    camera.position.z,
+  );
+  raycaster.ray.direction.set(mouse.x, mouse.y, 1).normalize();
+
+  const intersects = raycaster.intersectObject(fireTruck);
+
+  if (intersects.length > 0) {
+    tooltip.style.display = "block";
+
+    const tooltipWidth = tooltip.offsetWidth;
+    const tooltipHeight = tooltip.offsetHeight;
+
+    let left = event.clientX + 10;
+    let top = event.clientY + 10;
+
+    if (left + tooltipWidth > window.innerWidth) {
+      left = event.clientX - tooltipWidth - 10;
+    }
+
+    if (top + tooltipHeight > window.innerHeight) {
+      top = event.clientY - tooltipHeight - 10;
+    }
+
+    tooltip.style.left = `${left}px`;
+    tooltip.style.top = `${top}px`;
+    tooltip.innerHTML = "Press 1 & 2 to Switch vehicles";
+  } else {
+    tooltip.style.display = "none";
+  }
+}
+
+function onMouseClick() {
+  const raycaster = new THREE.Raycaster();
+  raycaster.ray.origin.set(
+    camera.position.x,
+    camera.position.y,
+    camera.position.z,
+  );
+  raycaster.ray.direction.set(0, 0, 1).normalize();
+  const intersects = raycaster.intersectObject(fireTruck);
+  if (intersects.length > 0) {
+    console.log("Truck clicked!");
+  }
+}
+
+const toast = document.createElement("div");
+toast.style.position = "fixed";
+toast.style.bottom = "20px";
+toast.style.left = "50%";
+toast.style.transform = "translateX(-50%)";
+toast.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+toast.style.color = "#fff";
+toast.style.padding = "10px 20px";
+toast.style.borderRadius = "5px";
+toast.style.fontSize = "16px";
+toast.style.display = "none";
+document.body.appendChild(toast);
+
+function showToast(message) {
+  toast.innerText = message;
+  toast.style.display = "block";
+
+  setTimeout(() => {
+    toast.style.display = "none";
+  }, 3000);
+}
+
+window.addEventListener("keydown", (event) => {
+  if (event.key === "1" && fireTruck) {
+    currentVehicle = fireTruck;
+    console.log("Switched to Cyber Truck!");
+    showToast("Switched to Cyber Truck wasd");
+  }
+
+  if (event.key === "2" && edgeVehicle) {
+    currentVehicle = edgeVehicle;
+    console.log("Switched to Edge Vehicle!");
+    showToast("Switched to Ford Edge wasd");
+  }
+});
+
+const movement = {
+  forward: false,
+  backward: false,
+  left: false,
+  right: false,
+};
+
+const speed = 0.5;
+const rotationSpeed = 0.06;
+
+function setupControls() {
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "s") movement.forward = true;
+    if (event.key === "w") movement.backward = true;
+    if (event.key === "a") movement.left = true;
+    if (event.key === "d") movement.right = true;
+  });
+
+  window.addEventListener("keyup", (event) => {
+    if (event.key === "s") movement.forward = false;
+    if (event.key === "w") movement.backward = false;
+    if (event.key === "a") movement.left = false;
+    if (event.key === "d") movement.right = false;
+  });
+}
+
+function updateMovement() {
+  if (!currentVehicle) return;
+
+  if (movement.forward) {
+    currentVehicle.translateZ(-speed);
+  }
+
+  if (movement.backward) {
+    currentVehicle.translateZ(speed);
+  }
+
+  if (movement.left) {
+    currentVehicle.rotation.y += rotationSpeed;
+  }
+
+  if (movement.right) {
+    currentVehicle.rotation.y -= rotationSpeed;
+  }
+}
+
+function animateScene() {
+  requestAnimationFrame(animateScene);
+
+  updateMovement();
+  controls.update();
+  renderer.render(scene, camera);
+}
+
+setupControls();
+animateScene();
+
 
 function createLaser(startPos, endPos, color) {
   const laserMaterial = new THREE.LineBasicMaterial({
