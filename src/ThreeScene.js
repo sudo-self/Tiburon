@@ -705,9 +705,55 @@ loader.load("/textures/pool_jacuzzi.glb", (gltf) => {
 const objectParams = {
   url: "/textures/jessejesse.glb",
   position: [5.3, 6.5, 4.5],
-  scale: [0.02, 0.02, -0.02],
-  rotationY: 3.25, 
+  scale: [0.03, 0.03, -0.03],
+  rotationY: 3.25,
 };
+
+
+const planetParams = {
+  url: "/textures/earth.glb",
+  position: [16.2, 10.6, -15.8],
+  scale: [0.9, 0.9, 0.9],
+  rotationY: 2,
+  rotationX: -2,
+  orbitRadius: 20,
+  orbitSpeed: 0.1,
+};
+
+
+loader.load(planetParams.url, (gltf) => {
+  const planet = gltf.scene;
+
+  planet.position.set(...planetParams.position);
+  planet.scale.set(...planetParams.scale);
+  planet.rotation.y = planetParams.rotationY;
+  planet.rotation.x = planetParams.rotationX;
+
+  scene.add(planet);
+
+  const orbitCenter = new THREE.Vector3(0, 10, 0);
+
+  const animateOrbit = () => {
+    requestAnimationFrame(animateOrbit);
+
+    const delta = clock.getDelta();
+    const elapsed = clock.getElapsedTime();
+
+    const angle = elapsed * planetParams.orbitSpeed;
+
+    planet.position.x = orbitCenter.x + planetParams.orbitRadius * Math.cos(angle);
+    planet.position.z = orbitCenter.z + planetParams.orbitRadius * Math.sin(angle);
+    planet.position.y = orbitCenter.y;
+
+    planet.rotation.y += delta * 0.1;
+
+    renderer.render(scene, camera);
+  };
+
+  animateOrbit();
+});
+
+
 
 
 
@@ -1205,6 +1251,7 @@ const models = [
     rotationY: 2,
     rotationX: -2,
   },
+  
 
   {
     url: "/textures/the_piano.glb",
