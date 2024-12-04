@@ -6,8 +6,9 @@ import { Sky } from "three/examples/jsm/objects/Sky.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { MathUtils, Vector3 } from "three";
 
-
-const isMobile = typeof navigator !== "undefined" && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+const isMobile =
+  typeof navigator !== "undefined" &&
+  /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -20,7 +21,7 @@ const camera = new THREE.PerspectiveCamera(
   70,
   window.innerWidth / window.innerHeight,
   0.1,
-  100
+  100,
 );
 camera.position.set(0, 1, 5);
 
@@ -37,11 +38,11 @@ scene.background = new THREE.Color(0x000022);
 const createStars = () => {
   const starGeometry = new THREE.BufferGeometry();
   const starMaterial = new THREE.PointsMaterial({
-    color: 0xffffff,
-    size: isMobile ? 0.1 : 0.16, // Smaller stars on mobile
+    color: 0xffffe0,
+    size: isMobile ? 0.1 : 0.16,
   });
 
-  const starCount = isMobile ? 20000 : 90000; // Fewer stars on mobile
+  const starCount = isMobile ? 20000 : 90000;
   const starPositions = [];
   for (let i = 0; i < starCount; i++) {
     const x = (Math.random() - 0.5) * 1000; // Random X position
@@ -52,7 +53,7 @@ const createStars = () => {
 
   starGeometry.setAttribute(
     "position",
-    new THREE.Float32BufferAttribute(starPositions, 3)
+    new THREE.Float32BufferAttribute(starPositions, 3),
   );
 
   const stars = new THREE.Points(starGeometry, starMaterial);
@@ -68,7 +69,6 @@ const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.25;
 controls.screenSpacePanning = false;
-
 
 const renderLoop = () => {
   controls.update();
@@ -86,7 +86,6 @@ window.addEventListener("resize", () => {
   renderer.setSize(width, height);
 });
 
-
 const loader = new GLTFLoader();
 let fireTruck, edgeVehicle;
 let currentVehicle;
@@ -97,7 +96,7 @@ loader.load(
     fireTruck = gltf.scene;
 
     fireTruck.position.set(9.3, 0.05, 5.5);
-    fireTruck.scale.set(0.55, 0.55, 0.55);
+    fireTruck.scale.set(0.57, 0.57, 0.57);
     fireTruck.rotation.y = Math.PI;
 
     fireTruck.traverse((child) => {
@@ -125,7 +124,7 @@ loader.load(
   "/textures/09_edge.glb",
   (gltf) => {
     edgeVehicle = gltf.scene;
-    edgeVehicle.position.set(10.9, 0.1, -1.0);
+    edgeVehicle.position.set(10.9, 0.1, -2.0);
     edgeVehicle.scale.set(0.0005, 0.0005, 0.0005);
     edgeVehicle.rotation.y = Math.PI / 14;
     scene.add(edgeVehicle);
@@ -137,7 +136,6 @@ loader.load(
 
 const wallTexture = new THREE.TextureLoader().load("/textures/wall.jpeg");
 const wallMaterial = new THREE.MeshStandardMaterial({ map: wallTexture });
-
 const leftWall = new THREE.Mesh(new THREE.PlaneGeometry(5, 2.5), wallMaterial);
 leftWall.position.set(-2.5, 1.25, 0);
 leftWall.rotation.y = Math.PI / 2;
@@ -161,165 +159,6 @@ const secondBackWall = new THREE.Mesh(
 ); //darts
 secondBackWall.position.set(2.5, 1.8, 2.9);
 scene.add(secondBackWall);
-
-const tooltip = document.createElement("div");
-tooltip.style.position = "fixed";
-tooltip.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
-tooltip.style.color = "#fff";
-tooltip.style.padding = "5px";
-tooltip.style.borderRadius = "3px";
-tooltip.style.display = "none";
-document.body.appendChild(tooltip);
-
-window.addEventListener("mousemove", onMouseMove, false);
-window.addEventListener("click", onMouseClick, false);
-
-function onMouseMove(event) {
-  const mouse = new THREE.Vector2();
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-  const raycaster = new THREE.Raycaster();
-  raycaster.ray.origin.set(
-    camera.position.x,
-    camera.position.y,
-    camera.position.z,
-  );
-  raycaster.ray.direction.set(mouse.x, mouse.y, 1).normalize();
-
-  const intersects = raycaster.intersectObject(fireTruck);
-
-  if (intersects.length > 0) {
-    tooltip.style.display = "block";
-
-    const tooltipWidth = tooltip.offsetWidth;
-    const tooltipHeight = tooltip.offsetHeight;
-
-    let left = event.clientX + 10;
-    let top = event.clientY + 10;
-
-    if (left + tooltipWidth > window.innerWidth) {
-      left = event.clientX - tooltipWidth - 10;
-    }
-
-    if (top + tooltipHeight > window.innerHeight) {
-      top = event.clientY - tooltipHeight - 10;
-    }
-
-    tooltip.style.left = `${left}px`;
-    tooltip.style.top = `${top}px`;
-    tooltip.innerHTML = "Press 1 & 2 to Switch vehicles";
-  } else {
-    tooltip.style.display = "none";
-  }
-}
-
-function onMouseClick() {
-  const raycaster = new THREE.Raycaster();
-  raycaster.ray.origin.set(
-    camera.position.x,
-    camera.position.y,
-    camera.position.z,
-  );
-  raycaster.ray.direction.set(0, 0, 1).normalize();
-  const intersects = raycaster.intersectObject(fireTruck);
-  if (intersects.length > 0) {
-    console.log("Truck clicked!");
-  }
-}
-
-const toast = document.createElement("div");
-toast.style.position = "fixed";
-toast.style.bottom = "20px";
-toast.style.left = "50%";
-toast.style.transform = "translateX(-50%)";
-toast.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
-toast.style.color = "#fff";
-toast.style.padding = "10px 20px";
-toast.style.borderRadius = "5px";
-toast.style.fontSize = "16px";
-toast.style.display = "none";
-document.body.appendChild(toast);
-
-function showToast(message) {
-  toast.innerText = message;
-  toast.style.display = "block";
-
-  setTimeout(() => {
-    toast.style.display = "none";
-  }, 3000);
-}
-
-window.addEventListener("keydown", (event) => {
-  if (event.key === "1" && fireTruck) {
-    currentVehicle = fireTruck;
-    console.log("Switched to Cyber Truck!");
-    showToast("Switched to Cyber Truck wasd");
-  }
-
-  if (event.key === "2" && edgeVehicle) {
-    currentVehicle = edgeVehicle;
-    console.log("Switched to Edge Vehicle!");
-    showToast("Switched to Ford Edge wasd");
-  }
-});
-
-const movement = {
-  forward: false,
-  backward: false,
-  left: false,
-  right: false,
-};
-
-const speed = 0.5;
-const rotationSpeed = 0.06;
-
-function setupControls() {
-  window.addEventListener("keydown", (event) => {
-    if (event.key === "s") movement.forward = true;
-    if (event.key === "w") movement.backward = true;
-    if (event.key === "a") movement.left = true;
-    if (event.key === "d") movement.right = true;
-  });
-
-  window.addEventListener("keyup", (event) => {
-    if (event.key === "s") movement.forward = false;
-    if (event.key === "w") movement.backward = false;
-    if (event.key === "a") movement.left = false;
-    if (event.key === "d") movement.right = false;
-  });
-}
-
-function updateMovement() {
-  if (!currentVehicle) return;
-
-  if (movement.forward) {
-    currentVehicle.translateZ(-speed);
-  }
-
-  if (movement.backward) {
-    currentVehicle.translateZ(speed);
-  }
-
-  if (movement.left) {
-    currentVehicle.rotation.y += rotationSpeed;
-  }
-
-  if (movement.right) {
-    currentVehicle.rotation.y -= rotationSpeed;
-  }
-}
-
-function animateScene() {
-  requestAnimationFrame(animateScene);
-
-  updateMovement();
-  controls.update();
-  renderer.render(scene, camera);
-}
-
-setupControls();
-animateScene();
 
 const textureLoader = new THREE.TextureLoader();
 const floorTexture = textureLoader.load("/textures/stone.jpg");
@@ -398,31 +237,6 @@ const drivewaySquare6 = new THREE.Mesh(
   new THREE.PlaneGeometry(4, 4),
   drivewayMaterial1,
 );
-drivewaySquare6.rotation.x = -Math.PI / 2;
-drivewaySquare6.rotation.z = Math.PI + Math.PI / 2;
-drivewaySquare6.receiveShadow = true;
-drivewaySquare6.position.set(16.0, 0.1, -14.0);
-scene.add(drivewaySquare6);
-
-const drivewaySquare7 = new THREE.Mesh(
-  new THREE.PlaneGeometry(4, 3),
-  drivewayMaterial1,
-);
-drivewaySquare7.rotation.x = -Math.PI / 2;
-drivewaySquare7.rotation.z = Math.PI + Math.PI / 2;
-drivewaySquare7.receiveShadow = true;
-drivewaySquare7.position.set(18.0, 0.1, -16.5);
-scene.add(drivewaySquare7);
-
-const drivewaySquare8 = new THREE.Mesh(
-  new THREE.PlaneGeometry(4, 3),
-  drivewayMaterial1,
-);
-drivewaySquare8.rotation.x = -Math.PI / 2;
-drivewaySquare8.rotation.z = Math.PI + Math.PI / 2;
-drivewaySquare8.receiveShadow = true;
-drivewaySquare8.position.set(19.0, 0.1, -16.5);
-scene.add(drivewaySquare8);
 
 const planeMaterial = new THREE.MeshStandardMaterial({ map: rockyTexture });
 
@@ -435,7 +249,7 @@ const floorMaterial = new THREE.MeshStandardMaterial({ map: floorTexture });
 const floor1 = new THREE.Mesh(new THREE.PlaneGeometry(5, 5), floorMaterial);
 floor1.rotation.x = -Math.PI / 2;
 floor1.receiveShadow = true;
-floor1.position.set(0, 0.02, 0);
+floor1.position.set(0, 0.01, 0);
 scene.add(floor1);
 
 const floor3 = floor1.clone();
@@ -506,6 +320,27 @@ additionalRowFloor.position.x = 11.0;
 additionalRowFloor.position.z = 3.99;
 scene.add(additionalRowFloor);
 
+
+const thirdFloorSquare1 = new THREE.Mesh(
+  new THREE.PlaneGeometry(5, 4),
+  thirdMaterial
+);
+thirdFloorSquare1.rotation.x = -Math.PI / 2;
+thirdFloorSquare1.receiveShadow = true;
+thirdFloorSquare1.position.set(6.7, 3.07, 10.55);
+scene.add(thirdFloorSquare1);
+
+
+const thirdFloorSquare2 = new THREE.Mesh(
+  new THREE.PlaneGeometry(5, 4),
+  thirdMaterial
+);
+thirdFloorSquare2.rotation.x = -Math.PI / 2;
+thirdFloorSquare2.receiveShadow = true;
+thirdFloorSquare2.position.set(4.7, 3.08, 10.55);
+scene.add(thirdFloorSquare2);
+
+
 const uniqueDarkTopTexture = new THREE.TextureLoader().load(
   "/textures/dark_top.jpg",
 );
@@ -530,6 +365,165 @@ const frontWallMesh = new THREE.Mesh(
 frontWallMesh.position.set(5.0, 4.9, 5.5);
 scene.add(frontWallMesh);
 
+const tooltip = document.createElement("div");
+tooltip.style.position = "fixed";
+tooltip.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+tooltip.style.color = "#fff";
+tooltip.style.padding = "5px";
+tooltip.style.borderRadius = "3px";
+tooltip.style.display = "none";
+document.body.appendChild(tooltip);
+
+window.addEventListener("mousemove", onMouseMove, false);
+window.addEventListener("click", onMouseClick, false);
+
+function onMouseMove(event) {
+  const mouse = new THREE.Vector2();
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  const raycaster = new THREE.Raycaster();
+  raycaster.ray.origin.set(
+    camera.position.x,
+    camera.position.y,
+    camera.position.z,
+  );
+  raycaster.ray.direction.set(mouse.x, mouse.y, 1).normalize();
+
+  const intersects = raycaster.intersectObject(fireTruck);
+
+  if (intersects.length > 0) {
+    tooltip.style.display = "block";
+
+    const tooltipWidth = tooltip.offsetWidth;
+    const tooltipHeight = tooltip.offsetHeight;
+
+    let left = event.clientX + 10;
+    let top = event.clientY + 10;
+
+    if (left + tooltipWidth > window.innerWidth) {
+      left = event.clientX - tooltipWidth - 10;
+    }
+
+    if (top + tooltipHeight > window.innerHeight) {
+      top = event.clientY - tooltipHeight - 10;
+    }
+
+    tooltip.style.left = `${left}px`;
+    tooltip.style.top = `${top}px`;
+    tooltip.innerHTML = "Pressing 1 & 2 changes vehicles";
+  } else {
+    tooltip.style.display = "none";
+  }
+}
+
+function onMouseClick() {
+  const raycaster = new THREE.Raycaster();
+  raycaster.ray.origin.set(
+    camera.position.x,
+    camera.position.y,
+    camera.position.z,
+  );
+  raycaster.ray.direction.set(0, 0, 1).normalize();
+  const intersects = raycaster.intersectObject(fireTruck);
+  if (intersects.length > 0) {
+    console.log("Truck clicked!");
+  }
+}
+
+const toast = document.createElement("div");
+toast.style.position = "fixed";
+toast.style.bottom = "20px";
+toast.style.left = "50%";
+toast.style.transform = "translateX(-50%)";
+toast.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+toast.style.color = "#fff";
+toast.style.padding = "10px 20px";
+toast.style.borderRadius = "5px";
+toast.style.fontSize = "16px";
+toast.style.display = "none";
+document.body.appendChild(toast);
+
+function showToast(message) {
+  toast.innerText = message;
+  toast.style.display = "block";
+
+  setTimeout(() => {
+    toast.style.display = "none";
+  }, 4000);
+}
+
+window.addEventListener("keydown", (event) => {
+  if (event.key === "1" && fireTruck) {
+    currentVehicle = fireTruck;
+    console.log("Cyber Truck controls: W A S D");
+    showToast("Cyber Truck controls: W A S D");
+  }
+
+  if (event.key === "2" && edgeVehicle) {
+    currentVehicle = edgeVehicle;
+    console.log("Switched to Edge Vehicle!");
+    showToast("Ford Edge controls: W A S D");
+  }
+});
+
+const movement = {
+  forward: false,
+  backward: false,
+  left: false,
+  right: false,
+};
+
+const speed = 0.5;
+const rotationSpeed = 0.06;
+
+function setupControls() {
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "s") movement.forward = true;
+    if (event.key === "w") movement.backward = true;
+    if (event.key === "a") movement.left = true;
+    if (event.key === "d") movement.right = true;
+  });
+
+  window.addEventListener("keyup", (event) => {
+    if (event.key === "s") movement.forward = false;
+    if (event.key === "w") movement.backward = false;
+    if (event.key === "a") movement.left = false;
+    if (event.key === "d") movement.right = false;
+  });
+}
+
+function updateMovement() {
+  if (!currentVehicle) return;
+
+  if (movement.forward) {
+    currentVehicle.translateZ(-speed);
+  }
+
+  if (movement.backward) {
+    currentVehicle.translateZ(speed);
+  }
+
+  if (movement.left) {
+    currentVehicle.rotation.y += rotationSpeed;
+  }
+
+  if (movement.right) {
+    currentVehicle.rotation.y -= rotationSpeed;
+  }
+}
+
+function animateScene() {
+  requestAnimationFrame(animateScene);
+
+  updateMovement();
+  controls.update();
+  renderer.render(scene, camera);
+}
+
+setupControls();
+animateScene();
+
 function createLaser(startPos, endPos, color) {
   const laserMaterial = new THREE.LineBasicMaterial({
     color: color,
@@ -547,38 +541,35 @@ function createLaser(startPos, endPos, color) {
 }
 
 const colors = [0xff0000, 0x00ff00, 0x0000ff, 0xffff00, 0xff00ff, 0x00ffff];
-
-const laserStart = new THREE.Vector3(5.0, 4.9, 5.5);
-
 const lasers = [];
-for (let i = 0; i < 5; i++) {
-  const angle = Math.random() * Math.PI * 2;
-  const distance = Math.random() * 5 + 3;
+const startPoint = new THREE.Vector3(5.3, 4.5, 4.5);
 
-  const color = colors[Math.floor(Math.random() * colors.length)];
 
-  const laserEnd = new THREE.Vector3(
-    laserStart.x + Math.cos(angle) * distance,
-    laserStart.y - Math.random() * 2,
-    laserStart.z + Math.sin(angle) * distance,
-  );
+colors.forEach((color, index) => {
+  const endPoint = new THREE.Vector3(0, 10, 0);
+  const laser = createLaser(startPoint.clone(), endPoint.clone(), color);
 
-  const laser = createLaser(laserStart, laserEnd, color);
-  lasers.push(laser);
-}
+  lasers.push({
+    laser,
+    direction: index % 2 === 0 ? 1 : -1,
+    angleOffset: (index / colors.length) * Math.PI * 2,
+    speed: 0.05 + index * 0.01,
+  });
+});
+
 
 function animateLasers() {
-  lasers.forEach((laser) => {
-    const randomMovementX = Math.random() * 0.1 - 0.05;
-    const randomMovementY = Math.random() * 0.1 - 0.05;
-    const randomMovementZ = Math.random() * 0.1 - 0.05;
+  lasers.forEach(({ laser, direction, angleOffset, speed }) => {
+    const positionArray = laser.geometry.attributes.position.array;
 
-    laser.geometry.attributes.position.array[0] += randomMovementX;
-    laser.geometry.attributes.position.array[1] += randomMovementY;
-    laser.geometry.attributes.position.array[2] += randomMovementZ;
-    laser.geometry.attributes.position.array[3] += randomMovementX;
-    laser.geometry.attributes.position.array[4] += randomMovementY;
-    laser.geometry.attributes.position.array[5] += randomMovementZ;
+    const time = performance.now() * 0.002;
+    const oscillation = Math.sin(time * speed + angleOffset) * 2;
+
+  
+    positionArray[0] = startPoint.x + oscillation * direction;
+    positionArray[3] = startPoint.x + oscillation * direction;
+    positionArray[1] += 0.02;
+    positionArray[4] += 0.02;
 
     laser.geometry.attributes.position.needsUpdate = true;
   });
@@ -587,6 +578,7 @@ function animateLasers() {
 }
 
 animateLasers();
+
 
 const cloudTexture = new THREE.TextureLoader().load("/textures/clouds.jpg");
 const cloudMaterial = new THREE.PointsMaterial({
@@ -636,7 +628,7 @@ loader.load(
   (gltf) => {
     const jessie = gltf.scene;
     jessie.position.set(5.3, 4.0, 4.5);
-    jessie.scale.set(0.008, 0.008, 0.008);
+    jessie.scale.set(0.01, 0.01, 0.01);
     jessie.rotation.y = THREE.MathUtils.degToRad(150);
     scene.add(jessie);
   },
@@ -700,26 +692,22 @@ loader.load("/textures/pool_jacuzzi.glb", (gltf) => {
   animateScene();
 });
 
-
-
 const objectParams = {
   url: "/textures/jessejesse.glb",
-  position: [5.3, 6.5, 4.5],
-  scale: [0.03, 0.03, -0.03],
+  position: [5.3, 7.0, 4.5],
+  scale: [0.05, 0.05, -0.05],
   rotationY: 3.25,
 };
-
 
 const planetParams = {
   url: "/textures/earth.glb",
   position: [16.2, 10.6, -15.8],
-  scale: [0.9, 0.9, 0.9],
+  scale: [1.0, 1.0, 1.0],
   rotationY: 2,
   rotationX: -2,
   orbitRadius: 20,
-  orbitSpeed: 0.1,
+  orbitSpeed: 0.01,
 };
-
 
 loader.load(planetParams.url, (gltf) => {
   const planet = gltf.scene;
@@ -741,8 +729,10 @@ loader.load(planetParams.url, (gltf) => {
 
     const angle = elapsed * planetParams.orbitSpeed;
 
-    planet.position.x = orbitCenter.x + planetParams.orbitRadius * Math.cos(angle);
-    planet.position.z = orbitCenter.z + planetParams.orbitRadius * Math.sin(angle);
+    planet.position.x =
+      orbitCenter.x + planetParams.orbitRadius * Math.cos(angle);
+    planet.position.z =
+      orbitCenter.z + planetParams.orbitRadius * Math.sin(angle);
     planet.position.y = orbitCenter.y;
 
     planet.rotation.y += delta * 0.1;
@@ -753,20 +743,14 @@ loader.load(planetParams.url, (gltf) => {
   animateOrbit();
 });
 
-
-
-
-
 loader.load(objectParams.url, (gltf) => {
   const object = gltf.scene;
   object.position.set(...objectParams.position);
   object.scale.set(...objectParams.scale);
   scene.add(object);
 
-
   const animateCustom = () => {
     requestAnimationFrame(animateCustom);
-
 
     const cameraPosition = new THREE.Vector3();
     camera.getWorldPosition(cameraPosition);
@@ -774,9 +758,10 @@ loader.load(objectParams.url, (gltf) => {
     const objectPosition = new THREE.Vector3();
     object.getWorldPosition(objectPosition);
 
-    const direction = new THREE.Vector3().subVectors(cameraPosition, objectPosition).normalize();
+    const direction = new THREE.Vector3()
+      .subVectors(cameraPosition, objectPosition)
+      .normalize();
 
-  
     const angleY = Math.atan2(direction.x, direction.z);
     object.rotation.y = angleY;
 
@@ -785,7 +770,6 @@ loader.load(objectParams.url, (gltf) => {
 
   animateCustom();
 });
-
 
 const pointLight = new THREE.PointLight(0xffaa88, 1, 10);
 pointLight.position.set(0, 2, 0);
@@ -1123,14 +1107,14 @@ loader.load(
 
 let helicopter;
 let helicopterMixer;
-let helicopterRotationSpeed = 0.1;
+let helicopterRotationSpeed = 10.0;
 
 loader.load(
   "/textures/apache_gunship.glb",
   (gltf) => {
     helicopter = gltf.scene;
-    helicopter.position.set(-10.0, 4.6, -2.0);
-    helicopter.scale.set(0.5, 0.5, 0.5);
+    helicopter.position.set(-10.0, 2.5, -2.0);
+    helicopter.scale.set(0.4, 0.4, 0.4);
     helicopter.rotation.set(0, Math.PI, 0);
     scene.add(helicopter);
 
@@ -1167,13 +1151,12 @@ const models = [
     scale: [0.8, 0.8, 0.8],
     rotationY: 18,
   },
-    
 
   {
     url: "/textures/spellbound_mailbox.glb",
-    position: [19.0, 0.4, -18.5],
+    position: [12.5, 0.09, -13.5],
     scale: [0.3, 0.3, 0.3],
-    rotationY: 1,
+    rotationY: 0.8,
   },
 
   {
@@ -1222,13 +1205,12 @@ const models = [
     rotationY: 1,
   },
 
-    {
+  {
     url: "/textures/radio_tower_antenna.glb",
     position: [-14, 0, 4.5],
     scale: [0.5, 0.5, 0.5],
     rotationY: -174.3,
   },
-
 
   {
     url: "/textures/railing.glb",
@@ -1251,7 +1233,6 @@ const models = [
     rotationY: 2,
     rotationX: -2,
   },
-  
 
   {
     url: "/textures/the_piano.glb",
@@ -1373,8 +1354,8 @@ const models = [
   },
 
   {
-    url: "/textures/pillar.glb",
-    position: [7.0, 0.15, 8.2],
+    url: "/textures/pillar.glb", //back
+    position: [2.5, 0.35, 12.3],
     scale: [0.4, 0.43, 0.4],
     rotationY: -174.3,
   },
@@ -1494,7 +1475,7 @@ const models = [
   {
     url: "/textures/pirate_flag.glb",
     position: [13.0, 0.01, 2.5],
-    scale: [0.02, 0.02, 0.02],
+    scale: [0.013, 0.013, 0.013],
     rotationY: Math.PI / -2.3,
   },
 
@@ -1526,26 +1507,41 @@ const models = [
 
   {
     url: "/textures/bullseye.glb",
-    position: [-1.8, 0.03, -5.5],
+    position: [5.2, 0.1, 1.0],
     scale: [0.007, 0.007, 0.007],
+    rotationY: Math.PI,
   },
 
   {
-    url: "/textures/wooden_railing.glb",
-    position: [4.9, 3.3, 8.6],
+    url: "/textures/wooden_railing.glb",  //back
+    position: [3.2, 3.5, 12.6],
     scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / 150,
   },
+  
   {
-    url: "/textures/wooden_railing.glb",
-    position: [8.6, 3.3, 8.6],
+    url: "/textures/couch.glb",  //back
+    position: [4.8, 4.0, 10.8],
+    scale: [0.4, 0.4, 0.4],
+    rotationY: Math.PI,
+  },
+  {
+    url: "/textures/wooden_railing.glb", //back
+    position: [5.0, 3.5, 12.6],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 150,
+  },
+  
+  {
+    url: "/textures/wooden_railing.glb", //back
+    position: [6.8, 3.5, 12.6],
     scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / 150,
   },
 
   {
-    url: "/textures/wooden_railing.glb",
-    position: [6.8, 3.3, 8.6],
+    url: "/textures/wooden_railing.glb", //back
+    position: [8.6, 3.5, 12.6],
     scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / 150,
   },
@@ -1788,8 +1784,8 @@ const models = [
 
   {
     url: "/textures/helipad.glb",
-    position: [-16, 0, -1.5],
-    scale: [0.003, 0.003, 0.003],
+    position: [-10.0, 0.5, -2.0],
+    scale: [0.005, 0.005, 0.005],
     rotationY: Math.PI / 1,
   },
 
@@ -1854,26 +1850,14 @@ const models = [
     scale: [5.4, 3.2, 5.4],
     rotationY: Math.PI / -100,
   },
-  {
-    url: "/textures/black_pool.glb",
-    position: [5.0, 3.1, 7.8],
-    scale: [0.01, 0.01, 0.01],
-    rotationY: Math.PI / 150,
-  },
-
-  {
-    url: "/textures/black_pool.glb",
-    position: [7.0, 3.1, 7.8],
-    scale: [0.01, 0.01, 0.01],
-    rotationY: Math.PI / 150,
-  },
 
   {
     url: "/textures/starlink_satellite_dish.glb",
-    position: [8.5, 3.1, 7.8],
+    position: [10.5, 3.1, 3.7],
     scale: [0.005, 0.005, 0.005],
-    rotationY: Math.PI / 150,
+    rotationY: Math.PI, // Rotated 180 degrees
   },
+
 
   {
     url: "/textures/camping_fox.glb",
@@ -1887,11 +1871,11 @@ const models = [
     scale: [0.3, 0.3, 0.3],
     rotationY: Math.PI / 2,
   },
-    {
+  {
     url: "/textures/basketball_hoop.glb", //hoop
-    position: [11.0, 1.0, 2.0],
+    position: [11.3, 1.0, 2.0],
     scale: [0.5, 0.5, 0.5],
-    rotationY: -174.3,
+    rotationY: -172.8,
   },
 ];
 
@@ -2079,7 +2063,7 @@ models.forEach(({ url, position, scale, rotationY, rotationX, rotationZ }) => {
         const light = new THREE.SpotLight(0xffffff, 5);
         light.position.set(0, 2, 0);
         light.angle = Math.PI / 4;
-        light.penumbra = 0.5;
+        light.penumbra = 1.5;
         light.distance = 5;
         light.castShadow = true;
         light.visible = false;
@@ -2169,6 +2153,27 @@ windowPlane.position.set(-2.4, 1.65, 0);
 windowPlane.rotation.y = Math.PI / 2;
 scene.add(windowPlane);
 
+
+const secondVideoScreen = new THREE.Mesh(
+  new THREE.PlaneGeometry(3.5, 1.5),
+  videoMaterial
+);
+
+
+secondVideoScreen.position.set(5.05, 5.0, 5.7);
+
+const secondBorder = new THREE.Mesh(
+  new THREE.PlaneGeometry(2 + borderThickness, 1 + borderThickness),
+  borderMaterial
+);
+secondBorder.position.copy(secondVideoScreen.position);
+secondBorder.position.z -= 0.01;
+
+
+scene.add(secondBorder);
+scene.add(secondVideoScreen);
+
+
 window.addEventListener("resize", () => {
   const width = window.innerWidth;
   const height = window.innerHeight;
@@ -2197,6 +2202,7 @@ console.log("Camera:", camera);
 console.log("Renderer:", renderer);
 
 export default ThreeScene;
+
 
 
 
