@@ -1526,8 +1526,9 @@ const models = [
 
   {
     url: "/textures/bullseye.glb",
-    position: [-1.8, 0.03, -5.5],
+    position: [5.2, 0.1, 1.0],
     scale: [0.007, 0.007, 0.007],
+    rotationY: Math.PI,
   },
 
   {
