@@ -1,4 +1,4 @@
-// JesseJesse.com
+// JesseJesse.com - Nighttime with Stars
 
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
@@ -6,8 +6,9 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { Sky } from "three/examples/jsm/objects/Sky.js";
 import { MathUtils, Vector3 } from "three";
 
-const scene = new THREE.Scene();
 
+
+const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;
@@ -23,27 +24,57 @@ const camera = new THREE.PerspectiveCamera(
 camera.position.set(0, 1, 5);
 
 
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-controls.dampingFactor = 0.25;
-controls.screenSpacePanning = false;
-
-
 const sky = new Sky();
 sky.scale.setScalar(450000);
+scene.add(sky);
 
 
 const sun = new Vector3();
 const phi = MathUtils.degToRad(90);
 const theta = MathUtils.degToRad(180);
-sun.setFromSphericalCoords(1, phi, theta);
-
-sky.material.uniforms.sunPosition.value.copy(sun);
 
 
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+
+scene.background = new THREE.Color(0x000022);
+
+
+const createStars = () => {
+  const starGeometry = new THREE.BufferGeometry();
+  const starMaterial = new THREE.PointsMaterial({
+    color: 0xffffff,
+    size: 0.16,
+  });
+
+
+  const starCount = 90000;
+  const starPositions = [];
+  for (let i = 0; i < starCount; i++) {
+    const x = (Math.random() - 0.5) * 1000; // Random X position
+    const y = (Math.random() - 0.5) * 1000; // Random Y position
+    const z = (Math.random() - 0.5) * 1000; // Random Z position
+    starPositions.push(x, y, z);
+  }
+
+  starGeometry.setAttribute(
+    "position",
+    new THREE.Float32BufferAttribute(starPositions, 3)
+  );
+
+
+  const stars = new THREE.Points(starGeometry, starMaterial);
+  scene.add(stars);
+};
+createStars();
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.2);
 directionalLight.position.copy(sun).multiplyScalar(450000);
 scene.add(directionalLight);
+
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.25;
+controls.screenSpacePanning = false;
 
 
 window.addEventListener("resize", () => {
@@ -54,6 +85,7 @@ window.addEventListener("resize", () => {
   camera.updateProjectionMatrix();
   renderer.setSize(width, height);
 });
+
 
 const loader = new GLTFLoader();
 let fireTruck, edgeVehicle;
@@ -78,9 +110,6 @@ loader.load(
     scene.add(fireTruck);
 
     console.log("Fire truck loaded successfully with modified materials!");
-
-    const ambientLight = new THREE.AmbientLight(0x505050, 0.4);
-    scene.add(ambientLight);
 
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
     directionalLight.position.set(5, 5, 5);
