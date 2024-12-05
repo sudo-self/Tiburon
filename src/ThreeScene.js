@@ -243,7 +243,6 @@ drivewaySquare6.receiveShadow = true;
 drivewaySquare6.position.set(6.0, 0.1, 10.0);
 scene.add(drivewaySquare6);
 
-
 const planeMaterial = new THREE.MeshStandardMaterial({ map: rockyTexture });
 
 const planeGeometry = new THREE.PlaneGeometry(50, 50);
@@ -326,20 +325,18 @@ additionalRowFloor.position.x = 11.0;
 additionalRowFloor.position.z = 3.99;
 scene.add(additionalRowFloor);
 
-
 const thirdFloorSquare1 = new THREE.Mesh(
   new THREE.PlaneGeometry(5, 4),
-  thirdMaterial
+  thirdMaterial,
 );
 thirdFloorSquare1.rotation.x = -Math.PI / 2;
 thirdFloorSquare1.receiveShadow = true;
 thirdFloorSquare1.position.set(6.7, 3.07, 10.55);
 scene.add(thirdFloorSquare1);
 
-
 const thirdFloorSquare2 = new THREE.Mesh(
   new THREE.PlaneGeometry(5, 4),
-  thirdMaterial
+  thirdMaterial,
 );
 thirdFloorSquare2.rotation.x = -Math.PI / 2;
 thirdFloorSquare2.receiveShadow = true;
@@ -348,14 +345,12 @@ scene.add(thirdFloorSquare2);
 
 const thirdFloorSquare3 = new THREE.Mesh(
   new THREE.PlaneGeometry(5, 4),
-  thirdMaterial
+  thirdMaterial,
 );
 thirdFloorSquare3.rotation.x = -Math.PI / 2;
 thirdFloorSquare3.receiveShadow = true;
 thirdFloorSquare3.position.set(10.5, 3.09, 10.55);
 scene.add(thirdFloorSquare3);
-
-
 
 const uniqueDarkTopTexture = new THREE.TextureLoader().load(
   "/textures/dark_top.jpg",
@@ -560,7 +555,6 @@ const colors = [0xff0000, 0x00ff00, 0x0000ff, 0xffff00, 0xff00ff, 0x00ffff];
 const lasers = [];
 const startPoint = new THREE.Vector3(5.3, 4.5, 4.5);
 
-
 colors.forEach((color, index) => {
   const endPoint = new THREE.Vector3(0, 10, 0);
   const laser = createLaser(startPoint.clone(), endPoint.clone(), color);
@@ -573,7 +567,6 @@ colors.forEach((color, index) => {
   });
 });
 
-
 function animateLasers() {
   lasers.forEach(({ laser, direction, angleOffset, speed }) => {
     const positionArray = laser.geometry.attributes.position.array;
@@ -581,7 +574,6 @@ function animateLasers() {
     const time = performance.now() * 0.002;
     const oscillation = Math.sin(time * speed + angleOffset) * 2;
 
-  
     positionArray[0] = startPoint.x + oscillation * direction;
     positionArray[3] = startPoint.x + oscillation * direction;
     positionArray[1] += 0.02;
@@ -594,7 +586,6 @@ function animateLasers() {
 }
 
 animateLasers();
-
 
 const cloudTexture = new THREE.TextureLoader().load("/textures/clouds.jpg");
 const cloudMaterial = new THREE.PointsMaterial({
@@ -1529,33 +1520,33 @@ const models = [
   },
 
   {
-    url: "/textures/wooden_railing.glb",  //back
+    url: "/textures/wooden_railing.glb", //back
     position: [3.2, 3.5, 12.6],
     scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / 150,
   },
-  
+
   {
-    url: "/textures/couch.glb",  //back
+    url: "/textures/couch.glb", //back
     position: [4.8, 4.0, 10.8],
     scale: [0.4, 0.4, 0.4],
     rotationY: Math.PI,
   },
-  
+
   {
     url: "/textures/grill.glb", //back
     position: [12.2, 2.9, 3.8],
     scale: [0.6, 0.6, 0.6],
     rotationY: Math.PI,
   },
-  
+
   {
     url: "/textures/wooden_railing.glb", //back
     position: [5.0, 3.5, 12.6],
     scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / 150,
   },
-  
+
   {
     url: "/textures/wooden_railing.glb", //back
     position: [6.8, 3.5, 12.6],
@@ -1569,14 +1560,14 @@ const models = [
     scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / 150,
   },
-  
+
   {
     url: "/textures/wooden_railing.glb", //back
     position: [10.4, 3.5, 12.6],
     scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / 150,
   },
-  
+
   {
     url: "/textures/wooden_railing.glb", //back
     position: [12.2, 3.5, 12.6],
@@ -1584,14 +1575,13 @@ const models = [
     rotationY: Math.PI / 150,
   },
 
-
   {
     url: "/textures/wooden_railing.glb",
     position: [10.4, 3.5, 8.6],
     scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / 150,
   },
-  
+
   {
     url: "/textures/wooden_railing.glb",
     position: [12.2, 3.5, 8.6],
@@ -1624,7 +1614,7 @@ const models = [
     scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / 2,
   },
-  
+
   {
     url: "/textures/wooden_railing.glb", //corner
     position: [2.3, 3.5, 11.8],
@@ -1637,14 +1627,13 @@ const models = [
     scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / -2,
   },
-  
+
   {
     url: "/textures/wooden_railing.glb",
     position: [13.0, 3.5, 10.0],
     scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / 2,
   },
-    
 
   {
     url: "/textures/tree.glb",
@@ -1727,14 +1716,14 @@ const models = [
     scale: [2.5, 2.5, 2.5],
     rotationY: Math.PI / 2,
   },
-  
+
   {
     url: "/textures/floral_cluster.glb", //back
     position: [8.0, 0.03, 14.5],
     scale: [2.5, 2.5, 2.5],
     rotationY: Math.PI / 2,
   },
-  
+
   {
     url: "/textures/floral_cluster.glb", //back
     position: [12.0, 0.03, 14.5],
@@ -1956,7 +1945,6 @@ const models = [
     scale: [0.003, 0.003, 0.003],
     rotationY: Math.PI, // Rotated 180 degrees
   },
-
 
   {
     url: "/textures/camping_fox.glb",
@@ -2252,26 +2240,22 @@ windowPlane.position.set(-2.4, 1.65, 0);
 windowPlane.rotation.y = Math.PI / 2;
 scene.add(windowPlane);
 
-
 const secondVideoScreen = new THREE.Mesh(
   new THREE.PlaneGeometry(3.5, 1.5),
-  videoMaterial
+  videoMaterial,
 );
-
 
 secondVideoScreen.position.set(5.05, 5.0, 5.7);
 
 const secondBorder = new THREE.Mesh(
   new THREE.PlaneGeometry(2 + borderThickness, 1 + borderThickness),
-  borderMaterial
+  borderMaterial,
 );
 secondBorder.position.copy(secondVideoScreen.position);
 secondBorder.position.z -= 0.01;
 
-
 scene.add(secondBorder);
 scene.add(secondVideoScreen);
-
 
 window.addEventListener("resize", () => {
   const width = window.innerWidth;
