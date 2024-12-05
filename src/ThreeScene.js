@@ -220,7 +220,7 @@ const drivewaySquare4 = new THREE.Mesh(
 drivewaySquare4.rotation.x = -Math.PI / 2;
 drivewaySquare4.rotation.z = Math.PI + Math.PI / 2;
 drivewaySquare4.receiveShadow = true;
-drivewaySquare4.position.set(13.0, 0.1, -9.0);
+drivewaySquare4.position.set(10.0, 0.1, 13.2);
 scene.add(drivewaySquare4);
 
 const drivewaySquare5 = new THREE.Mesh(
@@ -230,13 +230,19 @@ const drivewaySquare5 = new THREE.Mesh(
 drivewaySquare5.rotation.x = -Math.PI / 2;
 drivewaySquare5.rotation.z = Math.PI + Math.PI / 2;
 drivewaySquare5.receiveShadow = true;
-drivewaySquare5.position.set(14.0, 0.1, -12.0);
+drivewaySquare5.position.set(10.0, 0.1, 10.0);
 scene.add(drivewaySquare5);
 
 const drivewaySquare6 = new THREE.Mesh(
   new THREE.PlaneGeometry(4, 4),
   drivewayMaterial1,
 );
+drivewaySquare6.rotation.x = -Math.PI / 2;
+drivewaySquare6.rotation.z = Math.PI + Math.PI / 2;
+drivewaySquare6.receiveShadow = true;
+drivewaySquare6.position.set(6.0, 0.1, 10.0);
+scene.add(drivewaySquare6);
+
 
 const planeMaterial = new THREE.MeshStandardMaterial({ map: rockyTexture });
 
@@ -288,7 +294,7 @@ thirdFloor.position.z = 7.0;
 scene.add(thirdFloor);
 
 const leftThirdFloor = new THREE.Mesh(
-  new THREE.PlaneGeometry(4, 3),
+  new THREE.PlaneGeometry(5, 3),
   thirdMaterial,
 );
 leftThirdFloor.rotation.x = -Math.PI / 2;
@@ -339,6 +345,16 @@ thirdFloorSquare2.rotation.x = -Math.PI / 2;
 thirdFloorSquare2.receiveShadow = true;
 thirdFloorSquare2.position.set(4.7, 3.08, 10.55);
 scene.add(thirdFloorSquare2);
+
+const thirdFloorSquare3 = new THREE.Mesh(
+  new THREE.PlaneGeometry(5, 4),
+  thirdMaterial
+);
+thirdFloorSquare3.rotation.x = -Math.PI / 2;
+thirdFloorSquare3.receiveShadow = true;
+thirdFloorSquare3.position.set(10.5, 3.09, 10.55);
+scene.add(thirdFloorSquare3);
+
 
 
 const uniqueDarkTopTexture = new THREE.TextureLoader().load(
@@ -1154,7 +1170,7 @@ const models = [
 
   {
     url: "/textures/spellbound_mailbox.glb",
-    position: [12.5, 0.09, -13.5],
+    position: [11.5, 0.09, -8.5],
     scale: [0.3, 0.3, 0.3],
     rotationY: 0.8,
   },
@@ -1341,7 +1357,7 @@ const models = [
 
   {
     url: "/textures/pillar.glb", //back
-    position: [12.5, 0.15, 8.2],
+    position: [12.5, 0.35, 12.3],
     scale: [0.4, 0.43, 0.4],
     rotationY: -174.3,
   },
@@ -1494,13 +1510,13 @@ const models = [
 
   {
     url: "/textures/wooden_railing.glb",
-    position: [10.1, 3.3, 2.5],
+    position: [10.1, 3.5, 2.5],
     scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI,
   },
   {
     url: "/textures/wooden_railing.glb",
-    position: [12.0, 3.3, 2.5],
+    position: [12.0, 3.5, 2.5],
     scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI,
   },
@@ -1525,6 +1541,14 @@ const models = [
     scale: [0.4, 0.4, 0.4],
     rotationY: Math.PI,
   },
+  
+  {
+    url: "/textures/grill.glb", //back
+    position: [12.2, 2.9, 3.8],
+    scale: [0.6, 0.6, 0.6],
+    rotationY: Math.PI,
+  },
+  
   {
     url: "/textures/wooden_railing.glb", //back
     position: [5.0, 3.5, 12.6],
@@ -1545,39 +1569,82 @@ const models = [
     scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / 150,
   },
-
+  
   {
-    url: "/textures/wooden_railing.glb",
-    position: [10.4, 3.3, 8.6],
+    url: "/textures/wooden_railing.glb", //back
+    position: [10.4, 3.5, 12.6],
     scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / 150,
   },
+  
+  {
+    url: "/textures/wooden_railing.glb", //back
+    position: [12.2, 3.5, 12.6],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 150,
+  },
+
+
   {
     url: "/textures/wooden_railing.glb",
-    position: [12.2, 3.3, 8.6],
+    position: [10.4, 3.5, 8.6],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 150,
+  },
+  
+  {
+    url: "/textures/wooden_railing.glb",
+    position: [12.2, 3.5, 8.6],
     scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / 150,
   },
 
   {
     url: "/textures/wooden_railing.glb",
-    position: [13.0, 3.3, 5.6],
+    position: [13.0, 3.5, 5.6],
     scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / 2,
   },
   {
     url: "/textures/wooden_railing.glb",
-    position: [13.0, 3.3, 3.6],
+    position: [13.0, 3.5, 3.6],
     scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / 2,
   },
 
   {
     url: "/textures/wooden_railing.glb",
-    position: [13.0, 3.3, 7.6],
+    position: [13.0, 3.5, 7.6],
     scale: [0.01, 0.01, 0.01],
     rotationY: Math.PI / 2,
   },
+  {
+    url: "/textures/wooden_railing.glb", //corner
+    position: [13.0, 3.5, 11.8],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 2,
+  },
+  
+  {
+    url: "/textures/wooden_railing.glb", //corner
+    position: [2.3, 3.5, 11.8],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / -2,
+  },
+  {
+    url: "/textures/wooden_railing.glb", //corner
+    position: [2.3, 3.5, 10.4],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / -2,
+  },
+  
+  {
+    url: "/textures/wooden_railing.glb",
+    position: [13.0, 3.5, 10.0],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 2,
+  },
+    
 
   {
     url: "/textures/tree.glb",
@@ -1657,6 +1724,38 @@ const models = [
   {
     url: "/textures/floral_cluster.glb",
     position: [12.0, 0.03, -3.5],
+    scale: [2.5, 2.5, 2.5],
+    rotationY: Math.PI / 2,
+  },
+  
+  {
+    url: "/textures/floral_cluster.glb", //back
+    position: [8.0, 0.03, 14.5],
+    scale: [2.5, 2.5, 2.5],
+    rotationY: Math.PI / 2,
+  },
+  
+  {
+    url: "/textures/floral_cluster.glb", //back
+    position: [12.0, 0.03, 14.5],
+    scale: [2.5, 2.5, 2.5],
+    rotationY: Math.PI / 2,
+  },
+  {
+    url: "/textures/floral_cluster.glb", //back
+    position: [12.0, 0.03, 13.5],
+    scale: [2.5, 2.5, 2.5],
+    rotationY: Math.PI / 2,
+  },
+  {
+    url: "/textures/floral_cluster.glb", //back
+    position: [12.0, 0.03, 11.5],
+    scale: [2.5, 2.5, 2.5],
+    rotationY: Math.PI / 2,
+  },
+  {
+    url: "/textures/floral_cluster.glb", //back
+    position: [12.0, 0.03, 12.5],
     scale: [2.5, 2.5, 2.5],
     rotationY: Math.PI / 2,
   },
@@ -1853,8 +1952,8 @@ const models = [
 
   {
     url: "/textures/starlink_satellite_dish.glb",
-    position: [10.5, 3.1, 3.7],
-    scale: [0.005, 0.005, 0.005],
+    position: [5.1, 4.0, 3.1],
+    scale: [0.003, 0.003, 0.003],
     rotationY: Math.PI, // Rotated 180 degrees
   },
 
