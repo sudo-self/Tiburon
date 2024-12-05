@@ -1167,23 +1167,27 @@ const models = [
     scale: [0.8, 0.8, 0.8],
     rotationY: 18,
   },
+
   {
     url: "/textures/spellbound_mailbox.glb",
     position: [11.5, 0.09, -8.5],
     scale: [0.3, 0.3, 0.3],
     rotationY: 0.8,
   },
+
   {
     url: "/textures/darts.glb",
     position: [2.5, 1.8, 2.95],
     scale: [0.8, 0.8, 0.8],
   },
+
   {
     url: "/textures/bar_sign_board.glb",
     position: [5.8, 1.4, 7.3],
     scale: [-0.02, 0.02, 0.02],
     rotationY: 3.12,
   },
+
   {
     url: "/textures/apple_watch.glb",
     position: [0.1, 0.61, 0.2],
@@ -1191,106 +1195,788 @@ const models = [
     rotationY: Math.PI / 18,
     rotationX: -Math.PI / 18,
   },
+
   {
     url: "/textures/aviators.glb",
     position: [2.0, 0.6, 2.0],
     scale: [0.0009, 0.0009, 0.0009],
     rotationZ: Math.PI / 55,
-    rotationY: -Math.PI / 2,
-    rotationX: -Math.PI / 55,
+    rotationY: Math.PI / -2,
+    rotationX: Math.PI / -55,
   },
+
   {
     url: "/textures/modern_kitchen.glb",
     position: [6.0, 0.1, 5.8],
     scale: [0.4, 0.4, 0.4],
     rotationZ: Math.PI / 60,
     rotationY: Math.PI,
+    rotationX: 0,
   },
+
   {
     url: "/textures/vape.glb",
     position: [0.3, 0.61, 0.2],
     scale: [0.2, 0.2, 0.2],
     rotationY: 1,
   },
+
   {
     url: "/textures/radio_tower_antenna.glb",
     position: [-14, 0, 4.5],
     scale: [0.5, 0.5, 0.5],
     rotationY: -174.3,
   },
+
   {
     url: "/textures/railing.glb",
-    instances: [
-      { position: [27.2, 1.6, -5.8], scale: [0.5, 0.4, 0.5], rotationY: 3.15 },
-      { position: [27.2, 1.6, -0.8], scale: [0.5, 0.4, 0.5], rotationY: 3.15 },
-      { position: [-4.5, 1.6, -23.5], scale: [0.5, 0.4, 0.5], rotationY: -14.15 },
-      { position: [-9.5, 1.6, -23.0], scale: [0.5, 0.4, 0.5], rotationY: -14.15 },
-    ],
+    position: [27.2, 1.6, -5.8],
+    scale: [0.5, 0.4, 0.5],
+    rotationY: 3.15,
   },
+
+  {
+    url: "/textures/railing.glb",
+    position: [27.2, 1.6, -0.8],
+    scale: [0.5, 0.4, 0.5],
+    rotationY: 3.15,
+  },
+
   {
     url: "/textures/a10.glb",
-    instances: [
-      { position: [2.2, 10.6, -15.8], scale: [0.07, 0.07, 0.07], rotationY: 2, rotationX: -2 },
-      { position: [-17.5, 4.5, -20.0], scale: [0.2, 0.2, 0.2], rotationY: -1.8, rotationX: 0.3 },
-    ],
+    position: [2.2, 10.6, -15.8],
+    scale: [0.07, 0.07, 0.07],
+    rotationY: 2,
+    rotationX: -2,
   },
+
   {
     url: "/textures/the_piano.glb",
     position: [2.1, 3.0, 4.4],
     scale: [0.4, 0.4, 0.4],
     rotationY: -14.15,
   },
+
+  {
+    url: "/textures/railing.glb",
+    position: [-4.5, 1.6, -23.5], //kitchen Side
+    scale: [0.5, 0.4, 0.5],
+    rotationY: -14.15,
+  },
+
+  {
+    url: "/textures/railing.glb", //Runway Side
+    position: [-9.5, 1.6, -23.0],
+    scale: [0.5, 0.4, 0.5],
+    rotationY: -14.15,
+  },
+
   {
     url: "/textures/sofa.glb",
     position: [-0.5, 3.1, 2.5],
     scale: [1.4, 1.4, 1.4],
     rotationY: -12.55,
   },
+
   {
     url: "/textures/up_window.glb",
-    instances: [
-      { position: [-2.4, 1.0, 3.8], scale: [0.5, 0.5, 0.5], rotationY: -14.1 },
-      { position: [-2.4, 1.0, 6.3], scale: [0.5, 0.5, 0.5], rotationY: -14.1 },
-      { position: [6.5, 1.0, -2.7], scale: [0.5, 0.5, 0.5], rotationY: -153.95 },
-      { position: [1.5, 1.0, -2.7], scale: [0.5, 0.5, 0.5], rotationY: -153.95 },
-      { position: [6.0, 1.0, 7.6], scale: [0.5, 0.5, 0.5], rotationY: -153.95 },
-      { position: [7.5, 1.0, 1.0], scale: [0.6, 0.6, 0.6], rotationY: -174.3 },
-    ],
+    position: [-2.4, 1.0, 3.8], //side runway
+    scale: [0.5, 0.5, 0.5],
+    rotationY: -14.1,
   },
+
   {
-    url: "/textures/door_arch.glb",
-    position: [4.5, 0.1, -2.7],
+    url: "/textures/up_window.glb", //side runway
+    position: [-2.4, 1.0, 6.3],
+    scale: [0.5, 0.5, 0.5],
+    rotationY: -14.1,
+  },
+
+  {
+    url: "/textures/up_window.glb",
+    position: [6.5, 1.0, -2.7], //Front
     scale: [0.5, 0.5, 0.5],
     rotationY: -153.95,
   },
+
+  {
+    url: "/textures/up_window.glb",
+    position: [1.5, 1.0, -2.7], //Front
+    scale: [0.5, 0.5, 0.5],
+    rotationY: -153.95,
+  },
+
+  {
+    url: "/textures/door_arch.glb",
+    position: [4.5, 0.1, -2.7], //arch
+    scale: [0.5, 0.5, 0.5],
+    rotationY: -153.95,
+  },
+
   {
     url: "/textures/walkway_stone.glb",
-    instances: [
-      { position: [4.5, 0.1, -3.3], scale: [0.5, 0.5, 0.5] },
-      { position: [5.5, 0.1, -3.3], scale: [0.5, 0.5, 0.5] },
-      { position: [6.5, 0.1, -3.3], scale: [0.5, 0.5, 0.5] },
-      { position: [7.5, 0.1, -3.3], scale: [0.5, 0.5, 0.5] },
-    ],
+    position: [4.5, 0.1, -3.3], //arch
+    scale: [0.5, 0.5, 0.5],
   },
   {
-    url: "/textures/me.glb",
-    position: [8.2, 1.5, 1.0],
-    scale: [0.4, 0.4, 0.4],
-    rotationY: -Math.PI / 2,
+    url: "/textures/walkway_stone.glb",
+    position: [5.5, 0.1, -3.3], //arch
+    scale: [0.5, 0.5, 0.5],
   },
+  {
+    url: "/textures/walkway_stone.glb",
+    position: [6.5, 0.1, -3.3], //arch
+    scale: [0.5, 0.5, 0.5],
+  },
+  {
+    url: "/textures/walkway_stone.glb",
+    position: [7.5, 0.1, -3.3], //arch
+    scale: [0.5, 0.5, 0.5],
+  },
+
+  {
+    url: "/textures/up_window.glb",
+    position: [6.0, 1.0, 7.6], //Back
+    scale: [0.5, 0.5, 0.5],
+    rotationY: -153.95,
+  },
+
+  {
+    url: "/textures/up_window.glb",
+    position: [7.5, 1.0, 1.0], //side garage
+    scale: [0.6, 0.6, 0.6],
+    rotationY: -174.3,
+  },
+
+  {
+    url: "/textures/me.glb",
+    position: [8.2, 1.5, 1.0], //me
+    scale: [0.4, 0.4, 0.4],
+    rotationY: Math.PI / -2,
+  },
+
+  {
+    url: "/textures/pillar.glb", //back
+    position: [12.5, 0.35, 12.3],
+    scale: [0.4, 0.43, 0.4],
+    rotationY: -174.3,
+  },
+
+  {
+    url: "/textures/pillar.glb", //Front
+    position: [12.5, 0.15, 2.8],
+    scale: [0.4, 0.43, 0.4],
+    rotationY: -174.3,
+  },
+
+  {
+    url: "/textures/pillar.glb", //back
+    position: [2.5, 0.35, 12.3],
+    scale: [0.4, 0.43, 0.4],
+    rotationY: -174.3,
+  },
+
   {
     url: "/textures/humvee.glb",
     position: [-13.0, 0.1, 6.0],
     scale: [0.004, 0.004, 0.004],
     rotationY: -12.55,
   },
+
+  {
+    url: "/textures/retro_tv.glb",
+    position: [0.9, 2.0, 4.5],
+    scale: [0.06, 0.06, 0.06],
+    rotationY: -40.9,
+  },
+
+  {
+    url: "/textures/ps5_customized.glb",
+    position: [-1.0, 0.03, -2.0],
+    scale: [0.3, 0.3, 0.3],
+    rotationY: 0,
+  },
+
+  {
+    url: "/textures/kitchen_table.glb",
+    position: [0.4, 0.6, -2.4],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: 0,
+  },
+
+  {
+    url: "/textures/wool_rug.glb",
+    position: [5.2, 0.1, 1.0],
+    scale: [0.02, 0.02, 0.02],
+    rotationY: 8.1,
+  },
+
   {
     url: "/textures/playstation_shapes.glb",
     position: [-0.2, 0.8, -2.4],
     scale: [0.1, 0.1, 0.1],
+    rotationY: 0,
+  },
+
+  {
+    url: "/textures/donnie.glb",
+    position: [-2.2, 0, -1.2],
+    scale: [0.4, 0.4, 0.4],
+    rotationY: Math.PI / 2,
+  },
+
+  {
+    url: "/textures/runway.glb",
+    position: [-21, 0, -8.2],
+    scale: [0.01, 0.01, 0.03],
+    rotationY: Math.PI / 2.4,
+  },
+
+  {
+    url: "/textures/runway.glb",
+    position: [-17.8, 0.01, -20.0],
+    scale: [0.01, 0.01, 0.03],
+    rotationY: Math.PI / 2.4,
+  },
+
+  {
+    url: "/textures/a10.glb",
+    position: [-17.5, 4.5, -20.0],
+    scale: [0.2, 0.2, 0.2],
+    rotationY: -1.8,
+    rotationX: 0.3,
+  },
+
+  {
+    url: "/textures/bookshelf_speaker.glb",
+    position: [-2.4, 1.75, -1.6],
+    scale: [0.6, 0.6, 0.6],
+    rotationY: Math.PI / 2,
+  },
+  {
+    url: "/textures/chest_speaker.glb",
+    position: [-2.43, 2.15, -1.6],
+    scale: [4.5, 4.5, 4.5],
+    rotationY: Math.PI / -2,
+  },
+
+  {
+    url: "/textures/babys_highchair.glb",
+    position: [0.1, 0, -1.9],
+    scale: [0.3, 0.3, 0.3],
+    rotationY: Math.PI / 2,
+  },
+
+  {
+    url: "/textures/red_energy.glb",
+    position: [-2.3, 1.06, -0.3],
+    scale: [1.5, 1.5, 1.5],
+    rotationY: Math.PI / 4,
+  },
+
+  {
+    url: "/textures/rug.glb",
+    position: [0.1, 0, 1.0],
+    scale: [0.9, 0.9, 0.9],
+    rotationY: Math.PI / 40,
+  },
+
+  {
+    url: "/textures/stuff_Bear.glb",
+    position: [-1.75, 0.05, 2],
+    scale: [1.6, 1.6, 1.6],
+    rotationY: Math.PI / 3.0,
+  },
+
+  {
+    url: "/textures/pirate_flag.glb",
+    position: [13.0, 0.01, 2.5],
+    scale: [0.013, 0.013, 0.013],
+    rotationY: Math.PI / -2.3,
+  },
+
+  {
+    url: "/textures/stairs.glb",
+    position: [7.0, 3.0, 4.9],
+    scale: [0.4, 0.4, 0.4],
+    rotationY: Math.PI / -52.0,
+  },
+
+  {
+    url: "/textures/da_stairs.glb",
+    position: [7.0, 0.03, 2.5],
+    scale: [1.0, 1.0, 1.0],
+  },
+
+  {
+    url: "/textures/wooden_railing.glb",
+    position: [10.1, 3.5, 2.5],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI,
+  },
+  {
+    url: "/textures/wooden_railing.glb",
+    position: [12.0, 3.5, 2.5],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI,
+  },
+
+  {
+    url: "/textures/bullseye.glb",
+    position: [5.2, 0.1, 1.0],
+    scale: [0.007, 0.007, 0.007],
+    rotationY: Math.PI,
+  },
+
+  {
+    url: "/textures/wooden_railing.glb",  //back
+    position: [3.2, 3.5, 12.6],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 150,
+  },
+  
+  {
+    url: "/textures/couch.glb",  //back
+    position: [4.8, 4.0, 10.8],
+    scale: [0.4, 0.4, 0.4],
+    rotationY: Math.PI,
+  },
+  
+  {
+    url: "/textures/grill.glb", //back
+    position: [12.2, 2.9, 3.8],
+    scale: [0.6, 0.6, 0.6],
+    rotationY: Math.PI,
+  },
+  
+  {
+    url: "/textures/wooden_railing.glb", //back
+    position: [5.0, 3.5, 12.6],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 150,
+  },
+  
+  {
+    url: "/textures/wooden_railing.glb", //back
+    position: [6.8, 3.5, 12.6],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 150,
+  },
+
+  {
+    url: "/textures/wooden_railing.glb", //back
+    position: [8.6, 3.5, 12.6],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 150,
+  },
+  
+  {
+    url: "/textures/wooden_railing.glb", //back
+    position: [10.4, 3.5, 12.6],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 150,
+  },
+  
+  {
+    url: "/textures/wooden_railing.glb", //back
+    position: [12.2, 3.5, 12.6],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 150,
+  },
+
+
+  {
+    url: "/textures/wooden_railing.glb",
+    position: [10.4, 3.5, 8.6],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 150,
+  },
+  
+  {
+    url: "/textures/wooden_railing.glb",
+    position: [12.2, 3.5, 8.6],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 150,
+  },
+
+  {
+    url: "/textures/wooden_railing.glb",
+    position: [13.0, 3.5, 5.6],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 2,
+  },
+  {
+    url: "/textures/wooden_railing.glb",
+    position: [13.0, 3.5, 3.6],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 2,
+  },
+
+  {
+    url: "/textures/wooden_railing.glb",
+    position: [13.0, 3.5, 7.6],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 2,
+  },
+  {
+    url: "/textures/wooden_railing.glb", //corner
+    position: [13.0, 3.5, 11.8],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 2,
+  },
+  
+  {
+    url: "/textures/wooden_railing.glb", //corner
+    position: [2.3, 3.5, 11.8],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / -2,
+  },
+  {
+    url: "/textures/wooden_railing.glb", //corner
+    position: [2.3, 3.5, 10.4],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / -2,
+  },
+  
+  {
+    url: "/textures/wooden_railing.glb",
+    position: [13.0, 3.5, 10.0],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 2,
+  },
+    
+
+  {
+    url: "/textures/tree.glb",
+    position: [-3.8, 0.03, -5.5],
+    scale: [0.003, 0.003, 0.003],
+    rotationY: Math.PI / -1.3,
+  },
+
+  {
+    url: "/textures/tree.glb",
+    position: [1.1, 0.03, -6.0],
+    scale: [0.0024, 0.0028, 0.0024],
+    rotationY: Math.PI / -1.3,
+  },
+  {
+    url: "/textures/tree.glb",
+    position: [15.5, 0.05, 1.5],
+    scale: [0.0024, 0.0028, 0.0024],
+    rotationY: Math.PI / -1.3,
+  },
+  {
+    url: "/textures/tree.glb",
+    position: [14.5, 0.05, 3.5],
+    scale: [0.0024, 0.0028, 0.0024],
+    rotationY: Math.PI / -1.0,
+  },
+
+  {
+    url: "/textures/floral_cluster.glb",
+    position: [12.0, 0.03, 0],
+    scale: [2.5, 2.5, 2.5],
+    rotationY: Math.PI / 2,
+  },
+  {
+    url: "/textures/floral_cluster.glb",
+    position: [12.0, 0.03, 2.5],
+    scale: [2.5, 2.5, 2.5],
+    rotationY: Math.PI / 2,
+  },
+  {
+    url: "/textures/floral_cluster.glb",
+    position: [7.7, 0.03, 2],
+    scale: [2.5, 2.5, 2.5],
+    rotationY: Math.PI / 2,
+  },
+  {
+    url: "/textures/floral_cluster.glb",
+    position: [8.0, 0.03, 0],
+    scale: [2.5, 2.5, 2.5],
+    rotationY: Math.PI / 2,
+  },
+  {
+    url: "/textures/floral_cluster.glb",
+    position: [8.0, 0.03, 2],
+    scale: [2.5, 2.5, 2.5],
+    rotationY: Math.PI / 2,
+  },
+
+  {
+    url: "/textures/floral_cluster.glb",
+    position: [12.0, 0.03, -2.5],
+    scale: [2.5, 2.5, 2.5],
+    rotationY: Math.PI / 2,
+  },
+  {
+    url: "/textures/floral_cluster.glb",
+    position: [12.0, 0.03, -1],
+    scale: [2.5, 2.5, 2.5],
+    rotationY: Math.PI / 2,
+  },
+  {
+    url: "/textures/floral_cluster.glb",
+    position: [12.0, 0.03, -3.5],
+    scale: [2.5, 2.5, 2.5],
+    rotationY: Math.PI / 2,
+  },
+  {
+    url: "/textures/floral_cluster.glb",
+    position: [12.0, 0.03, -3.5],
+    scale: [2.5, 2.5, 2.5],
+    rotationY: Math.PI / 2,
+  },
+  
+  {
+    url: "/textures/floral_cluster.glb", //back
+    position: [8.0, 0.03, 14.5],
+    scale: [2.5, 2.5, 2.5],
+    rotationY: Math.PI / 2,
+  },
+  
+  {
+    url: "/textures/floral_cluster.glb", //back
+    position: [12.0, 0.03, 14.5],
+    scale: [2.5, 2.5, 2.5],
+    rotationY: Math.PI / 2,
+  },
+  {
+    url: "/textures/floral_cluster.glb", //back
+    position: [12.0, 0.03, 13.5],
+    scale: [2.5, 2.5, 2.5],
+    rotationY: Math.PI / 2,
+  },
+  {
+    url: "/textures/floral_cluster.glb", //back
+    position: [12.0, 0.03, 11.5],
+    scale: [2.5, 2.5, 2.5],
+    rotationY: Math.PI / 2,
+  },
+  {
+    url: "/textures/floral_cluster.glb", //back
+    position: [12.0, 0.03, 12.5],
+    scale: [2.5, 2.5, 2.5],
+    rotationY: Math.PI / 2,
+  },
+  {
+    url: "/textures/floral_cluster.glb",
+    position: [7.5, 0.03, -4.0],
+    scale: [2.5, 2.5, 2.5],
+    rotationY: Math.PI / 2,
+  },
+  {
+    url: "/textures/floral_cluster.glb",
+    position: [8.0, 0.03, -4.0],
+    scale: [2.5, 2.5, 2.5],
+    rotationY: Math.PI / 2,
+  },
+
+  {
+    url: "/textures/samsung_tv_remote_control.glb",
+    position: [0.5, 0.6, 2],
+    scale: [0.1, 0.1, 0.1],
+    rotationX: -Math.PI / 8,
+    rotationZ: Math.PI / 8,
+  },
+  {
+    url: "/textures/chinese_stairs.glb",
+    position: [3.8, 0.1, 1.4],
+    scale: [0.003, 0.003, 0.003],
+    rotationY: Math.PI / -2,
+  },
+
+  {
+    url: "/textures/hoodie.glb",
+    position: [2.3, 0.5, 2.0],
+    scale: [0.8, 0.8, 0.8],
+    rotationX: -Math.PI / 2,
+    rotationZ: Math.PI / 8,
+  },
+
+  {
+    url: "/textures/woodtable.glb",
+    position: [1.9, 0.01, -2.2],
+    scale: [0.5, 0.5, 0.5],
+    rotationZ: Math.PI / 84,
+  },
+
+  {
+    url: "/textures/candy_real.glb",
+    position: [0.8, 0.36, -1.1],
+    scale: [0.1, 0.1, 0.1],
+    rotationZ: Math.PI / 80,
+  },
+
+  {
+    url: "/textures/bmx.glb",
+    position: [11.0, 0.6, 4.5],
+    scale: [0.3, 0.3, 0.3],
+    rotationY: Math.PI / 10,
+  },
+
+  {
+    url: "/textures/pool_table.glb",
+    position: [-1.0, 0.1, 6.0],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 3,
+  },
+
+  {
+    url: "/textures/bronco.glb",
+    position: [0.6, 0.65, -2.2],
+    scale: [0.004, 0.004, 0.004],
+    rotationX: -Math.PI / 55,
+    rotationZ: Math.PI / 55,
+    rotationY: Math.PI / 2,
+  },
+  {
+    url: "/textures/flash_light.glb",
+    position: [0.3, 0.65, -2.0],
+    scale: [0.9, 0.9, 0.9],
+    rotationX: -Math.PI / 55,
+    rotationZ: Math.PI / 55,
+    rotationY: Math.PI / 2,
+  },
+
+  {
+    url: "/textures/chess_coines.glb",
+    position: [-0.3, 0.8, -2.0],
+    scale: [0.03, 0.03, 0.03],
+    rotationX: -Math.PI / 55,
+    rotationZ: Math.PI / 55,
+    rotationY: Math.PI / 2,
+  },
+  {
+    url: "/textures/coffe_maker.glb",
+    position: [0.7, 0.75, -0.1],
+    scale: [0.01, 0.01, 0.01],
+    rotationY: Math.PI / 5,
+  },
+  {
+    url: "/textures/c_cup.glb",
+    position: [0.5, 0.65, -0.1],
+    scale: [0.03, 0.03, 0.03],
+    rotationY: Math.PI / 5,
+  },
+
+  {
+    url: "/textures/d_tags.glb",
+    position: [0.6, 0.63, 0.2],
+    scale: [0.0002, 0.0002, 0.0002],
+    rotationY: Math.PI / 5,
+  },
+
+  {
+    url: "/textures/pirate_poster.glb",
+    position: [-1.7, 0.9, -2.5],
+    scale: [0.2, 0.2, 0.2],
+    rotationY: Math.PI / -2,
+  },
+
+  {
+    url: "/textures/cyber_garage.glb",
+    position: [6.0, -1.9, 1.4],
+    scale: [0.5, 0.5, 0.5],
+    rotationY: Math.PI / 1,
+  },
+
+  {
+    url: "/textures/helipad.glb",
+    position: [-10.0, 0.5, -2.0],
+    scale: [0.005, 0.005, 0.005],
+    rotationY: Math.PI / 1,
+  },
+
+  {
+    url: "/textures/modern_kitchen.glb",
+    position: [6.2, 0.1, 5.8],
+    scale: [0.4, 0.4, 0.4],
+    rotationZ: Math.PI / 60,
+    rotationY: Math.PI,
+    rotationX: 0,
+  },
+
+  {
+    url: "/textures/metallic_garden_table.glb",
+    position: [2.8, 0.1, 5.5],
+    scale: [0.03, 0.03, 0.03],
+    rotationX: 0,
+    rotationY: Math.PI / 2,
+    rotationZ: 0,
+  },
+
+  {
+    url: "/textures/fire_flower.glb",
+    position: [2.8, 1.3, 5.5],
+    scale: [0.05, 0.05, 0.05],
+    rotationX: 0,
+    rotationY: Math.PI / 4,
+    rotationZ: 0,
+  },
+
+  {
+    url: "/textures/table21.glb",
+    position: [0.4, 3.1, 4.5],
+    scale: [1.0, 1.0, 1.0],
+    rotationY: Math.PI / 3,
+  },
+
+  {
+    url: "/textures/stairs.glb",
+    position: [3.8, 2.5, 6.5],
+    scale: [0.3, 0.3, 0.3],
+    rotationY: Math.PI,
+  },
+
+  {
+    url: "/textures/bottles.glb",
+    position: [0.4, 3.35, 4.5],
+    scale: [0.005, 0.005, 0.005],
+    rotationY: Math.PI / 3,
+  },
+
+  {
+    url: "/textures/jj.jpeg",
+    position: [-1.4, 0.9, -2.5],
+    scale: [0.2, 0.2, 0.2],
+    rotationY: Math.PI / -2,
+  },
+
+  {
+    url: "/textures/frame.glb",
+    position: [1.7, 1.6, -2.55],
+    scale: [5.4, 3.2, 5.4],
+    rotationY: Math.PI / -100,
+  },
+
+  {
+    url: "/textures/starlink_satellite_dish.glb",
+    position: [5.1, 4.0, 3.1],
+    scale: [0.003, 0.003, 0.003],
+    rotationY: Math.PI, // Rotated 180 degrees
+  },
+
+
+  {
+    url: "/textures/camping_fox.glb",
+    position: [13.0, -0.6, 5.8],
+    scale: [3.5, 3.5, 3.5],
+    rotationY: Math.PI / 2,
+  },
+  {
+    url: "/textures/flower_bed.glb",
+    position: [6.0, 0.1, -5.5],
+    scale: [0.3, 0.3, 0.3],
+    rotationY: Math.PI / 2,
+  },
+  {
+    url: "/textures/basketball_hoop.glb", //hoop
+    position: [11.3, 1.0, 2.0],
+    scale: [0.5, 0.5, 0.5],
+    rotationY: -172.8,
   },
 ];
-
 
 loader.setCrossOrigin("anonymous");
 
@@ -1615,4 +2301,5 @@ console.log("Camera:", camera);
 console.log("Renderer:", renderer);
 
 export default ThreeScene;
+
 
